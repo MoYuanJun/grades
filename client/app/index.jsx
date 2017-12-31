@@ -10,6 +10,5 @@ import {Provider} from 'react-redux';
 /* 引入自定义组件路由组件 */
 import RouterMap  from './router/RouterMap';
 
-
 const dom = <Provider store={store}><RouterMap /></Provider>;
 render(dom,document.getElementById('root'));
