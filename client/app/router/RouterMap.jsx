@@ -1,6 +1,6 @@
 /* 路由组件  这里引入所有页面 再按父模板进行展示所有页面 根据不同路由统计管理页面 */
 import React from 'react'; //react基本依赖
-import {BrowserRouter,Route,Switch} from 'react-router-dom';//router依赖 实际上只要这一个组件就可以了
+import {BrowserRouter,Route,Switch,browserHistory} from 'react-router-dom';//router依赖 实际上只要这一个组件就可以了
 /* 引入自定义组件 */
 import App from '../containers/App'; //父模板
 import Home from '../containers/Home';//首页

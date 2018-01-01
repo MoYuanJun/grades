@@ -1,5 +1,9 @@
 /* 所有页面的 模板文件 */
 import React from 'react';
+/* 引用通用样式||JS */
+import 'antd/dist/antd.less';  //antd样式
+import '../static/css/common.less';   //通用样式  包括阿里字体图标的使用
+import '../static/font_icon/iconfont'; //引入阿里字体图标 之JS文件
 /* 连接redux相关依赖 */
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -9,12 +13,8 @@ class App extends React.Component{
     return(
       <div>
         {this.props.children}
-        {this.props.userInfo.userName} {/* 测试 */}
       </div>
     )
-  }
-  componentDidMount(){/* 测试 */
-    this.props.userInfoAction.userInfoGet(); //获取用户信息
   }
 }
 
