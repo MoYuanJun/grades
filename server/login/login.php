@@ -1,14 +1,20 @@
 <?php
 /* 登录判断 */
+/**
+ * 通过post方式调用接口
+ * 传入userName和password
+ * 输出：users表中所有通过username和password查询到的数据;外加一条error数据，表示登录状态
+ */
 header('Content-type:text/html;charset:utf-8');
 header('Access-Control-Allow-Origin:*');
+
+//数据获取封装函数库 
+require_once('../config/MySQL.php');
 
 /* 获取通过post方法传来的账号密码 */
 $password = md5($_POST['password']);
 $userName = $_POST['userName'];
 
-//数据获取封装函数库 
-require_once('../config.php');
 
 //编写SQL并通过封装的函数db_implement传入可执行SQL返回结果
 $sql = "select * from `users` where `username`='".$userName."' and `password`='".$password."'";

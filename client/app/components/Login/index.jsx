@@ -18,19 +18,24 @@ class ComLogin extends React.Component{
     const icon_re = <svg className='icon' aria-hidden='true'><use xlinkHref='#icon-zhuce'></use></svg>
     return (
       <div id='login'>
+
         <div className='content'>
           {/* 使用antd组件 */}
           {/* 外层组件 defaultActiveKey默认当前key */}
           <Tabs defaultActiveKey="1" > 
+
             <TabPane className='tab_login' tab={<span className='tab_head'>{icon_login}登录</span>} key="1">
-              {/* 第一个选项卡：调用木偶组件分页 */}
+              {/* 第一个选项卡：调用木偶组件分页 ===> 登录 */}
               <SubLogin LoginFun={this.props.LoginFun} />{/* 接收智能组件传来的方法 再传给木偶组件之分页 */}
             </TabPane>
+
             <TabPane className='tab_login' tab={<span  className='tab_head'>{icon_re}注册</span>} key="2">
-              content 2
+              <SubRegister judgeUser={this.props.judgeUser} register={this.props.register}/>
             </TabPane>
+
           </Tabs>
           </div>
+          
       </div>
     )
     

@@ -3,7 +3,7 @@ import React from 'react'; //react基本依赖
 import {BrowserRouter,Route,Switch,browserHistory} from 'react-router-dom';//router依赖 实际上只要这一个组件就可以了
 /* 引入自定义组件 */
 import App from '../containers/App'; //父模板
-import Home from '../containers/Home';//首页
+import Home from '../containers/Prospects/Home';//客户端首页
 import Login from '../containers/Login';//登录页
 import NotFound from '../containers/NotFound';//找不到页面时显示
 

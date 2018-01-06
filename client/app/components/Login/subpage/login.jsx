@@ -36,8 +36,10 @@ class SubLogin extends React.Component{
     const { getFieldDecorator } = this.props.form;
     return (
       <div id="com_login">
+        {/* form表单开始 */}
         <Form onSubmit={this.handleSubmit} className="login-form">
-          <FormItem hasFeedback>{/* 自动检验 */}
+
+          <FormItem hasFeedback>{/* hasFeedback 表示 自动检验 ==> 检验通过显示绿色小图标*/}
             {getFieldDecorator('userName', {
               /* 表单检验规则 */
               rules: [{ required: true, message: '请输入正确的账号!' }],
@@ -45,6 +47,7 @@ class SubLogin extends React.Component{
               <Input size='large' prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="账号" />
             )}
           </FormItem>
+
           <FormItem hasFeedback >{/* 自动检验 */}
             {getFieldDecorator('password', {
               /* 表单检验规则 */
@@ -53,11 +56,14 @@ class SubLogin extends React.Component{
               <Input size='large' prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
             )}
           </FormItem>
+
           <FormItem className='but'>
+            {/* 按钮设置type表示按钮的样式  htmlType表示类型   */}
             <Button size='large' type="primary" htmlType="submit" className="login-form-button">
               登录
             </Button>
           </FormItem>
+
         </Form>
       </div>
     );

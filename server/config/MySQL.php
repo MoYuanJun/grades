@@ -1,11 +1,15 @@
 <?php
+
+/* 数据库信息 */
+$users = 'users';  //用户表
+
 /* 封装方法  ==> 连接数据库 并执行可执行SQL语句*/
 function db_implement ($sql){
   /* 数据库账号密码 */
-  $db_url = 'localhost';
-  $db_name = 'root';
-  $db_password = 'root';
-  $db= 'grades';
+  $db_url = 'localhost'; //IP
+  $db_name = 'root';  //账号
+  $db_password = 'root';  //密码
+  $db= 'grades';  //数据库名称
 
   /* 连接数据库 */
   //【第一步】连接数据库系统 参数：ip 账号 密码
