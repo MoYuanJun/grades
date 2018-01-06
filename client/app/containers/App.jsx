@@ -18,14 +18,14 @@ class App extends React.Component{
   }
 }
 
-
-/* 连接到redux */
-function mapStateToProps(state){/* 将state映射到 props*/
+export default App;
+/* // 连接到redux
+function mapStateToProps(state){// 将state映射到 props
   return {
     userInfo:state.userInfo
   }
 }
-function mapDispatchToProps(dispatch){/* 将action函数集合dispatch进行连接并映射到props */
+function mapDispatchToProps(dispatch){// 将action函数集合dispatch进行连接并映射到props
   return {
     userInfoAction:bindActionCreators(userInfoAction,dispatch),
   }
@@ -34,3 +34,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+ */
