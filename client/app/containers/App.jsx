@@ -8,6 +8,8 @@ import '../static/font_icon/iconfont'; //引入阿里字体图标 之JS文件
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userInfoAction from '../actions/userInfoAction.js';
+
+
 class App extends React.Component{
   render(){
     return(
