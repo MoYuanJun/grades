@@ -5,7 +5,7 @@
  * 传入userName
  * 输出：200 或 404 #200表示存在该用户，404表示不存在
  */
-header('Content-type:text/html;charset:utf-8');
+header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 
 //数据获取封装函数库 

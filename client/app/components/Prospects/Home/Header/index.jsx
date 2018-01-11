@@ -3,7 +3,7 @@ import React from 'react';
 import './style.less';
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
-import ImgLogo from '../../img/logo.png';
+import ImgLogo from '../../../../static/img/logo.png';
 class ComponentHeader extends React.Component{
   render(){
     return (
@@ -32,7 +32,6 @@ class ComponentHeader extends React.Component{
               <li className='float-left'><a href="">我的订单</a></li>
               <li className='float-left'><a href="">收藏夹</a></li>
             </ul>
-              
           </div>
         </div>
       </div>

@@ -15,7 +15,6 @@ class SwiperAndUser extends React.Component{
             <UserShowComponent />
           </div>
         </div>
-        
       </div>
     );
   }

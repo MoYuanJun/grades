@@ -37,7 +37,66 @@
 ####【搭建登录注册页面】
     ##首先搭建数据库用户信息：
     ##字段暂定：
+    ##编写PHP
+    ##编写登录界面 ==> 并实现简单的登录注册
+####编写客户端首页  ==> 基本页面先搭建起来
+    ##编写Header
+    ##编写轮播和用户信息
+    ##编写商品展示列表
 
+
+
+###############################分割线####################################
+######遇到的问题
+1、react路由问题：
+    ==> BrowserRouter好像会发生一堆 BUG 最后改用HashRouter
+    ==> 路由嵌套问题
+        /* 嵌套路由设置 */
+        const ProspectsRouter = ({ match }) => (
+        <div>
+            {/* 嵌套路由：路由 /prospects/home 将跳转到 Home组件 */}
+            <Route path={`${match.url}/home`} component={Home}/>
+        </div>
+        ) 
+        /* 开始编写 路由配置 */
+        class RouterMap extends React.Component{
+        render(){
+            return (
+            <HashRouter>
+                <App>{/* 自定义父组件  作为主模板 */}
+                <Switch>{/* 设置  限制每次路由有且只能加载匹配到的第一个路由 
+                            *否则最后一个路由配置将被一直匹配到（会同时匹配到2个路由） */}
+                    {/* 正常路由配置 */}
+                    <Route exact path='/' component={Home} />{/* exact 表示严格匹配  只有完全匹配到根 才加载Home组件  如果不加根路由会永远被匹配带 */}
+                    <Route path='/detail/:id' component={Detail} /> {/* 可以通过路由给组件设置参数 通过 id进行匹配接收 */}
+                    <Route path='/list/aaaa' component={List} />
+                    <Route path='/prospects' component={ProspectsRouter} />
+                    <Route path='/*' component={NotFound} />
+                </Switch>
+                </App>
+            </HashRouter>
+            )
+        }
+        }
+        export default RouterMap;  /* 导出路由 */
+
+2、IE11下报错：不支持 startsWith 方法或属性
+    ==> 按照提示：引入兼容代码
+    ==> 检测浏览器是否支持该方法不支持则手动设置自定义函数，同时补充endsWith方法
+    ==> 具体代码如下：
+        if (typeof String.prototype.startsWith != 'function') {  
+            String.prototype.startsWith = function (prefix){  
+            return this.slice(0, prefix.length) === prefix;  
+            };  
+        }
+
+        if (typeof String.prototype.endsWith != 'function') {  
+            String.prototype.endsWith = function(suffix) {  
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;  
+            };  
+        }  
+3、Safari下提示  MAP对象未定义：
+    
 
 
 

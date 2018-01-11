@@ -5,7 +5,7 @@
  * 传入userName和password
  * 输出：users表中所有通过username和password查询到的数据;外加一条error数据，表示登录状态
  */
-header('Content-type:text/html;charset:utf-8');
+header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 
 //数据获取封装函数库 

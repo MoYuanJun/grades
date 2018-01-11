@@ -1,0 +1,57 @@
+/* 木偶组件 Item样式 */
+
+#ItemComponent{
+  height: 100%;
+  border: 1px solid #F8F8F8;
+  background: #F8F8F8;
+  cursor: pointer;
+  padding: 20px;
+  .img{
+    width: 100%;
+    margin: 0 auto;
+    img{
+      width: 100%;
+    }
+  }
+  .title{
+    font-size: 1.3rem ;
+    color: #999;
+    line-height: 1.5;
+    overflow: hidden;
+    margin: 0;
+  }
+  .evacol{
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #ccc;
+    margin: 0;
+    span{
+      padding: 0 0.5rem;
+      margin: 0;
+    }
+  }
+  .price{
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #999;
+    margin: 0;
+    .newPrice{
+      font-size: 2rem;
+      color: #FF5102;
+      span{
+        font-size: 1.2rem;
+      }
+    }
+    .oldPrice{
+      text-decoration: line-through;
+    }
+    .float-right{
+      padding: 10px 0 0 0;
+    }
+  }
+}
+
+#ItemComponent:hover{
+  border: 1px solid #F86442;
+}
+

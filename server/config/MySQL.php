@@ -2,6 +2,8 @@
 
 /* 数据库信息 */
 $users = 'users';  //用户表
+$commodity = 'commodity'; //商品列表
+
 
 /* 封装方法  ==> 连接数据库 并执行可执行SQL语句*/
 function db_implement ($sql){

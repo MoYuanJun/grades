@@ -1,4 +1,5 @@
 /* 入口文件 */
+import './static/js/common';
 import React from 'react';
 import {render} from 'react-dom';
 

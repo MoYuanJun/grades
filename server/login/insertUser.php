@@ -1,7 +1,7 @@
 
 <!-- 注册 ： 插入语句 -->
 <?php
-header('Content-type:text/html;charset:utf-8');
+header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 
 require_once '../config/MySQL.php';
