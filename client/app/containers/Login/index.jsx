@@ -52,7 +52,7 @@ class Login extends React.Component{
         <ComLogin LoginFun={this.LoginFun.bind(this)} 
                   judgeUser={this.judgeUser_.bind(this)} 
                   register={this.register_.bind(this)}
-                  type={this.props.match.params.type} />
+                  type={this.props.match.params.type} />{/* 获取路由参数 */}
       </div>
     )
   }

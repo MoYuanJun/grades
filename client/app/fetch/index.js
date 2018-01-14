@@ -26,3 +26,15 @@ export function getCommodityList(strParams){
   return get( URL + 'commodity/getCommodityList.php' + strParams);
 }
 
+/* 商品搜索 */
+export function searchCommodity(obj){
+  let strParams = '?';
+  if(obj){
+    for(let key in obj){
+      strParams += key+'='+obj[key]+'&';
+    }
+    
+  }
+  console.log(URL + 'commodity/searchCommodity.php'+strParams);
+  return get(URL + 'commodity/searchCommodity.php'+strParams);
+}

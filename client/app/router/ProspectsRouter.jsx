@@ -2,12 +2,14 @@
 import { Route } from 'react-router-dom';
 import React from 'react';  //必须 配合使用
 import Login from '../containers/Login/index';
+import Search from '../containers/Prospects/Search';
 
 import ProspectsHome from '../containers/Prospects/Home';
 /* 嵌套路由设置 :根路由为 /prospects */
 const ProspectsRouter = ({ match }) => (
   <div>
     <Route path={`${match.url}/home`} component={ProspectsHome}/>
+    <Route path={`${match.url}/search`} component={Search} />
   </div>
 ) 
 export default ProspectsRouter;
