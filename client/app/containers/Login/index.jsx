@@ -1,10 +1,9 @@
-/* 登录 ==>智能组件 */
+/* 登录注册 ==>智能组件 */
 import React from 'react';
 /* 加载自定义组件 */
 import ComLogin from '../../components/Login';
 /* 导入封装好的函数 该文件统一管理要获取的数据的方法 */
 import { LoginData, judgeUser, register } from  '.././../fetch/index';
-
 
 /* 连接到redux */
 import { connect } from 'react-redux';
@@ -21,28 +20,39 @@ class Login extends React.Component{
         this.props.userInfoAction.updataUser(json);
         console.log('redux-userInfo','输出位置：登录页面之智能组件','登录成功',this.props.userInfo);/* ================= */
         //跳转到首页
-        //window.history.go(-1) 跳转到上一路径
+        this.props.history.go(-1); //回退到上一个路由，继续操作
       }else{
         //登录失败 调用木偶组件的回调函数 弹出登录失败对话框
         calback(); 
       }
     });
   }
-  /* 业务函数：判断当前用户是否存在 参数：{userNam:'用户名'} */
-  judgeUser_(obj){
-    return judgeUser(obj);
+
+  /* 业务函数：判断当前用户是否存在 参数：{userNam:'用户名',calback} */
+  judgeUser_(obj, calback){
+    judgeUser(obj).then(res=>res.text()).then(text=>{
+      calback( text )
+    });
   }
+  
   /* 业务函数：用户注册函数 */
   register_(obj){
-    return register(obj);
-  }
+    register(obj).then(res=>res.text()).then(text=>{
 
+      console.log('注册木偶表单39行--注册成功！',text,obj);
+      this.props.history.go(-1);
+    });
+  }
 
   render(){
     return (
       <div>
+        {console.log(this.props.match.params)}
         {/* 将业务函数 ： 登录方法传给木偶组件 */}
-        <ComLogin LoginFun={this.LoginFun.bind(this)} judgeUser={this.judgeUser_.bind(this)} register={this.register_.bind(this)} />
+        <ComLogin LoginFun={this.LoginFun.bind(this)} 
+                  judgeUser={this.judgeUser_.bind(this)} 
+                  register={this.register_.bind(this)}
+                  type={this.props.match.params.type} />
       </div>
     )
   }

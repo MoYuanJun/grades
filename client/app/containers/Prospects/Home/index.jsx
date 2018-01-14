@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Header from './subpage/Header';  //导航头 子智能组件
 import SwiperAndUser from './subpage/SwiperAndUser'; //swiper和user信息 子智能组件
 import List from './subpage/List';
+import Footer from '../../../components/Footer';
+
 class ProspectsHome extends React.Component{
   render(){
     return (
@@ -13,12 +15,7 @@ class ProspectsHome extends React.Component{
         <Header />
         <SwiperAndUser />
         <List />
-
-        <p>====================================== 分割线 ====================================</p>
-        <h2>客户端首页</h2>
-        <p><Link to='/login'>登录</Link></p>
-        <p><Link to='/prospects/home'>客户端</Link></p>
-        <p><Link to='/backgrounds/home'>前台</Link></p>
+        <Footer />
       </div>
     )
   }

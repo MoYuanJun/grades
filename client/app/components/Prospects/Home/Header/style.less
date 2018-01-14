@@ -9,12 +9,15 @@
     @height : 60px;   /* header组件 上部高度 */
     height: @height;
     background: #FF4611;
-    padding: 0 20px;
+    min-width: 1240px;
     .logo{
       display: block;
       height: 100%;
       width: 220px;
       padding: 13px 0;
+      img{
+        height: 30px;
+      }
     }
     .menu{
       ul{}
@@ -41,7 +44,7 @@
   }
   #header_bottom{
     @height : 30px; /* header组件 下部高度 */
-
+    min-width: 1240px;
     padding:0 20px;
     background: #F5F5F5;
     height: @height;

@@ -3,14 +3,15 @@ import React from 'react';
 import './style.less';
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
-import ImgLogo from '../../../../static/img/logo.png';
 class ComponentHeader extends React.Component{
   render(){
     return (
       <div id='header'>
         <div id='header_top'>
           <div className='content clearfix'>
-            <Link className='logo float-left' to='/'><img src={ImgLogo} alt="logo"/></Link>
+            <Link className='logo float-left' to='/'>
+              <img src={require('../../../../static/img/logo.png')} alt="logo"/>
+            </Link>
             <div className='menu float-left'>
               <ul>
                 <li className='float-left'><a href="javascript:;">女装</a></li>
@@ -27,8 +28,8 @@ class ComponentHeader extends React.Component{
         <div id='header_bottom'>
           <div className='content clearfix'>
             <ul className='float-right'>
-              <li className='float-left'><a href="">亲，请登录</a></li>
-              <li className='float-left'><a href="">免费注册</a></li>
+              <li className='float-left'><Link to='/login/login'>亲，请登录</Link></li>
+              <li className='float-left'><Link to='/login/register'>免费注册</Link></li>
               <li className='float-left'><a href="">我的订单</a></li>
               <li className='float-left'><a href="">收藏夹</a></li>
             </ul>

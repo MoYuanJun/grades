@@ -11,9 +11,9 @@ if ( !window.Promise ){
 }
 
 /* 导出封装的方法 ： 参数 url*/
-export function get ( url ){
+export function get ( url){
   /* 调用 fetch方法  */
-  var result = fetch( url, {
+  var result = fetch( url , {
     /* 设置头响应信息 */
     headers : {'Accept': 'application/json,text/plain,*/*' }
   });

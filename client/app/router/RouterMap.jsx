@@ -20,7 +20,7 @@ class RouterMap extends React.Component{
         <App> {/* 所有页面外层：父模板 */}
           <Switch>{/* 根据路由 按所有路由(Route)从上到下依次匹配路由，有且只匹配一个 */}
             <Route exact path='/' component={ProspectsHome} /> {/* 默认首页为客户端首页 路由，path表示匹配路由(理解为正则) exact表示严格匹配 没有exact默认按照模糊匹配那么所有路由都会先被匹配到 那么自然就没必要向下匹配来了 */}
-            <Route path='/login' component={Login} /> {/* 登录共用一个智能组件 */}
+            <Route path='/login/:type' component={Login} /> {/* 登录注册共用一个智能组件 */}
             <Route path="/prospects" component={ProspectsRouter} />{/* 嵌套路由：客户端 */}
             <Route path='/backgrounds' component={BackgroundsRouter} />{/* 嵌套路由：后台 */}
             <Route path='/*' component={NotFound} />

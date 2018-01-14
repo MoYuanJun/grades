@@ -8,23 +8,31 @@ import { getCommodityList } from '.././../../../fetch/index';
 class List extends React.Component{
   constructor(){
     super();
-    this.state = {
-      data : null
-    }
+    this.state = {}
   }
   render(){
     return (
       <div id='List'>
         <div className='content'>
-        <ListComponent data = {this.state.data} />
+          <ListComponent data = {this.state} />
         </div>
       </div>
     );
   }
   componentDidMount(){
-    getCommodityList().then(res=>res.json()).then((json)=>{
-      this.setState({data:json});
+    getCommodityList('?size=10&orderBy=com_time&orderByType=desc').then(res=>res.json()).then((json)=>{
+      json.title = '最新上架';
+      this.setState(Object.assign(this.state, { newestList : json }));
+    });
+    getCommodityList('?size=10&orderBy=com_salesVolume&orderByType=desc').then(res=>res.json()).then((json)=>{
+      json.title = '热销';
+      this.setState(Object.assign(this.state,{ hotSelltList : json }));
+    });
+    getCommodityList('?size=10&orderBy=com_collect&orderByType=desc').then(res=>res.json()).then((json)=>{
+      json.title = '热门收藏';
+      this.setState(Object.assign(this.state,{ hotCollectList: json }));
     });
   }
 }
 export default List;
+

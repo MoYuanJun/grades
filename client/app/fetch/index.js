@@ -20,11 +20,9 @@ export function register(obj){
   return post(URL+'login/insertUser.php',obj);
 }
 
-/* 获取商品列表: */
-export function getCommodityList(params){
+/* 获取商品列表: 参数路由参数 */
+export function getCommodityList(strParams){
   /* 拼接参数 */
-  if( !params ){ params = ''; }
-  const strurl = URL+'commodity/getCommodityList.php'+params;
-  return get(strurl);
+  return get( URL + 'commodity/getCommodityList.php' + strParams);
 }
 

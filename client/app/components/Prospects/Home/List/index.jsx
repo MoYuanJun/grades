@@ -5,9 +5,12 @@ import ListComponentSubpage from './subpage';
 
 class ListComponent extends React.Component{
   render(){
+    const data = this.props.data;
     return (
       <div>
-        <ListComponentSubpage data = {this.props.data}/>
+        <ListComponentSubpage data = {data.newestList} /> {/* 最新上架 */}
+        <ListComponentSubpage data = {data.hotSelltList} />{/* 热销 */}
+        <ListComponentSubpage data = {data.hotCollectList} />{/* 热门收藏 */}
       </div>
     );
   }

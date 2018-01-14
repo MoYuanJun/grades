@@ -21,9 +21,9 @@ class ComLogin extends React.Component{
 
         <div className='content'>
           {/* 使用antd组件 */}
-          {/* 外层组件 defaultActiveKey默认当前key */}
-          <Tabs defaultActiveKey="1" > 
-
+          {/* 外层组件 defaultActiveKey默认当前key 接收从智能组件传来的路由参数 */}
+          <Tabs defaultActiveKey={this.props.type === 'register' ? '2' : '1' } > 
+          
             <TabPane className='tab_login' tab={<span className='tab_head'>{icon_login}登录</span>} key="1">
               {/* 第一个选项卡：调用木偶组件分页 ===> 登录 */}
               <SubLogin LoginFun={this.props.LoginFun} />{/* 接收智能组件传来的方法 再传给木偶组件之分页 */}

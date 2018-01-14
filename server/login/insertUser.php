@@ -1,29 +1,44 @@
-
-<!-- 注册 ： 插入语句 -->
 <?php
+/* 注册插入语句*/
 header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 
-require_once '../config/MySQL.php';
+/* 导入封装的方法 */
+require_once '../config/MySQL.php';  //数据库连接 执行方法
+require_once '../func/judgeUserFunc.php'; //获取判断用户是否存在的封装函数
+require_once '../func/getIDFunc.php';   //生成唯一ID方法
 
-/* 获取账号密码 */
+/* 获取账号密码  生成唯一ID*/
 $userName = $_POST['userName'];
 $password = md5($_POST['password']);
 
-$sql = "insert into ".$users." (`username`,`password`) values ('".$userName."','".$password."');";
-db_implement($sql);
+//后端再次进行验证 ： 当前用户是否已存在
+if(judgeUserFunc($userName, "db_implement") === 404){
+  $id = getIDFunc('uid') ;
+  $sql = "insert into ".$users." (`u_id`,`username`,`password`) values ('".$id."','".$userName."','".$password."');";
 
-//获取数据库操作影响行数
-$row = mysql_affected_rows();
+  /* 调用封装的 SQL执行方法 */
+  db_implement($sql);
 
-/* 判断是否插入语句成功：即注册成功 */
-if($row === 1){
-  /* 注册成功则返回1 */
-  echo 1;
+  //获取数据库操作影响行数
+  $row = mysql_affected_rows();
+
+  /* 判断是否插入语句成功：即注册成功 */
+  if($row === 1){
+    /* 注册成功则返回1 */
+    echo 1;
+  }else{
+    /* 注册失败则返回0 */
+    echo 0;
+  }
 }else{
-  /* 注册失败则返回0 */
-  echo 0;
+  //注册失败，当前用户存在
+  echo 2; 
 }
+
+
+
+
 
 
 

@@ -4,26 +4,29 @@ import './style.less'
 import ItemComponent from '../../Item';
 class ListComponentSubpage extends React.Component{
   render(){
+    const data = this.props.data;
     return (
-      this.props.data ?
+      data ?
           <div id='ListComponentSubpage' className='clearfix'>
-            <div className='item float-left'>
-            <ItemComponent data = {this.props.data[0]} />
+            <div className='hea clearfix'>
+              <svg className='icon float-left svg' aria-hidden='true'>
+                <use xlinkHref={data.title === '最新上架' ? '#icon-zuixin' 
+                                : data.title === '热销' ? '#icon-rexiaochanpin' 
+                                : '#icon-haoping' }>
+                </use>
+              </svg>
+              <h2 className='float-left'>{data.title}</h2>
             </div>
-            <div className='item float-left'>
-            <ItemComponent data = {this.props.data[1]}  />
-            </div>
-            <div className='item float-left'>
-            <ItemComponent data = {this.props.data[2]}  />
-            </div>
-            <div className='item float-left'>
-            <ItemComponent data = {this.props.data[3]} />
-            </div>
-            <div className='item float-left'>
-            <ItemComponent data = {this.props.data[4]} />
-            </div>
+            {data.content.length?
+              data.content.map((value, key, arr)=>{
+                return <div key={key} className='item float-left'>
+                        <ItemComponent data = {data.content[key]}  />
+                      </div>
+              })
+              : ''}
           </div> : ''
     );
   }
 }
 export default ListComponentSubpage;
+
