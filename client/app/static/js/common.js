@@ -25,4 +25,4 @@ export const wordlimit = (cname,wordLength) =>{
     if(nowLength > wordLength){
       cname.innerHTML=cname.innerHTML.substr(0,wordLength)+' . . . ';
     }　
-  }
+}

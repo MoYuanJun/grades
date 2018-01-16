@@ -3,15 +3,20 @@ import React from 'react';
 import './style.less';
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
+
 class ComponentHeader extends React.Component{
+  /* 搜索事件处理器 searchText */
   render(){
     return (
       <div id='header'>
+        {/* 顶部 橘黄色 */}
         <div id='header_top'>
           <div className='content clearfix'>
+            {/* Logo */}
             <Link className='logo float-left' to='/'>
               <img src={require('../../../../static/img/logo.png')} alt="logo"/>
             </Link>
+            {/* 菜单 */}
             <div className='menu float-left'>
               <ul>
                 <li className='float-left'><a href="javascript:;">女装</a></li>
@@ -20,11 +25,16 @@ class ComponentHeader extends React.Component{
                 <li className='float-left'><a href="javascript:;">运动</a></li>
               </ul>
             </div>
+            {/* 搜索框 */}
             <div className='search float-right'>
-              <Input.Search className='inputSearch' onSearch={(value)=>{console.log(value)}} placeholder="输入搜索词条" enterButton="搜索"  />
+              <Input.Search className='inputSearch' 
+                            onSearch={ this.props.searchHandler } 
+                            placeholder="输入搜索词条" 
+                            enterButton="搜索"  />
             </div>
           </div>
         </div>
+        {/* 底部灰白区域 */}
         <div id='header_bottom'>
           <div className='content clearfix'>
             <ul className='float-right'>

@@ -31,9 +31,10 @@ while($row = mysql_fetch_assoc($get)){
 }
 
 /* 对查询结果进行分析 并添加状态位 200查有所值 404并没有查询到任何东西 */
-if($result){
+if(isset($result)){
   $result['error'] = 200;
 }else{
+  $result['content'] = array(); //如果查询不到内容 返回空数组
   $result['error'] = 404;
 }
 /* 对查询的数据进行JSON编码 并输出 */

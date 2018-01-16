@@ -9,7 +9,6 @@ class ItemComponent extends React.Component{
     return (
       <div id='ItemComponent'>
         <div className = 'img'>
-        {console.log('2222222222222',data)}
           <img src={ data.com_img } alt=""/>
         </div>
         <p ref='title' className = 'title'>{data.com_title}</p>
@@ -22,6 +21,7 @@ class ItemComponent extends React.Component{
             <span className = 'oldPrice'>￥{data.com_price}</span>
             <span className = 'float-right'>月销{data.com_salesVolume}笔</span>
         </p>
+
       </div>
     );
   }
@@ -29,6 +29,7 @@ class ItemComponent extends React.Component{
     //调用方法 对标题的字数进行限制，超过用省略号进行替代
     wordlimit(this.refs.title,23);
   }
+  componentDidUpdate(){wordlimit(this.refs.title,23);console.log(1111)}
 }
 export default ItemComponent;
 

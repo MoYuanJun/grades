@@ -9,7 +9,7 @@ import ProspectsHome from '../containers/Prospects/Home';
 const ProspectsRouter = ({ match }) => (
   <div>
     <Route path={`${match.url}/home`} component={ProspectsHome}/>
-    <Route path={`${match.url}/search`} component={Search} />
+    <Route path={`${match.url}/search/:searchText`} component={Search} />{/* this.props.match.params.searchText */}
   </div>
 ) 
 export default ProspectsRouter;
