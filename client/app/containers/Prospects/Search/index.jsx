@@ -13,7 +13,7 @@ class Search extends React.Component{
   constructor(){
     super();
     this.state={
-      searchValue: '',      //当前输入框文字
+      placeholder: '',      //从首页跳转过来所带的参数
       searchText: '',       //搜索词条
       startIndex: 0,        //开始条数
       dataNumber: 15,       //获取n条数据
@@ -56,7 +56,7 @@ class Search extends React.Component{
   render(){
     return (
       <div>
-        <Header searchHandler={this.searchHandler.bind(this)} />
+        <Header searchHandler={this.searchHandler.bind(this)} placeholder={this.state.placeholder} />
         <List data={this.state.data} />
         <Footer />
       </div>
@@ -65,7 +65,7 @@ class Search extends React.Component{
 
   //组件更新后首次执行  ==> 首页过来
   componentDidMount(){
-    this.stateChange('searchValue', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
+    this.stateChange('placeholder', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
     this.stateChange('searchText', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
     this.resetData(); //更新||其实是首次获取数据
   }

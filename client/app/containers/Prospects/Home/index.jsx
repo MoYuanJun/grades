@@ -12,7 +12,7 @@ class ProspectsHome extends React.Component{
   render(){
     return (
       <div>
-        <Header />
+        <Header history={this.props.history} />
         <SwiperAndUser />
         <List />
         <Footer />

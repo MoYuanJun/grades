@@ -29,8 +29,8 @@ class ComponentHeader extends React.Component{
             <div className='search float-right'>
               <Input.Search className='inputSearch' 
                             onSearch={ this.props.searchHandler } 
-                            placeholder="输入搜索词条" 
-                            enterButton="搜索"  />
+                            placeholder={this.props.placeholder ? this.props.placeholder : '输入搜索词条'} 
+                            enterButton="搜索"/>
             </div>
           </div>
         </div>

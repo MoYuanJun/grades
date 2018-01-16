@@ -29,7 +29,10 @@ class ItemComponent extends React.Component{
     //调用方法 对标题的字数进行限制，超过用省略号进行替代
     wordlimit(this.refs.title,23);
   }
-  componentDidUpdate(){wordlimit(this.refs.title,23);console.log(1111)}
+  //组件更新后  触发==>执行函数 对标题字数进行限制
+  componentDidUpdate(){
+    wordlimit(this.refs.title,23);
+  }
 }
 export default ItemComponent;
 

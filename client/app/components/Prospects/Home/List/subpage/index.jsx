@@ -3,6 +3,10 @@ import React from 'react';
 import './style.less'
 import ItemComponent from '../../Item';
 class ListComponentSubpage extends React.Component{
+  constructor(){
+    super();
+    this.state={loading:false}
+  }
   render(){
     const data = this.props.data;
     return (
@@ -21,15 +25,17 @@ class ListComponentSubpage extends React.Component{
               </div>
               : ''
             }
-            
+            {console.log(data.content.length)}
             {
-              data.content.length ?
+              data.content.length !== 0 ?
                 data.content.map((value, key, arr)=>{
                   return <div key={key} className='item float-left'>
                           <ItemComponent data = {data.content[key]}  />
                         </div>
-                })
-                : ''
+                }) : 
+                <div>
+                  找不到哦
+                </div>
             }
           </div> : ''
     );
