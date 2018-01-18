@@ -2,7 +2,7 @@
 import React from 'react';
 import Subpage from './subpage';
 
-class CommodityComponent extends React.Component{
+class BuyCommodityComponent extends React.Component{
   render(){
     return (
       <div>
@@ -14,15 +14,4 @@ class CommodityComponent extends React.Component{
   }
 }
 
-export default CommodityComponent;
-
-
-
-
-
-
-
-
-
-
-
+export default BuyCommodityComponent;

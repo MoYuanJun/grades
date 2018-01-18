@@ -2,11 +2,11 @@
 import React from 'react';
 
 import { getCommodityInfo } from '../../../fetch';
-import CommodityComponent from '../../../components/Prospects/Commodity';
+import BuyCommodityComponent from '../../../components/Prospects/BuyCommodity';
 import Header from './subpage/Header';
 
 
-class Commodity extends React.Component{
+class BuyCommodity extends React.Component{
   constructor(){
     super();
     this.state={}
@@ -28,7 +28,7 @@ class Commodity extends React.Component{
     return (
       <div>
         <Header history={this.props.history} />
-        <CommodityComponent data={this.state.data} />
+        <BuyCommodityComponent data={this.state.data} />
         单独商品展示
         {this.props.match.params.comId}
       </div>
@@ -45,5 +45,5 @@ class Commodity extends React.Component{
   }
 }
 
-export default Commodity;
+export default BuyCommodity;
 
