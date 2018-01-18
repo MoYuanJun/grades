@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import Header from './subpage/Header';  //导航头 子智能组件
 import SwiperAndUser from './subpage/SwiperAndUser'; //swiper和user信息 子智能组件
 import List from './subpage/List';
-import Footer from '../../../components/Footer';
 
 class ProspectsHome extends React.Component{
   render(){
@@ -15,7 +14,6 @@ class ProspectsHome extends React.Component{
         <Header history={this.props.history} />
         <SwiperAndUser />
         <List />
-        <Footer />
       </div>
     )
   }

@@ -12,8 +12,8 @@ class List extends React.Component{
   }
   render(){
     return (
-      <div id='List'>
-        <div className='content'>
+      <div>
+        <div>
           <ListComponent data = {this.state} />
         </div>
       </div>

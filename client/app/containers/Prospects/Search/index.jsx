@@ -5,9 +5,6 @@ import { searchCommodity } from '../../../fetch/index';
 
 import Header from '../../../components/Prospects/Home/Header';
 import List from '../../../components/Prospects/Home/List/index';
-import Footer from '../../../components/Footer';
-
-
 
 class Search extends React.Component{
   constructor(){
@@ -58,7 +55,6 @@ class Search extends React.Component{
       <div>
         <Header searchHandler={this.searchHandler.bind(this)} placeholder={this.state.placeholder} />
         <List data={this.state.data} />
-        <Footer />
       </div>
     );
   }

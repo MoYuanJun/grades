@@ -1,5 +1,5 @@
 <?php
-/* 获取商品信息 */
+/* 获取商品列表 */
 header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 

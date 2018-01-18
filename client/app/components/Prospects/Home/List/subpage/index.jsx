@@ -25,7 +25,6 @@ class ListComponentSubpage extends React.Component{
               </div>
               : ''
             }
-            {console.log(data.content.length)}
             {
               data.content.length !== 0 ?
                 data.content.map((value, key, arr)=>{

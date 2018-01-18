@@ -1,12 +1,16 @@
 /* 客户端：木偶组件List中的每个木偶组件Item */
 import React from 'react';
 import './style.less';
+
+import { Link } from 'react-router-dom';
+
 //引入 方法 对特定元素的字数进行限制 并将多余的文字用省略号替代
 import { wordlimit } from '../../../../static/js/common';
 class ItemComponent extends React.Component{
   render(){
     const data = this.props.data;
     return (
+      <Link to={`/prospects/commodity/${data.commodity_id}`}>
       <div id='ItemComponent'>
         <div className = 'img'>
           <img src={ data.com_img } alt=""/>
@@ -21,8 +25,8 @@ class ItemComponent extends React.Component{
             <span className = 'oldPrice'>￥{data.com_price}</span>
             <span className = 'float-right'>月销{data.com_salesVolume}笔</span>
         </p>
-
       </div>
+      </Link>
     );
   }
   componentDidMount(){

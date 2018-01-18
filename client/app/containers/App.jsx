@@ -1,5 +1,8 @@
 /* 所有页面的 模板文件 */
 import React from 'react';
+
+import Footer from '../components/Footer';
+
 /* 引用通用样式||JS */
 import 'antd/dist/antd.less';  //antd样式
 import '../static/css/common.less';   //通用样式  包括阿里字体图标的使用
@@ -15,6 +18,7 @@ class App extends React.Component{
     return(
       <div>
         {this.props.children}
+        <Footer />
       </div>
     )
   }

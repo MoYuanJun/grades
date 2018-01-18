@@ -35,6 +35,10 @@ export function searchCommodity(obj){
     }
     
   }
-  console.log(URL + 'commodity/searchCommodity.php'+strParams);
   return get(URL + 'commodity/searchCommodity.php'+strParams);
+}
+
+/* 通过ID获取某商品的信息 */
+export function getCommodityInfo(comId){
+  return get(URL + 'commodity/getCommodityInfo.php?comId=' + comId);
 }
