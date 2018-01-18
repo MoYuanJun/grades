@@ -1,6 +1,6 @@
 /* 单独商品展示 ==> 头部智能组件 ==> 因为业务不同 */
 import React from 'react';
-import HeaderComponetn from '../../../../components/Prospects/Home/Header';
+import HeaderComponetn from '../../../../components/Header';
 
 class Header extends React.Component{
   constructor(){

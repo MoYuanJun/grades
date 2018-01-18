@@ -3,8 +3,8 @@ import React from 'react';
 
 import { searchCommodity } from '../../../fetch/index';
 
-import Header from '../../../components/Prospects/Home/Header';
-import List from '../../../components/Prospects/Home/List/index';
+import Header from '../../../components/Header';
+import List from '../../../components/List';
 
 class Search extends React.Component{
   constructor(){

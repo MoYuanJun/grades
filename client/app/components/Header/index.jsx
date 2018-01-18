@@ -14,7 +14,7 @@ class ComponentHeader extends React.Component{
           <div className='content clearfix'>
             {/* Logo */}
             <Link className='logo float-left' to='/'>
-              <img src={require('../../../../static/img/logo.png')} alt="logo"/>
+              <img src={require('../../static/img/logo.png')} alt="logo"/>
             </Link>
             {/* 菜单 */}
             <div className='menu float-left'>

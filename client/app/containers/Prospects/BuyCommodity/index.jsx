@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { getCommodityInfo } from '../../../fetch';
-import BuyCommodityComponent from '../../../components/Prospects/BuyCommodity';
+import BuyCommodityComponent from '../../../components/BuyCommodity';
 import Header from './subpage/Header';
 
 
@@ -11,7 +11,6 @@ class BuyCommodity extends React.Component{
     super();
     this.state={}
   }
-
 
   /**
    * 设置更新state函数

@@ -1,6 +1,6 @@
 /* 头部智能组件 */
 import React from 'react';
-import ComponentHeader from '../../../../components/Prospects/Home/Header/index';
+import ComponentHeader from '../../../../components/Header';
 import { Modal } from 'antd';
 
 class Header extends React.Component{

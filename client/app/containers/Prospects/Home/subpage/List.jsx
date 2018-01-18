@@ -1,7 +1,7 @@
 /* 客户端：智能组件List */
 import React from 'react';
 
-import ListComponent from '../../../../components/Prospects/Home/List';
+import ListComponent from '../../../../components/List';
 import { getCommodityList } from '.././../../../fetch/index';
 
 

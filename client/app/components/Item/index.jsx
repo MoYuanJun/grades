@@ -5,7 +5,7 @@ import './style.less';
 import { Link } from 'react-router-dom';
 
 //引入 方法 对特定元素的字数进行限制 并将多余的文字用省略号替代
-import { wordlimit } from '../../../../static/js/common';
+import { wordlimit } from '../../static/js/common';
 class ItemComponent extends React.Component{
   render(){
     const data = this.props.data;
