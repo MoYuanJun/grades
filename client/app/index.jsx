@@ -1,5 +1,8 @@
 /* 入口文件 */
-import './static/js/common';
+/* 兼容 */
+import 'babel-polyfill';  //兼容使用： assign
+
+/* 开始 */
 import React from 'react';
 import {render} from 'react-dom';
 

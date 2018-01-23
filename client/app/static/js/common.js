@@ -1,19 +1,3 @@
-/**
- * IE报错：
- * 解决部分浏览器 不支持startsWith 和 endsWith方法的解决办法
- * 检测：若不支持startsWith 和 endsWith则自定义引入自定义方法
- */
-if (typeof String.prototype.startsWith != 'function') {  
-  String.prototype.startsWith = function (prefix){  
-   return this.slice(0, prefix.length) === prefix;  
-  };  
- }
-
- if (typeof String.prototype.endsWith != 'function') {  
-  String.prototype.endsWith = function(suffix) {  
-   return this.indexOf(suffix, this.length - suffix.length) !== -1;  
-  };  
- }  
 
 /**
  * 对元素的字数进行限制  多余的省略并在末尾添加省略号
@@ -26,3 +10,20 @@ export const wordlimit = (cname,wordLength) =>{
       cname.innerHTML=cname.innerHTML.substr(0,wordLength)+' . . . ';
     }　
 }
+
+/**
+ *字符串处理方法：将给定字符串按指定分隔符分割成数组；
+ * 例：将字符串 str;str;str;按';'格式化为[str,str,str]
+ * @param {string} str   字符串
+ * @param {chara} chara  字符
+ * @return {Array}
+ */
+ export function getStrToArray(str, chara){
+  let Array = str.split(chara);
+  if(Array[Array.length-1] == ''){  //最后一个数组元素可能是空字符得进行判断处理
+    //Array.length = Array.length - 1;
+    Array.pop();
+  }
+  return Array;
+ }
+

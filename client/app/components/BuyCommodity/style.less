@@ -1,0 +1,151 @@
+
+#showComInfo{
+  min-width: 1240px;
+  margin: 20px 0 0 0;
+  .content{
+    height: 600px;
+    border:1px solid rgba(234, 234, 234,1);
+    margin: 0 auto;
+    width: 1200px;
+    padding: 20px;
+    .img{
+      img{
+        width: 100%;
+      }
+    }
+    .con-left{
+      width: 400px;
+      height: 100%;
+      background: red;
+    }
+    .con-center{
+      width: 516px;
+      height: 100%;
+      margin: 0 20px;
+      .row-key{
+        width: 50px;
+        letter-spacing: 10px;
+      }
+      .row-value{
+        padding: 0 0 0 20px;
+        width: 440px;
+      }
+      .row{
+        padding: 10px;
+      }
+      h2{
+        font-size: 18px;
+      }
+      .price{
+        background: #FFF4F2;
+        .price-top{
+          padding:10px;
+          line-height: 50px;
+          background: #FDE5E0;
+          border-top:1px solid #FFCBC4;
+          border-bottom: 1px solid #FFCBC4;
+          .newPrice{
+            color: #E60012;
+            font-size: 30px;
+          }
+          .oldPrice{
+            text-decoration: line-through;
+          }
+        }
+        .price-bottom{
+          padding: 10px 10px 10px 80px;
+          svg{
+            margin: 0 10px 0 0;
+            color: #FF875A;
+          }
+          span{
+            padding: 0 20px 0 0;
+          }
+        }
+      }
+      .distribution{
+        padding: 10px;
+        line-height: 30px;
+      }
+      .size{
+        line-height: 30px;
+        padding: 10px;
+      }
+      .color{
+        padding: 10px;
+
+      }
+      .number{
+        line-height: 30px;
+        .num-prompt{
+          width: 300px;
+          padding: 0 0 0 10px;
+        }
+      }
+      .buy-btn{
+        .btn{
+          width: 168px;
+          height: 48;
+          line-height: 48px;
+          background:#FF4400;
+          border: 1px solid #F0CAB6;
+          border-radius: 2px;
+          margin: 0 20px 0 0;
+          color: #fff;
+          text-align: center;
+          cursor: pointer;
+          font-size: 15px;
+          svg{
+            font-size: 20px;
+          }
+        }
+        .btn:hover{
+          background: #F24300;
+        }
+        .buyNow{
+         
+        }
+        .buyAfter{
+          
+        }
+      }
+
+    }
+
+    .con-right{
+      width: 200px;
+      background: red;
+      height: 100%;
+    }
+  }
+
+  /* 下面是对antd的一些固定样式的修改 */
+  //===> 对单选框样式的修改  ==> 选择按钮的修改
+  .ant-radio-button-wrapper{
+    //使每个原本挨在一起的选项按钮
+    padding: 0 20px;
+    margin: 0 10px 10px 0;
+  }
+  .ant-radio-button-wrapper:first-child{
+    //去除第一个选项按钮的左边圆角
+    border-radius: 0px;
+
+  }
+  .ant-radio-button-wrapper:last-child{
+    //去除最后一个选项按钮的右边圆角
+    border-radius: 0px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

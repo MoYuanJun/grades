@@ -10,7 +10,7 @@ class ItemComponent extends React.Component{
   render(){
     const data = this.props.data;
     return (
-      <Link to={`/prospects/commodity/${data.commodity_id}`}>
+      <Link to={`/prospects/commodity/${data.com_id}`}>
       <div id='ItemComponent'>
         <div className = 'img'>
           <img src={ data.com_img } alt=""/>
@@ -21,8 +21,8 @@ class ItemComponent extends React.Component{
             收藏<span>{data.com_collect}</span>
         </p>
         <p className = 'price'>
-            <span className = 'newPrice'><span>￥</span>{data.com_price}</span>
-            <span className = 'oldPrice'>￥{data.com_price}</span>
+            <span className = 'newPrice'><span>￥</span>{data.com_newPrice}</span>
+            <span className = 'oldPrice'>￥{data.com_oldPrice}</span>
             <span className = 'float-right'>月销{data.com_salesVolume}笔</span>
         </p>
       </div>

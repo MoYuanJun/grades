@@ -96,7 +96,24 @@
             };  
         }  
 3、Safari下提示  MAP对象未定义：
-    
+
+
+4、IE11不支持assign不支持    
+    ==> npm install --save babel-polyfill
+    ==> 使用 babel-polyfill 的三种方法：
+        ==> require("babel-polyfill");
+        ==> import "babel-polyfill";
+        ==> module.exports = {
+                entry: ["babel-polyfill", "./app/js"]
+            };
+    ==> 补充：polyfill解决了上面的所有兼容问题
+        ==> 已知能够解决：IE11下报错：不支持 startsWith 方法或属性
+        ==> Map未定义问题
+        ==> assign未定义问题
+
+
+
+
 
 
 

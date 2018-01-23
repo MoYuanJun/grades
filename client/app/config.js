@@ -5,13 +5,18 @@ export const URL = 'http://localhost/grades/server/';
 
 //商品字段
 export const commodity = {
-  commodity_id : 'commodity_id',         //商品ID
+  com_id : 'com_id',         //商品ID
   com_title : 'com_title',               //标题
   com_evaluate : 'com_evaluate',         //评价{评价人id:星级}
   com_collect : 'com_collect',           //收藏{收藏者id数组}
-  com_price : 'com_price',               //价格{原价，现价}
+  com_newPrice : 'com_newPrice',          //价格{原价，现价}
+  com_oldPrice : 'com_oldPrice',          //价格{原价，原价价}
   com_img : 'com_img',                   //图片{主图，缩略图}
   com_salesVolume : 'com_salesVolume',   //销量（月）
   com_time : 'com_time',                  //时间
+  com_size : 'com_size',                           //尺寸
+  com_number : 'com_number',            //数量
+  com_color  : 'com_color'            //颜色
+
 }
 
