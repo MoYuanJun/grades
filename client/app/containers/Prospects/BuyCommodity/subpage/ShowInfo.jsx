@@ -12,7 +12,7 @@ class ShowInfo extends React.Component{
   render(){
     return (
       <div>
-        <BuyCommodityComponent data={this.state.data} />
+        <BuyCommodityComponent data={this.state.data} history={this.props.history} />
       </div>
     );
   }

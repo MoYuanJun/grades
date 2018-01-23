@@ -27,3 +27,23 @@ export const wordlimit = (cname,wordLength) =>{
   return Array;
  }
 
+ /**
+  * 修改当前this.state的某个值 并保持其他值不变
+  * @param {object} that 表示当前this指向
+  * @param {string || array} key 表示要修改state的key,可以是数组
+  * @param {任意} value 表示要修改state的value，可以是数组
+  */
+ export function changeState(that, key, value){
+  const state = that.state;
+  if (typeof key === 'string'){
+    state[key] = value;
+  }else if(typeof key === 'object'){ 
+    for(let i=0;i<key.length;i++){
+      state[key[i]] = value[i];
+    }
+  }else{
+    return false;
+  }
+  that.setState(state);
+  return true;
+}

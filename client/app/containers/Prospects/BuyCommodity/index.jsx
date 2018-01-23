@@ -8,7 +8,7 @@ class BuyCommodity extends React.Component{
     return (
       <div>
         <Header history={this.props.history} />
-        <ShowInfo comId={this.props.match.params.comId} />
+        <ShowInfo comId={this.props.match.params.comId} history={this.props.history} />
         {this.props.match.params.comId}
       </div>
     );
