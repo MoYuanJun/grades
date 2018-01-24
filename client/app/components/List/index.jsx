@@ -19,7 +19,6 @@ class ListComponent extends React.Component{
     const data = this.props.data;
     return (
       <div id='List'>
-      {console.log(data)}
         {this.matchHash() === 0 ?  
           <div className='content'>{/* 展示首页 */}
             <ListComponentSubpage data = {data.newestList} /> {/* 最新上架 */}

@@ -3,7 +3,7 @@ import React from 'react';
 import './style.less';
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 class ComponentHeader extends React.Component{
   /* 搜索事件处理器 searchText */
   render(){

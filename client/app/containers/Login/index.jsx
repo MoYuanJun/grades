@@ -47,7 +47,6 @@ class Login extends React.Component{
   render(){
     return (
       <div>
-        {console.log(this.props.match.params)}
         {/* 将业务函数 ： 登录方法传给木偶组件 */}
         <ComLogin LoginFun={this.LoginFun.bind(this)} 
                   judgeUser={this.judgeUser_.bind(this)} 
