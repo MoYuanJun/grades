@@ -1,4 +1,4 @@
-/* 木偶组件 ： 确认订单 ==> 模态框  ConfirmationOfOrder extends React.Component*/
+/* 木偶组件 ： 确认订单填写地址手机号付款方式 ==> 模态框 */
 import React from 'react';
 import './style.less';
 import { changeState } from '../../static/js/common';
@@ -10,11 +10,11 @@ class ConfirmationOfOrder extends React.Component {
     constructor(){
         super();
         this.state = {
-            isPrompt : false,
-            prompt : '',
-            address : undefined,
-            phone : undefined,
-            paymentMethod : '货到付款'
+            isPrompt : false,   //是否显示提示 ：对填写内容进行检测、错误提示状态
+            prompt : '',            //提示语 
+            u_address : undefined,    //地址
+            u_phone : undefined,      //电话
+            paymentMethod : 0       //付款方式
         }
     }
     /* 确定按钮触发函数 */
@@ -23,14 +23,12 @@ class ConfirmationOfOrder extends React.Component {
         console.log(1);
         if(!this.isPrompt()) {
             this.props.changeState(
-                ['address','phone','paymentMethod'],
-                [this.state.address,this.state.phone,this.state.paymentMethod])
-                console.log(2);
-            this.props.pushOrder();
+                ['u_address','u_phone','paymentMethod'],
+                [this.state.u_address,this.state.u_phone,this.state.paymentMethod])
+            this.props.pushOrder('2');  //填写状态表示直接购物
         }else{
             return false;
         }
-        
     }
     /* 取消按钮触发函数 */
     handleCancel = (e) => {
@@ -39,7 +37,7 @@ class ConfirmationOfOrder extends React.Component {
     }
     //是否显示提示：没有正确填写信息
     isPrompt(){
-        if(this.state.address && this.state.phone){
+        if(this.state.u_address && this.state.u_phone){
             return false;
         }else{
             changeState(this,['isPrompt','prompt'],[true,'注意：请填写您的地址和联系方式！']);
@@ -76,7 +74,7 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='value'>
                     <Input prefix={icon_genggaishouhuodizhi} 
                           onChange={(e)=>{
-                              changeState(this,'address', e.target.value);
+                              changeState(this,'u_address', e.target.value);
                           }} />
                     </div>
                 </div>
@@ -85,19 +83,19 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='value'>
                     <Input prefix={ icon_lianxifangshi } 
                            onChange={(e)=>{
-                               changeState(this,'phone', e.target.value);
+                               changeState(this,'u_phone', e.target.value);
                             }} />
                     </div>
                 </div>
                 <div className='paymentMethod'>
                     <div className='key'>付款方式：</div>
                     <div className='value'>
-                        <RadioGroup defaultValue="货到付款" 
+                        <RadioGroup defaultValue={1} 
                                     onChange={(e)=>{
                                         changeState(this,'paymentMethod', e.target.value);
                                     }}>
-                            <RadioButton value="货到付款">{icon_tianmaohuodaofukuan}&nbsp;货到付款</RadioButton>
-                            <RadioButton value="在线支付">{icon_zhifu01}&nbsp;在线支付</RadioButton>
+                            <RadioButton value={1}>{icon_tianmaohuodaofukuan}&nbsp;货到付款</RadioButton>
+                            <RadioButton value={2}>{icon_zhifu01}&nbsp;在线支付</RadioButton>
                         </RadioGroup>
                     </div>
                 </div>

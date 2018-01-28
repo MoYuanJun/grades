@@ -13,7 +13,6 @@ class ProspectsHome extends React.Component{
         <Header history={this.props.history} />
         <SwiperAndUser />
         <List />
-        <div>{console.log(this.props.userInfo)}</div>
       </div>
     )
   }

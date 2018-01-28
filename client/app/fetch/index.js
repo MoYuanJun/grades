@@ -5,7 +5,7 @@ import { post } from './post';
 import { URL } from '../config';
 
 
-/* 登录信息获取 参数 是通过post方式获取数据时的参数 一般是用户名和密码 */
+/* 登录 ==> 信息获取 => 参数 是通过post方式获取数据时的参数 一般是用户名和密码 */
 export function LoginData (obj){
   return post(URL+'login/login.php',obj);  
 }
@@ -20,13 +20,13 @@ export function register(obj){
   return post(URL+'login/insertUser.php',obj);
 }
 
-/* 获取商品列表: 参数路由参数 */
+/* 首页商品列表 ==> 获取商品列表: 参数=>路由参数 */
 export function getCommodityList(strParams){
   /* 拼接参数 */
   return get( URL + 'commodity/getCommodityList.php' + strParams);
 }
 
-/* 商品搜索 */
+/* 根据关键词==>商品搜索 */
 export function searchCommodity(obj){
   let strParams = '?';
   if(obj){
@@ -41,4 +41,9 @@ export function searchCommodity(obj){
 /* 通过ID获取某商品的信息 */
 export function getCommodityInfo(comId){
   return get(URL + 'commodity/getCommodityInfo.php?comId=' + comId);
+}
+
+//添加销售记录  ==> 购买时提交订单 或 添加到购物车都能触发  salesrecord/addSalesRecord.php
+export function addSalesRecord(obj){
+  return post( URL + 'salesrecord/addSalesRecord.php' , obj);
 }

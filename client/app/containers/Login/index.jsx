@@ -18,8 +18,6 @@ class Login extends React.Component{
       if (json.error === 200){  //后端返回的数据通过error表示登录的状态 200 登录成功  404登录失败
         /* 登录成功则将用户数据存储到redux */
         this.props.userInfoAction.updataUser(json);
-        console.log('redux-userInfo','输出位置：登录页面之智能组件','登录成功',this.props.userInfo);/* ================= */
-        //跳转到首页
         this.props.history.go(-1); //回退到上一个路由，继续操作
       }else{
         //登录失败 调用木偶组件的回调函数 弹出登录失败对话框
@@ -37,10 +35,14 @@ class Login extends React.Component{
   
   /* 业务函数：用户注册函数 */
   register_(obj){
-    register(obj).then(res=>res.text()).then(text=>{
-
-      console.log('注册木偶表单39行--注册成功！',text,obj);
-      this.props.history.go(-1);
+    register(obj).then(res=>res.json()).then(json=>{
+      //更新 redux
+      if( json.error === 200 ){  //注册成功 ==> 否则都是失败的
+        this.props.userInfoAction.updataUser(json);
+        this.props.history.go(-1);
+      } else {
+        this.props.history.push('/login/login');
+      }
     });
   }
 

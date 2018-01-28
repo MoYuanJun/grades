@@ -1,5 +1,5 @@
 /* 配置 */
-/* 后台项目服务器地址 */
+/* PHP后端项目URL */
 export const URL = 'http://localhost/grades/server/';
 
 
@@ -17,6 +17,15 @@ export const commodity = {
   com_size : 'com_size',                           //尺寸
   com_number : 'com_number',            //数量
   com_color  : 'com_color'            //颜色
-
 }
 
+/**
+ * 订单状态说明：默认值为0
+ * 1表示 ：购物车中
+ * 2表示 ：已下单
+ * 3表示 : 已发货
+ * 4表示 ：已收货 
+ * 付款方式：默认值为0
+ * 1表示 : 货到付款
+ * 2表示 : 在线支付
+ */

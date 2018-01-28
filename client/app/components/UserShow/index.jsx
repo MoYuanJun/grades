@@ -20,8 +20,15 @@ class UserShowComponent extends React.Component{
         </div>
         <div className='bottom'>
           <div className='loginAndRegister clearfix'>
-            <div className='login float-left'><Link to='/login/login'>登录入口</Link></div>
-            <div className='register float-right'><Link to='/login/register'>注册入口</Link></div>
+            {this.props.userInfo.u_id ? 
+            <div>
+              <div className='login float-left'><Link to='/login/login'>退出登录</Link></div>
+              <div className='register float-right'><Link to='####'>个人中心</Link></div>
+            </div> :
+            <div>
+              <div className='login float-left'><Link to='/login/login'>登录入口</Link></div>
+              <div className='register float-right'><Link to='/login/register'>注册入口</Link></div>
+            </div>}
           </div>
           <div></div>
         </div>
