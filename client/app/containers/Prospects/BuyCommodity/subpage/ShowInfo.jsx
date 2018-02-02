@@ -27,7 +27,7 @@ class ShowInfo extends React.Component{
     //将数据插入数据库 ==> 成功则进行业务处理
     addSalesRecord(obj).then(res=>res.text()).then(text=>{
       if(text === '200'){
-        this.props.history.push('/prospects/userHome/1123');
+        this.props.history.push(`/prospects/userHome/${obj.u_id}`);
       }else if (text === '404'){
         //错误处理
       }

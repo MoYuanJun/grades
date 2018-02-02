@@ -47,3 +47,9 @@ export function getCommodityInfo(comId){
 export function addSalesRecord(obj){
   return post( URL + 'salesrecord/addSalesRecord.php' , obj);
 }
+
+/* 通过u_id获取订单信息 */
+//@param { object } obj 参数：{u_id:xxxxx}
+export function getSalesRecord(obj){
+  return post( URL + 'salesrecord/getSalesRecord.php', obj);
+}

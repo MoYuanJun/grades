@@ -14,6 +14,5 @@ class BuyCommodity extends React.Component{
     );
   }
 }
-
 export default BuyCommodity;
 

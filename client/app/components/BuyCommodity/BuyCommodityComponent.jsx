@@ -51,12 +51,6 @@ class BuyCommodityComponent extends React.Component{
     }
   }
 
-  //更新设置：state
-  changeState(key, value){
-    //封装 再次调用？为了一次性绑定this指向
-    changeState(this, key, value);
-  }
-  
   //点击事件处理器：传入回调函数，点击时需要处理的业务
   clickHandler(state){
     /* 判断用户是否完整填写当前订单信息  */
@@ -69,7 +63,7 @@ class BuyCommodityComponent extends React.Component{
           this.pushOrder(state);
          } else if(state === '2') {
           //用户直接购买 ==> 显示模态框 ==> 填写信息
-           this.changeState('visible', true);
+           this.setState({'visible': true});
          }
       }
     }
@@ -82,11 +76,11 @@ class BuyCommodityComponent extends React.Component{
   isCorrectFillIn(arr, key){
     for(let i = 0;i<arr.length;i++){
       if(this.state[arr[i]] == null ){
-        this.changeState(key, false);
+        this.setState({key: false});
         return false;
       }
     }
-    this.changeState(key, true);
+    this.setState({key: true});
     return true;
   }
 
@@ -104,11 +98,12 @@ class BuyCommodityComponent extends React.Component{
   //提模态框提交订单和添加到购物车处理函数  ==> 合并处理
   //@param { string }  state 表示当前订单的状态 1 表示添加到购物车  2 表示直接购买
   pushOrder(state){
-    this.changeState('u_id', this.props.userInfo.u_id);
-    //执行从智能组件传来的处理函数
-    this.props.addSalesRecord(this.state, state);
+    this.setState({'u_id': this.props.userInfo.u_id}, ()=>{
+      //执行从智能组件传来的处理函数
+      this.props.addSalesRecord(this.state, state);
+    });
   }
-
+  
   render(){
     const data = this.props.data;
     return (
@@ -148,7 +143,7 @@ class BuyCommodityComponent extends React.Component{
                               size='small'
                               placeholder="请选择所在城市！"
                               displayRender={this.displayRender}
-                              onChange={(value)=>{this.changeState('u_city',value)}}/>
+                              onChange={(value)=>{this.setState({'u_city':value})}}/>
                     </div>
                   </div>
                   <div className='row size clearfix'>
@@ -158,7 +153,7 @@ class BuyCommodityComponent extends React.Component{
                           { data.com_size ? 
                           <RadioGroup size='small' name="radiogroup" 
                                       defaultValue={0}
-                                      onChange={(e)=>{ this.changeState('com_size',e.target.value) }}>
+                                      onChange={(e)=>{ this.setState({'com_size': e.target.value}) }}>
                             { this.initialization('com_size', data.com_size).map((value, index, arr)=>{
                                 return <RadioButton value={value} key={index}>{value}</RadioButton>;
                               }) }
@@ -174,7 +169,7 @@ class BuyCommodityComponent extends React.Component{
                           { data.com_color ? 
                             <RadioGroup size='small' name='radiogroup'
                                         defaultValue={0} 
-                                        onChange={(e)=>{this.changeState('com_color',e.target.value)}}>
+                                        onChange={(e)=>{this.setState({'com_color': e.target.value})}}>
                               { this.initialization('com_color', data.com_color).map((value, index, arr)=>{
                                 return <RadioButton value={value} key={index}>{value}</RadioButton>
                               }) }
@@ -189,7 +184,7 @@ class BuyCommodityComponent extends React.Component{
                       <div className='float-left num-input'>
                         <InputNumber min={1} max={10}
                                     step={1} defaultValue={1} 
-                                  onChange={(value)=>{this.changeState('com_number',value)}} />
+                                  onChange={(value)=>{this.setState({'com_number': value})}} />
                       </div>
                       <div className='float-left num-prompt'>
                         件&nbsp;(库存:{data.com_number}件)
@@ -223,7 +218,7 @@ class BuyCommodityComponent extends React.Component{
         }
         <ConfirmationOfOrder visible={this.state.visible} 
                              pushOrder={this.pushOrder.bind(this)}
-                             changeState = {this.changeState.bind(this)}
+                             changeParentState = {this.setState.bind(this)}
          />
          <div>{this.props.userInfo.u_id}</div>
       </div>

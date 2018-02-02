@@ -1,7 +1,6 @@
 /* 木偶组件 ： 确认订单填写地址手机号付款方式 ==> 模态框 */
 import React from 'react';
 import './style.less';
-import { changeState } from '../../static/js/common';
 import { Modal, Button, Input,Radio } from 'antd';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -22,9 +21,13 @@ class ConfirmationOfOrder extends React.Component {
         //console.log(e,'确认订单');
         console.log(1);
         if(!this.isPrompt()) {
-            this.props.changeState(
-                ['u_address','u_phone','paymentMethod'],
-                [this.state.u_address,this.state.u_phone,this.state.paymentMethod])
+            this.props.changeParentState(
+                {
+                    'u_address': this.state.u_address,
+                    'u_phone': this.state.u_phone,
+                    'paymentMethod': this.state.paymentMethod
+                })
+                
             this.props.pushOrder('2');  //填写状态表示直接购物
         }else{
             return false;
@@ -33,14 +36,14 @@ class ConfirmationOfOrder extends React.Component {
     /* 取消按钮触发函数 */
     handleCancel = (e) => {
       console.log(e,'取消订单');
-      this.props.changeState('visible',false);
+      this.props.changeParentState({'visible': false});
     }
     //是否显示提示：没有正确填写信息
     isPrompt(){
         if(this.state.u_address && this.state.u_phone){
             return false;
         }else{
-            changeState(this,['isPrompt','prompt'],[true,'注意：请填写您的地址和联系方式！']);
+            this.setState({'isPrompt': true, 'prompt': '注意：请填写您的地址和联系方式！'});
             return true;
         }
     }
@@ -74,7 +77,7 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='value'>
                     <Input prefix={icon_genggaishouhuodizhi} 
                           onChange={(e)=>{
-                              changeState(this,'u_address', e.target.value);
+                              this.setState({'u_address': e.target.value});
                           }} />
                     </div>
                 </div>
@@ -83,7 +86,7 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='value'>
                     <Input prefix={ icon_lianxifangshi } 
                            onChange={(e)=>{
-                               changeState(this,'u_phone', e.target.value);
+                               this.setState({'u_phone': e.target.value});
                             }} />
                     </div>
                 </div>
@@ -92,7 +95,7 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='value'>
                         <RadioGroup defaultValue={1} 
                                     onChange={(e)=>{
-                                        changeState(this,'paymentMethod', e.target.value);
+                                        this.setState({'paymentMethod': e.target.value});
                                     }}>
                             <RadioButton value={1}>{icon_tianmaohuodaofukuan}&nbsp;货到付款</RadioButton>
                             <RadioButton value={2}>{icon_zhifu01}&nbsp;在线支付</RadioButton>
