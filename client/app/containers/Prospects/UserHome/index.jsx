@@ -3,17 +3,31 @@ import React from 'react';
 import Header from '../../../components/Header';
 import UserHomeComponent   from '../../../components/UserHome';
 import { connect } from 'react-redux';
-import { getSalesRecord } from '../../../fetch';
+import { getSalesRecord, updateSalesRecordState } from '../../../fetch';
 class UserHome extends React.Component{
     constructor(){
         super();
         this.state = {};
     }
+
+    /**更新订单：
+     * @param {*} obj 
+     * @param {*} func 
+     */
+    updateSalesRecordState(obj,func = () => {console.log('未给定回调函数')}){
+        updateSalesRecordState(obj).then(res => res.text()).then(text => {
+            func();
+        });
+    }
+    
     render (){
         return (
             <div>
-                <Header></Header>
-                <UserHomeComponent OrdeData={this.state.OrdeData}></UserHomeComponent>
+                <Header />
+                <UserHomeComponent OrdeData = { this.state.OrdeData }
+                                   updateSalesRecordState = { this.updateSalesRecordState }
+                                   history = { this.props.history }
+                />
             </div>
         );
     }
@@ -23,6 +37,8 @@ class UserHome extends React.Component{
                 this.setState({OrdeData:json.content});
             }
         });
+
+        
     }
 }
 

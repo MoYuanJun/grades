@@ -7,33 +7,56 @@ class MyShoppingCart extends React.Component{
     constructor(){
         super();
         this.state = {
-            visible: true
+            visible: false,
+            sal_id: []
         }
     }
-    pushOrder(){
-        console.log('点击提交订单');
+
+    //获取订单列表选中项并添加到 this.state.sal_id ==> 传给木偶子组件
+    getCheckList = (checkList) => {
+        const filteCheckList = [];
+        for(let key in checkList) {
+            checkList[key] ? filteCheckList.push(key) : '';
+        }
+        this.setState({sal_id: filteCheckList});
     }
 
+    //模态框提交处理函数
+    pushOrder(){
+        /* {参数格式：
+            *  state: xx,
+            *  orderInfo: {key:value,key:value},
+            *  sal_id: [sal_id,sal_id,sal_id……]
+        } */
+        const params = {
+            state: '2',
+            orderInfo: {
+                u_address: this.state.u_address,
+                u_phone: this.state.u_phone,
+                paymentMethod: this.state.paymentMethod
+            },
+            sal_id: this.state.sal_id
+        }
+        this.props.updateSalesRecordState(params);
+        this.props.history.push('/');
+        console.log('点击提交订单', params);
+    }
+    
     render(){
-        const  childrenNodeDom = <div><svg className='icon' aria-hidden='true'> <use xlinkHref='#icon-goumai'></use></svg>购买;</div>;
         return (
             <div id='MyShoppingCart'>
                 <h2>购物车</h2>
-                <div className='header'>
-                    <ul className='clearfix'>
-                        <li className='float-left li_1'>商品信息</li>
-                        <li className='float-left li_2'>单价</li>
-                        <li className='float-left li_3'>数量</li>
-                        <li className='float-left li_4'>金额</li>
-                        <li className='float-left li_5'>操作</li>
-                    </ul>
-                </div>
                 <OrderListComponent data={this.props.data} 
-                                    childrenNodeDom={childrenNodeDom}/>
+                                    getCheckList={this.getCheckList}
+                                    operationLabel="购买"
+                                    changeParentState={this.setState.bind(this)}
+                                    operationIcon="#icon-goumai"
+                                    checkAll={false}/>
                 <div className='footer clearfix'>
                     <div className='float-left foot-left'></div>
                     <div className='float-right foot-right'></div>
                 </div>
+                {console.log('监听个人中心购物车this.state', this.state)}
                 <ConfirmationOfOrder visible={this.state.visible}
                                      changeParentState={this.setState.bind(this)}
                                      pushOrder={this.pushOrder.bind(this)}
@@ -41,10 +64,11 @@ class MyShoppingCart extends React.Component{
             </div>
         );
     }
+    componentDidMount(){
+        /* this.props.updateSalesRecordState({}); */
+    }
 }
 export default MyShoppingCart;
-
-
 
 
 

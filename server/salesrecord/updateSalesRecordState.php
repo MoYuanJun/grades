@@ -4,8 +4,8 @@ header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 require_once '../config/MySQL.php';     //导入数据库连接请求方法+数据库参数
 
-
-$state = '1';
+//获取修改后的状态
+$state = $_POST['state'];
 $time_type = '';
 switch($state){
     case '1' : $time_type = 'cart_time'; break;
@@ -15,18 +15,19 @@ switch($state){
     default : $time_type = null;
 }
 
-$orderInfo = array();
-$orderInfoStr = '';
-foreach($orderInfo as $key => $value){
-    $orderInfoStr += " ,".$key."='"."$value"."' ";
-}
+//修改订单信息 格式 , key=value, key=vale 
+$orderInfoStr = $_POST['orderInfo'];
 
-$time = '213213';
-$sal_id = 'salid_4b1167c5aa07da62954df1c8bb56ff37';
+//获取时间戳
+$time = $_POST['time'];
 
-$sql = "update ".$salesrecord." set state='".$state."', ".$time_type."='".$time.$orderInfoStr."' where sal_id='".$sal_id."';";
+//获取商品ID字符串 格式： id or id or id 
+$sal_idStr = $_POST['sal_id'];
 
-echo $sql;
+
+
+$sql = "update ".$salesrecord." set state='".$state."', ".$time_type."='".$time."'".$orderInfoStr." 
+where sal_id in (".$sal_idStr.");";
 
 /* 执行SQL语句 */
 $get = db_implement($sql);
@@ -35,7 +36,9 @@ $get = db_implement($sql);
 $row = mysql_affected_rows();
 
 if($row > 0){
-    echo $row;
+    echo $row.'';
+}else{
+    echo '0';
 }
 
 /*

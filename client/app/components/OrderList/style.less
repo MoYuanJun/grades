@@ -1,47 +1,63 @@
 #OrderListComponent{
     width: 100%;
+    .header{
+        padding: 0px 32px;
+        ul{
+            
+        }
+        li{
+           width: 8%;
+           line-height: 4;
+        }
+        .li_first{
+            width: 52%;
+            text-align: center;
+        }
+        .li_margin{
+            margin: 0 2%;
+        }
+    }
     .box{
         margin: 0 0 20px 0;
         background: #FCFCFC;
         border: 1px solid #ccc;
         padding: 25px 32px;
         .checkbox{
-            width: 3%;
+            width: 4%;
             margin: -4px 0 0 0;
         }
         .img{
             width: 11%;
-            background: blue;
             img{
                 width: 100%;
             }
         }
         .title{
-            background: pink;
             //height: 100px;
             width: 33%;
-            margin: 0 35px 0 15px;
+            margin: 0 2%;
         }
+        .iteam{
+            width: 8%;
+        }
+        .iteam-margin{
+            margin: 0 2%;
+        }
+        //单独iteam设置
         .price{
-            background: blue;
-            width: 8%;
-        }
-        .number{
-            margin: 0 25px;
-            background: pink;
-            width: 8%;
+            .old-price{
+                color: #999;
+                font-size: 14px;
+                margin: 0;
+                text-decoration:line-through;
+            }
+            .new-price{
+                color: #666;
+                font-size: 15px;
+            }
         }
         .total{
-            background: blue;
-            width: 8%;
-        }
-        .state{
-            background: pink;
-            width: 8%;
-        }
-        .operation{
-            background: red;
-            width: 8%;
+            color: #FF4400;
         }
     }
 }

@@ -53,3 +53,37 @@ export function addSalesRecord(obj){
 export function getSalesRecord(obj){
   return post( URL + 'salesrecord/getSalesRecord.php', obj);
 }
+
+/**
+ * 更新订单信息
+ * @param {object} 格式：
+ * {
+ *  state: xx,
+ *  orderInfo: {key:value,key:value},
+ *  sal_id: [sal_id,sal_id,sal_id……]
+ * }
+ */
+export function updateSalesRecordState(obj){
+  //将对象格式化为：", key='value', key='value'"
+  let orderInfostr = '';
+  for( let key in obj.orderInfo ){
+    orderInfostr += `, ${key}='${obj.orderInfo[key]}'`;
+  }
+
+  //将数组格式化为："'value','value','value','value'"
+  let sal_idStr = '';
+  obj.sal_id.map((item, index, arr) => {
+    index === 0 ? sal_idStr += `'${item}'` : 
+    index !== obj.sal_id.length-1 ? sal_idStr += `,'${item}'` : sal_idStr += `,'${item}'`;
+  });
+  
+  //获取时间戳
+  const time = new Date().getTime();
+
+  //重置参数
+  obj.orderInfo = orderInfostr;
+  obj.sal_id = sal_idStr;
+  obj.time = time;
+
+  return post( URL + 'salesrecord/updateSalesRecordState.php', obj );
+}

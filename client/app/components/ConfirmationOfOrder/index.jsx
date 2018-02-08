@@ -1,4 +1,9 @@
 /* 木偶组件 ： 确认订单填写地址手机号付款方式 ==> 模态框 */
+/* 
+状态值，控制模态框显示         {visible}
+设置父组件的this.state        {changeParentState}
+模态框点击确定的触发事件函数    {pushOrder}
+*/
 import React from 'react';
 import './style.less';
 import { Modal, Button, Input,Radio } from 'antd';
@@ -13,7 +18,7 @@ class ConfirmationOfOrder extends React.Component {
             prompt : '',            //提示语 
             u_address : undefined,    //地址
             u_phone : undefined,      //电话
-            paymentMethod : 0       //付款方式
+            paymentMethod : 1       //付款方式   1 货到付款   2  在线支付
         }
     }
     /* 确定按钮触发函数 */
@@ -28,14 +33,13 @@ class ConfirmationOfOrder extends React.Component {
                     'paymentMethod': this.state.paymentMethod
                 })
                 
-            this.props.pushOrder('2');  //填写状态表示直接购物
+            this.props.pushOrder();  //提交订单函数
         }else{
             return false;
         }
     }
     /* 取消按钮触发函数 */
     handleCancel = (e) => {
-      console.log(e,'取消订单');
       this.props.changeParentState({'visible': false});
     }
     //是否显示提示：没有正确填写信息

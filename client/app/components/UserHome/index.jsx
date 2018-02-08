@@ -60,9 +60,10 @@ class UserHomeComponent extends React.Component{
                                                                 return item; 
                                                             }
                                                         }) :
-                                                        ''} />
+                                                        ''}
+                                                        updateSalesRecordState={this.props.updateSalesRecordState} 
+                                                        history = { this.props.history }/>
                                     </div>
-                                    {console.log('2222222222222222222222',this.props.OrdeData)}
                                     <div style={ this.state.current === '3' ? { display: 'block' } : { display: 'none' } }>
                                     3333
                                     </div>

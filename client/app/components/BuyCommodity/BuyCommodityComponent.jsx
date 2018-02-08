@@ -1,4 +1,4 @@
-/* 单个商品展示  ==> 木偶组显示购买商品信息 */
+/* 单个商品展示  ==> 木偶组件显示购买商品信息 */
 import React from 'react';
 import { connect } from 'react-redux';
 import './style.less';
@@ -74,13 +74,16 @@ class BuyCommodityComponent extends React.Component{
   //@params { string } key  用来监听该状态的key
   //@return { boolean } 返回布尔值,所有信息都完整填写 返回true否则返回false
   isCorrectFillIn(arr, key){
+    let thisState = this.state;
     for(let i = 0;i<arr.length;i++){
       if(this.state[arr[i]] == null ){
-        this.setState({key: false});
+        thisState[key] = false;
+        this.setState(thisState);
         return false;
       }
     }
-    this.setState({key: true});
+    thisState[key] = true;
+    this.setState(thisState);
     return true;
   }
 
@@ -97,7 +100,7 @@ class BuyCommodityComponent extends React.Component{
 
   //提模态框提交订单和添加到购物车处理函数  ==> 合并处理
   //@param { string }  state 表示当前订单的状态 1 表示添加到购物车  2 表示直接购买
-  pushOrder(state){
+  pushOrder(state = '2'){
     this.setState({'u_id': this.props.userInfo.u_id}, ()=>{
       //执行从智能组件传来的处理函数
       this.props.addSalesRecord(this.state, state);
