@@ -37,8 +37,6 @@ class UserHome extends React.Component{
                 this.setState({OrdeData:json.content});
             }
         });
-
-        
     }
 }
 

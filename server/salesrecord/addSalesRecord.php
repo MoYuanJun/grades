@@ -18,6 +18,7 @@ $com_color      = $_POST['com_color'];                                          
 $com_size       = $_POST['com_size'];                                               //选择的商品尺寸
 $com_number     = $_POST['com_number'];                                             //购买数量
 $paymentMethod  = $_POST['paymentMethod'];                                          //付款方式 ：1表示货到付款 2 表示在线支付
+$totalPrice     = $_POST['totalPrice'];                                             //订单总价
 $state          = $_POST['state'];                                                  //订单状态 : 1表示购物车中 2 表示已下单 3 表示已发货  4表示已收货 
 $cart_time      = isset($_POST['cart_time']) ? $_POST['cart_time'] : 0;             //添加到购物车时间
 $buy_time       = isset($_POST['buy_time']) ? $_POST['buy_time'] : 0;               //下单时间
@@ -26,11 +27,23 @@ $receiving_time = isset($_POST['receiving_time']) ? $_POST['receiving_time'] : 0
 
 $sql = "insert into ".$salesrecord.
         " (`sal_id`,`com_id`,`u_id`,`u_address`,`u_phone`,
-        `com_color`,`com_size`,`com_number`,`paymentMethod`,
+        `com_color`,`com_size`,`com_number`,`paymentMethod`,`totalPrice`,
         `state`,`cart_time`,`buy_time`,`shipments_time`,`receiving_time`) 
-        values ('".$sal_id."','".$com_id."','".$u_id."','".$u_address."','".$u_phone."','".$com_color."'
-        ,'".$com_size."','".$com_number."','".$paymentMethod."','".$state."','".$cart_time."','".$buy_time."'
-        ,'".$shipments_time."','".$receiving_time."'
+        values ('".$sal_id.
+                "','".$com_id.
+                "','".$u_id.
+                "','".$u_address.
+                "','".$u_phone.
+                "','".$com_color
+                ."','".$com_size.
+                "','".$com_number.
+                "','".$paymentMethod.
+                "','".$totalPrice.
+                "','".$state.
+                "','".$cart_time.
+                "','".$buy_time."'
+                ,'".$shipments_time.
+                "','".$receiving_time."'
         );";
 /* 调用封装的 SQL执行方法 */
 db_implement($sql);

@@ -47,7 +47,8 @@ class BuyCommodityComponent extends React.Component{
       u_city: undefined,                      //购买者当前城市
       u_address: undefined,                   //收货地址
       u_phone: undefined,                     //联系方式
-      paymentMethod:1                       //付款方式  ： 1表示货到付款 2 表示在线支付
+      paymentMethod:1,                       //付款方式  ： 1表示货到付款 2 表示在线支付
+      totalPrice: 0 //订单总价
     }
   }
 
@@ -59,11 +60,14 @@ class BuyCommodityComponent extends React.Component{
         this.props.history.push('/login/login');   //用户没有正确注册则滚回注册
       }else{
         if(state === '1'){
-          //用户直接添加到购物车 ==> 提交信息
-          this.pushOrder(state);
+          //用户直接添加到购物车 计算订单总价并更新this.state.totalPrice，并且 ==> 提交信息
+          this.setState({totalPrice: this.state.com_number * this.props.data.com_newPrice}, () => {
+            console.log('22222222222222', this.state)
+            this.pushOrder(state);
+          });
          } else if(state === '2') {
-          //用户直接购买 ==> 显示模态框 ==> 填写信息
-           this.setState({'visible': true});
+          //用户直接购买 ==> 显示模态框并统计价格更新到this.state.totalPrice ==> 填写信息
+           this.setState({'visible': true, totalPrice: this.state.com_number * this.props.data.com_newPrice});
          }
       }
     }

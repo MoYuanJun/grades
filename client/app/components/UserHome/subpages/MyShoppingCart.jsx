@@ -41,23 +41,16 @@ class MyShoppingCart extends React.Component{
         this.props.history.push('/');
         console.log('点击提交订单', params);
     }
-    
     render(){
         return (
             <div id='MyShoppingCart'>
                 <h2>购物车</h2>
-                <OrderListComponent data={this.props.data} 
+                <OrderListComponent data={this.props.data} /* 列表木偶组件 */
                                     getCheckList={this.getCheckList}
                                     operationLabel="购买"
-                                    changeParentState={this.setState.bind(this)}
                                     operationIcon="#icon-goumai"
-                                    checkAll={false}/>
-                <div className='footer clearfix'>
-                    <div className='float-left foot-left'></div>
-                    <div className='float-right foot-right'></div>
-                </div>
-                {console.log('监听个人中心购物车this.state', this.state)}
-                <ConfirmationOfOrder visible={this.state.visible}
+                                    changeParentState={this.setState.bind(this)}/>
+                <ConfirmationOfOrder visible={this.state.visible} /* 模态框 */
                                      changeParentState={this.setState.bind(this)}
                                      pushOrder={this.pushOrder.bind(this)}
                 />

@@ -9,8 +9,7 @@ require_once '../config/MySQL.php';     //导入数据库连接请求方法+数�
 //$u_id = 'uid_7d71f8df381b7b53e1eb29ede7424e98';
 $u_id = $_POST['u_id'];
 /* 编写 SQL查询语句 */
-$sql = "select * from ".$salesrecord." where u_id='".$u_id."'";
-
+$sql = "select * from ".$salesrecord." where u_id='".$u_id."'"." order by sal_time desc ";
 /* 执行SQL语句 */
 $get = db_implement($sql);
 
