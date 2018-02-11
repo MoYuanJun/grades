@@ -4,7 +4,7 @@ data ： 数据 ； 格式：数组对象  ==>  [{}, {}, {}, {}, .....]
 getCheckList : 获取列表选中选中的订单 ； 格式：数组  ==> [ sal_id: boolean, sal_id: boolean, ..... ]
 operationLabel : 操作按钮显示的文本内容
 operationIcon="#icon-goumai"  : 操作按钮显示的图标名称(阿里云矢量图)
-changeParentState ： 改变更新父组件的this.state //其实就是将数据传递给父组件
+operationFunc ： 操作执行函数  点击操作按钮 执行的函数
 */
 import React from 'react';
 import { Checkbox } from 'antd';
@@ -109,7 +109,7 @@ class OrderListComponent extends React.Component{
     }
     render(){
         //接口，从父组件 获取的所有接口
-        const {data, childrenNodeDom, operationLabel, operationIcon, changeParentState } = this.props;
+        const {data, childrenNodeDom, operationLabel, operationIcon, changeParentState, operationFunc } = this.props;
         return (
             <div id="OrderListComponent">
                 <div className='header'>{/* 头部 */}
@@ -154,7 +154,13 @@ class OrderListComponent extends React.Component{
                                {this.stateNumberToText(item.state)}
                             </div>
                             <div className='operation float-left iteam'>
-                                {this.props.operationDom}
+                                <div value={item.sal_id} className="button" onClick={(e) => {
+                                    this.checkChangeHandler(item.sal_id, true);
+                                    operationFunc(); //操作按钮执行函数
+                                }}>
+                                    <svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
+                                    {operationLabel}
+                                </div>
                             </div>
                         </div>
                     );
@@ -168,11 +174,12 @@ class OrderListComponent extends React.Component{
                         <div  className="button" onClick={(e) => {
                                 for (let key in this.state.checkList){
                                     if(this.state.checkList[key]){
-                                        changeParentState({'visible': true});
+                                        operationFunc(); /* 操作按钮执行函数 */
                                         break;
                                     }
                                 }
-                            }}><svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
+                            }}>
+                            <svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
                             {operationLabel}
                         </div>
                     </div>

@@ -37,10 +37,17 @@ class MyShoppingCart extends React.Component{
             },
             sal_id: this.state.sal_id
         }
+        console.log(params);
         this.props.updateSalesRecordState(params);
         this.props.history.push('/');
         console.log('点击提交订单', params);
     }
+
+    /* 点击按钮执行 */
+    operationFunc = () =>{
+        this.setState({visible:true });
+    }
+
     render(){
         return (
             <div id='MyShoppingCart'>
@@ -49,7 +56,7 @@ class MyShoppingCart extends React.Component{
                                     getCheckList={this.getCheckList}
                                     operationLabel="购买"
                                     operationIcon="#icon-goumai"
-                                    changeParentState={this.setState.bind(this)}/>
+                                    operationFunc={this.operationFunc}/>
                 <ConfirmationOfOrder visible={this.state.visible} /* 模态框 */
                                      changeParentState={this.setState.bind(this)}
                                      pushOrder={this.pushOrder.bind(this)}

@@ -4,12 +4,12 @@ import { Layout, Menu, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 import './style.less';
 import MyShoppingCart from './subpages/MyShoppingCart';
-
+import MyOrderComponent from './subpages/MyOrder';
 class UserHomeComponent extends React.Component{
     constructor(){
         super();
         this.state = {
-            current: '2'
+            current: '3'
         }
     }
     render(){
@@ -24,7 +24,7 @@ class UserHomeComponent extends React.Component{
                             onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
                             >
                             <div className="logo" />
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['2']} onClick={(e)=>{
+                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['3']} onClick={(e)=>{
                                 console.log(e.key);
                                 this.setState({'current': e.key });
                             }}>
@@ -54,6 +54,7 @@ class UserHomeComponent extends React.Component{
                                     111111
                                     </div>
                                     <div style={ this.state.current === '2' ? { display: 'block' } : { display: 'none' } }>
+                                        {/* 购物车 */}
                                         <MyShoppingCart data = {this.props.OrdeData ?
                                                         this.props.OrdeData.filter((item, index, arr) => {
                                                             if(item.state === '1'){
@@ -65,7 +66,8 @@ class UserHomeComponent extends React.Component{
                                                         history = { this.props.history }/>
                                     </div>
                                     <div style={ this.state.current === '3' ? { display: 'block' } : { display: 'none' } }>
-                                    3333
+                                        {/* 我的订单 */}
+                                        <MyOrderComponent data = {this.props.OrdeData ? this.props.OrdeData : [] } />
                                     </div>
                                     <div style={ this.state.current === '4' ? { display: 'block' } : { display: 'none' } }>
                                     4444
