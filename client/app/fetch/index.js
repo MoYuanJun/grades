@@ -58,9 +58,9 @@ export function getSalesRecord(obj){
  * 更新订单信息
  * @param {object} 格式：
  * {
- *  state: xx,
- *  orderInfo: {key:value,key:value},
- *  sal_id: [sal_id,sal_id,sal_id……]
+ *  state: xx,   要修改后的状态  可选
+ *  orderInfo: {key:value,key:value},  要修改的键值对//可选
+ *  sal_id: [sal_id,sal_id,sal_id……]   //必选
  * }
  */
 export function updateSalesRecordState(obj){

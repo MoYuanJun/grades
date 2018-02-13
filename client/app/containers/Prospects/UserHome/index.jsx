@@ -2,7 +2,9 @@
 import React from 'react';
 import Header from '../../../components/Header';
 import UserHomeComponent   from '../../../components/UserHome';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { getUserOrderDataAction } from '../../../actions/orderDataAction';
 import { getSalesRecord, updateSalesRecordState } from '../../../fetch';
 class UserHome extends React.Component{
     constructor(){
@@ -24,7 +26,7 @@ class UserHome extends React.Component{
         return (
             <div>
                 <Header />
-                <UserHomeComponent OrdeData = { this.state.OrdeData }
+                <UserHomeComponent orderData = { this.props.orderData }
                                    updateSalesRecordState = { this.updateSalesRecordState }
                                    history = { this.props.history }
                 />
@@ -34,7 +36,8 @@ class UserHome extends React.Component{
     componentDidMount(){
         getSalesRecord({u_id:this.props.userInfo.u_id}).then(res=>res.json()).then(json=>{
             if(json.error === '200'){
-                this.setState({OrdeData:json.content});
+                console.log(json.content);
+                this.props.getUserOrderDataAction(json.content);
             }
         });
     }
@@ -43,10 +46,15 @@ class UserHome extends React.Component{
 /* 连接到redux */
 
 function mapStateToProps(state){
-    return {userInfo:state.userInfo}
+    return {
+        userInfo:state.userInfo,
+        orderData:state.orderData
+    }
 }
-function mapDispatchToProps(state){
-    return {}
+function mapDispatchToProps(dispatch){
+    return {
+        getUserOrderDataAction : bindActionCreators(getUserOrderDataAction, dispatch)
+    }
 }
 export default connect(
     mapStateToProps,

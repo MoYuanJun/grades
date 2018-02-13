@@ -25,7 +25,6 @@ class UserHomeComponent extends React.Component{
                             >
                             <div className="logo" />
                             <Menu theme="dark" mode="inline" defaultSelectedKeys={['3']} onClick={(e)=>{
-                                console.log(e.key);
                                 this.setState({'current': e.key });
                             }}>
                                 <Menu.Item key="1">
@@ -55,8 +54,8 @@ class UserHomeComponent extends React.Component{
                                     </div>
                                     <div style={ this.state.current === '2' ? { display: 'block' } : { display: 'none' } }>
                                         {/* 购物车 */}
-                                        <MyShoppingCart data = {this.props.OrdeData ?
-                                                        this.props.OrdeData.filter((item, index, arr) => {
+                                        <MyShoppingCart data = {this.props.orderData ?
+                                                        this.props.orderData.filter((item, index, arr) => {
                                                             if(item.state === '1'){
                                                                 return item; 
                                                             }
@@ -67,7 +66,9 @@ class UserHomeComponent extends React.Component{
                                     </div>
                                     <div style={ this.state.current === '3' ? { display: 'block' } : { display: 'none' } }>
                                         {/* 我的订单 */}
-                                        <MyOrderComponent data = {this.props.OrdeData ? this.props.OrdeData : [] } />
+                                        <MyOrderComponent data = {this.props.orderData ? this.props.orderData : [] }
+                                                          updateSalesRecordState={this.props.updateSalesRecordState}
+                                                          history = { this.props.history } />
                                     </div>
                                     <div style={ this.state.current === '4' ? { display: 'block' } : { display: 'none' } }>
                                     4444
