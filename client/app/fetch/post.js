@@ -25,15 +25,16 @@ function objToParams ( obj ){
 }
 
 /* 导出封装的post方法 */
-export function post (url, paramsObj){
+export function post (url, paramsObj, isFormat=true){
   var result = fetch (url, {
     method: 'post', //设置fetch获取数据的方式，默认是get所以在get的封装中并没有进行设置
     headers: { /* 设置头响应信息 */
       'Accept':'application/json,text/pain,*/*',
-      'Content-Type':'application/x-www-form-urlencoded'
+      'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
     },
     /* 设置参数  get可直接在URL中进行设置 */
-    body:objToParams( paramsObj )
+    /* body:isFormat ? objToParams( paramsObj ) : paramsObj */
+    body:objToParams( paramsObj ) 
   });
   return result;
 }

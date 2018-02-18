@@ -1,6 +1,7 @@
 /* 多fetch进行二次封装：所有数据的获取操作全部在这里 */
 import { get } from './get';
 import { post } from './post';
+import { upload } from './upload';
 /* 设置通用URL */
 import { URL } from '../config';
 
@@ -54,8 +55,7 @@ export function getSalesRecord(obj){
   return post( URL + 'salesrecord/getSalesRecord.php', obj);
 }
 
-/**
- * 更新订单信息
+/** 更新订单信息
  * @param {object} 格式：
  * {
  *  state: xx,   要修改后的状态  可选
@@ -87,3 +87,9 @@ export function updateSalesRecordState(obj){
 
   return post( URL + 'salesrecord/updateSalesRecordState.php', obj );
 }
+
+//upload文件上传
+export function uploadFile( obj = {} ){
+  return upload( URL + 'commodity/uploadFile.php', obj);
+}
+
