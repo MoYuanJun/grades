@@ -12,7 +12,7 @@ if( !window.Promise ){
   }
 
 export function upload (url, paramsObj){
-    var result = fetch (url, {
+    const result = fetch (url, {
       method: 'post',
       body: paramsObj
     });
