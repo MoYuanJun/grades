@@ -24,7 +24,7 @@ if(judgeUserFunc($userName, "db_implement") === 404){
 
   /* 判断是否插入语句成功：即注册成功 */
   if($row === 1){
-    /* 注册成功则返回1 接下来登录=》获取用户数据 */
+    /* 注册成功则返回1 接下来登录 ==> 获取用户数据 */
     $sql = "select * from `users` where `username`='".$userName."' and `password`='".$password."'";
     $set = db_implement($sql); //执行可执行SQL语句
     $result = mysql_fetch_assoc($set);//对查询语句结果进行处理 格式化

@@ -1,3 +1,4 @@
+/* 添加商品 - 木偶组件 */
 import React from 'react';
 import './style.less';
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
@@ -6,27 +7,30 @@ import Upload from '../Upload';
 
 class AddCommodityForm extends React.Component{
     state = {
-        isShowUpIcon:true,
-        isShowUpRes:false,
-        upResData:null
+        img:'',
     }
+
+    componentDidMount(){
+        console.log('%chistory?', 'color:red', this.props.history);
+    }
+
+    //表单提交事件处理器
     handleSubmit = (e) => {
+        const { insertCommodity, history } = this.props;
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+            values.com_img = this.state.img;
+            insertCommodity(values).then(res=>res.json()).then(json=>{
+                json.error === '200' ? history.go(0) :  ''
+            });
           }
         });
       }
-
-      uploadChangeHandler = (e) => { 
-        if(e.target.files && e.target.files[0]){  
-            this.setState({isShowUpIcon: false , isShowUpRes: true });
-            this.setState({upResData: window.URL.createObjectURL(e.target.files[0]) });
-        } else {
-            this.setState({isShowUpIcon: true , isShowUpRes: false });
-        }
-      }
+      //获取上传文件组件返回的路径 ==> 不直接传递this.setState是考虑上传多个图片
+      getImgPath = (imgUrl) => {
+          this.setState({img: imgUrl});
+      };
 
       render() {
         const { getFieldDecorator } = this.props.form;
@@ -57,16 +61,13 @@ class AddCommodityForm extends React.Component{
                             rules: [{ required: true, message: 'Please input your username!' }],
                         })(
                             <div>
-                                <div className='input-file'>
-                                    <input name='upfile' type="file" onChange={this.uploadChangeHandler} />
-                                    <div className='up-icon' style={{display:this.state.isShowUpIcon ? 'block' : 'none'}}>
-                                        <svg className='icon' aria-hidden='true'><use xlinkHref='#icon-shangchuan'></use></svg>
-                                        <p>上传</p>
-                                    </div>
-                                    <div className='up-res' style={{display:this.state.isShowUpRes ? 'block' : 'none'}}>
-                                        <img src={this.state.upResData} alt=""/>
-                                    </div>
-                                </div>
+                            <Upload getImgPath= {this.getImgPath } styleProps = {{
+                                    svgSize : '50px',
+                                    pSize: '16px',
+                                    padding: '60px',
+                                    width: '200px',
+                                    height: '200px',}}
+                            />
                             </div>
                         )}
                     </FormItem>
@@ -171,6 +172,7 @@ class AddCommodityForm extends React.Component{
                      商品修改时间
                     
                 </div>
+                {console.log('%c添加商品木偶组件this.state', 'background:red', this.state)}
             </div>
         );
       }

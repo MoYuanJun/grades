@@ -1,5 +1,11 @@
 <?PHP
-/* 文件上传 */
+/**文件上传:
+ * 返回格式：
+ * {
+ * error: '0' || '1',   //文件上传（失败 || 成功）
+ * img: url   //返回上传后的图片路径
+ * }
+ */
 header('Access-Control-Allow-Origin:*');
 //导入相关全局配置 
 require_once '../config/upload.php';
@@ -17,6 +23,5 @@ if( $upload->get_msg() === '文件上传成功' ){ //获取文件上传信息（
     $result['error'] = '1';
 }
 echo json_encode($result);
-
 
 ?>

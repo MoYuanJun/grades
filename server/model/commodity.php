@@ -13,6 +13,7 @@ com_evaluate {
 }
 com_collect {
     describe:商品收藏量
+    dataType:number
 }
 com_oldPrice {
     describe:商品原价
@@ -22,6 +23,7 @@ com_newPrice {
 }
 com_number {
     describe:商品库存
+    dataType:number
 }
 com_color {
     describe:商品颜色
@@ -34,6 +36,7 @@ com_img {
 }
 com_salesVolume {
     describe:商品月销售
+    dataType:number
 }
 com_time {
     describe:商品修改时间

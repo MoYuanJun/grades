@@ -1,17 +1,24 @@
 /* 后台首页智能组件 */
 import React from 'react';
-import UpLoad from '../../../components/Upload';
+
 import AddCommodityComponent from '../../../components/AddCommodity';
 import './style.less';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-
+import { insertCommodity } from '../../../fetch';
 class BackgroundsHome extends React.Component{
   state = {
     current:'1'
   }
+
+  //初始化
+  componentDidMount(){
+    this.setState({current: this.props.match.params.key});
+  }
+
   render(){
+    const { history } = this.props;
     return (
       <div id='backgrounds-home'>
         {console.log('this.state', this.state)}
@@ -67,7 +74,7 @@ class BackgroundsHome extends React.Component{
                 <Content >
                   <div className='content-content' >
                     <div style = {{display:this.state.current === '1' ? 'block' : 'none'}}>
-                      <AddCommodityComponent />
+                      <AddCommodityComponent insertCommodity={insertCommodity} history={history} />
                     </div>
                     <div style = {{display:this.state.current === '2' ? 'block' : 'none'}}>
                       2
@@ -108,7 +115,6 @@ class BackgroundsHome extends React.Component{
             </Layout>
           </div>
         </Layout>
-        <UpLoad></UpLoad>
       </div>
     );
   }

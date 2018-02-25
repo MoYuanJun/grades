@@ -93,3 +93,7 @@ export function uploadFile( obj = {} ){
   return upload( URL + 'commodity/uploadFile.php', obj);
 }
 
+//后台添加商品
+export function insertCommodity(obj){
+  return post( URL + 'commodity/insertCommodity.php', obj );
+}
