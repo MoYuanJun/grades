@@ -12,10 +12,6 @@ class BackgroundsHome extends React.Component{
     current:'1'
   }
 
-  //初始化
-  componentDidMount(){
-    this.setState({current: this.props.match.params.key});
-  }
 
   render(){
     const { history } = this.props;

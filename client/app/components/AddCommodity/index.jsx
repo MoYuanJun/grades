@@ -10,10 +10,6 @@ class AddCommodityForm extends React.Component{
         img:'',
     }
 
-    componentDidMount(){
-        console.log('%chistory?', 'color:red', this.props.history);
-    }
-
     //表单提交事件处理器
     handleSubmit = (e) => {
         const { insertCommodity, history } = this.props;

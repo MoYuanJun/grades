@@ -8,7 +8,7 @@ import BackgroundsHome from '../containers/Backgrounds/Home';
 //设置后台 嵌套路由 根路由为backgrounds
 const BackgroundsRouter = ( { match } ) => (
   <div>
-    <Route exact path={`${match.url}/:key`} component={BackgroundsHome}/>{/* this.props.match.params.key */}
+    <Route exact path={`${match.url}/`} component={BackgroundsHome}/>{/* this.props.match.params.key */}
   </div>
 );
 export default BackgroundsRouter;
