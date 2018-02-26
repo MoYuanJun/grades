@@ -5,7 +5,7 @@ import OrderListComponent from '../../OrderList';
 import { getSalesRecord } from '../../../fetch';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUserOrderDataAction, updataUserOrderDataAction } from '../../../actions/orderDataAction';
+import { getUserOrderDataAction, updataOrderDataAction } from '../../../actions/orderDataAction';
 const TabPane = Tabs.TabPane;
 
 class MyOrderComponent extends React.Component{
@@ -148,7 +148,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return {
         getUserOrderDataAction:bindActionCreators(getUserOrderDataAction, dispatch),
-        updataUserOrderDataAction:bindActionCreators(updataUserOrderDataAction, dispatch)
+        updataOrderDataAction:bindActionCreators(updataOrderDataAction, dispatch)
     }
 }
 export default connect(

@@ -1,8 +1,13 @@
 /* 订单列表木偶组件
 接口：
 data ： 数据 ； 格式：数组对象  ==>  [{}, {}, {}, {}, .....]
-operationFun : 父组件获取列表选中的订单id 并 通过给定state值执行不同操作  ； 格式：数组  ==> [ sal_id: boolean, sal_id: boolean, ..... ]
-        ==> state :0 表示用户点击列表中的多选框  1 表示用户单击列表项的按钮 2 表示用户单击底部按钮
+operationFunc : 
+            父组件获取列表选中的订单id 并 通过给定state值执行不同操作；
+            第一参数：：数组  ==> [ sal_id: boolean, sal_id: boolean, ..... ]
+            第二参数：==> state :0 表示用户点击列表中的多选框  1 表示用户单击列表项的按钮 2 表示用户单击底部按钮
+            第三参数：函数
+operationLabel: 操作按钮label
+operationIcon：操作按钮icon
 */
 import React from 'react';
 import { Checkbox } from 'antd';
@@ -36,7 +41,7 @@ class OrderListComponent extends React.Component{
     //判断当前是否是全选状态：并设置this.state.isCheckAll
     isCheckAll = () => {
         const { data } = this.props;
-        if(data.length){
+        if(data && data.length){
             let checkListLength = 0;
             for(let key in this.state.checkList){
                 this.state.checkList[key] === true ? checkListLength++ : '';
@@ -102,7 +107,7 @@ class OrderListComponent extends React.Component{
         /* 更新this.state中isCheckAll状态(是否全选)，并触发回调函数 */
         this.setState({isCheckAll: !this.state.isCheckAll}, () => {
             let checkAllList = {};  //存储全选个数
-            data.length ? data.map((item, index, arr) => {checkAllList[item.sal_id] = this.state.isCheckAll }) : '';
+            data && data.length ? data.map((item, index, arr) => {checkAllList[item.sal_id] = this.state.isCheckAll }) : '';
             this.setState({checkList: checkAllList}, () => {
                 this.upDataTotal(); //更新统计
             });
@@ -144,7 +149,7 @@ class OrderListComponent extends React.Component{
                     </ul>
                 </div>
                 {/* 中间列表 */}
-                {data.length ? data.map(( item, index, arr ) => {
+                {data && data.length ? data.map(( item, index, arr ) => {
                     return (
                         <div className='box clearfix' key = { index } 
                             style={{background:this.state.checkList[item.sal_id] ? '#FFF8E1' : ''}} >
@@ -197,7 +202,7 @@ class OrderListComponent extends React.Component{
                         <span>合计：<span className="total-price total">{`￥${this.state.totalPrice}`}</span></span>
                     </div>
                 </div>
-
+                {console.log('%c监听订单数据', 'color:red', data)}
             </div>
         );
     }

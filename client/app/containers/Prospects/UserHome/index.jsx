@@ -18,7 +18,9 @@ class UserHome extends React.Component{
      */
     updateSalesRecordState(obj,func = () => {console.log('未给定回调函数')}){
         updateSalesRecordState(obj).then(res => res.text()).then(text => {
-            func();
+            if(text !== '0'){
+                func();
+            }
         });
     }
     

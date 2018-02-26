@@ -168,7 +168,6 @@ class AddCommodityForm extends React.Component{
                      商品修改时间
                     
                 </div>
-                {console.log('%c添加商品木偶组件this.state', 'background:red', this.state)}
             </div>
         );
       }

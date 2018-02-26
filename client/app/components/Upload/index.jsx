@@ -75,7 +75,6 @@ class Demo extends React.Component {
           <div className='up-res' style={style.upRes}>
               <img src={this.state.upResData} alt="浏览图"/>
           </div>
-          {console.log('%c监听this.state', 'background:red', this.state)}
         </div>
     );
   }

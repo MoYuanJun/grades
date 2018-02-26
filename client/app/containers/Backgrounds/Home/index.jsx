@@ -1,23 +1,31 @@
 /* 后台首页智能组件 */
 import React from 'react';
-
-import AddCommodityComponent from '../../../components/AddCommodity';
 import './style.less';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getAdminOrderDataAction } from '../../../actions/orderDataAction';
+import { updataUser } from '../../../actions/userInfoAction';
+
+import AddCommodityComponent from '../../../components/AddCommodity';  //添加商品
+import SendTheGoods from './Subpage/SendTheGoods';  //待发货
+import WaitForGoodsReceiptComponent from './Subpage/WaitForGoodsReceipt';
+
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-import { insertCommodity } from '../../../fetch';
+
+//获取封装的fetch方法：添加（插入）商品数据、获取订单数据
+import { insertCommodity, getSalesRecord } from '../../../fetch';
+
 class BackgroundsHome extends React.Component{
   state = {
-    current:'1'
+    current:'7'
   }
-
-
   render(){
-    const { history } = this.props;
+    const { history, orderData } = this.props;
     return (
-      <div id='backgrounds-home'>
-        {console.log('this.state', this.state)}
+      <div id='backgrounds-home'> 
         <Layout>
           <Header className="header">
             <div className='header-content'>
@@ -39,8 +47,8 @@ class BackgroundsHome extends React.Component{
               <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                   mode="inline"
-                  defaultSelectedKeys={['1']}
-                  defaultOpenKeys={['sub1']}
+                  defaultSelectedKeys={['7']}
+                  defaultOpenKeys={['sub2']}
                   onClick={(e) => {
                     this.setState({current: e.key});
                   }}
@@ -55,7 +63,7 @@ class BackgroundsHome extends React.Component{
                   <SubMenu key="sub2" title={<span><Icon type="laptop" />订单信息管理</span>}>
                     <Menu.Item key="5">option5</Menu.Item>
                     <Menu.Item key="6">待发货</Menu.Item>
-                    <Menu.Item key="7">option7</Menu.Item>
+                    <Menu.Item key="7">待收货</Menu.Item>
                     <Menu.Item key="8">option8</Menu.Item>
                   </SubMenu>
                   <SubMenu key="sub3" title={<span><Icon type="notification" />商品类别管理</span>}>
@@ -85,10 +93,24 @@ class BackgroundsHome extends React.Component{
                       5
                     </div>
                     <div style = {{display:this.state.current === '6' ? 'block' : 'none'}}>
-                      6
+                      {orderData && orderData.length ?
+                        <SendTheGoods orderData={orderData.filter((item, index, arr)=>{
+                          if (item.state === '2' ){ return item }
+                        })}
+                        getAdminOrderDataAction={this.props.getAdminOrderDataAction}
+                        />
+                      :''
+                      }
                     </div>
                     <div style = {{display:this.state.current === '7' ? 'block' : 'none'}}>
-                      7 
+                      {orderData && orderData.length ?
+                        <WaitForGoodsReceiptComponent orderData={orderData.filter((item, index, arr)=>{
+                          if (item.state === '3' ){ return item }
+                        })}
+                        getAdminOrderDataAction={this.props.getAdminOrderDataAction}
+                        />
+                      :''
+                      }
                     </div>
                     <div style = {{display:this.state.current === '8' ? 'block' : 'none'}}>
                       8
@@ -111,8 +133,36 @@ class BackgroundsHome extends React.Component{
             </Layout>
           </div>
         </Layout>
+        {console.log('%credux state.orderData', 'color:green', orderData)}
       </div>
     );
   }
+
+  /**组件将要渲染的时候
+   * 1、获取所有订单数据 ==> 更新到redux中state.orderData
+   */
+  componentWillMount(){
+    const { getAdminOrderDataAction } = this.props;
+    getSalesRecord().then(res=>res.json()).then(json=>{
+      json.error === '200' ? getAdminOrderDataAction(json.content) : '';
+    });
+  }
 }
-export default BackgroundsHome;
+
+//连接redux
+function mapStateToProps(state){
+  return {
+    userInfo: state.userInfo,
+    orderData: state.orderData
+  }
+}
+function mapDispatchToProps(dispatch){
+  return {
+    getAdminOrderDataAction:bindActionCreators(getAdminOrderDataAction, dispatch),
+    updataUser:bindActionCreators(updataUser, dispatch)
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BackgroundsHome);

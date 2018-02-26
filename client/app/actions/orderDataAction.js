@@ -10,6 +10,14 @@ export function getUserOrderDataAction(data){
         }
 }
 
+//获取管理员订单信息：参数{uid:xxxx}
+export function getAdminOrderDataAction(data){
+    return {
+        type:actionType.ADMINORDERDATA_GET,
+        data
+    }
+}
+
 /**
  * 更新订单信息
  * @param {object} 格式：
@@ -20,7 +28,7 @@ export function getUserOrderDataAction(data){
  * 返回影响行数
  * }
  */
-export function updataUserOrderDataAction(data){
+export function updataOrderDataAction(data){
         return {
             type:actionType.ORDERDATA_UPDATA,
             data

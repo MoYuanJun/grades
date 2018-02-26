@@ -49,11 +49,14 @@ export function addSalesRecord(obj){
   return post( URL + 'salesrecord/addSalesRecord.php' , obj);
 }
 
-/* 通过u_id获取订单信息 */
-//@param { object } obj 参数：{u_id:xxxxx}
-export function getSalesRecord(obj){
+/**获取订单信息数据
+ * @param { object } obj 参数：{u_id:xxxxx}
+ * 参数：可选，默认获取所有订单数据
+ */
+export function getSalesRecord(obj = {}){
   return post( URL + 'salesrecord/getSalesRecord.php', obj);
 }
+
 
 /** 更新订单信息
  * @param {object} 格式：
@@ -84,7 +87,7 @@ export function updateSalesRecordState(obj){
   obj.orderInfo = orderInfostr;
   obj.sal_id = sal_idStr;
   obj.time = time;
-
+  console.log('%c time', 'color:green', time);
   return post( URL + 'salesrecord/updateSalesRecordState.php', obj );
 }
 
