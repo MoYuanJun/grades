@@ -1,13 +1,12 @@
 /* 导入orderData 相关的action.type */
 import * as actionType from '../constants/orderData';
-import { getSalesRecord, updateSalesRecordState } from '../fetch';
 
 //获取用户订单信息：参数{uid:xxxx}
 export function getUserOrderDataAction(data){
-        return {
-            type:actionType.USERORDERDATA_GET,
-            data
-        }
+    return {
+        type:actionType.USERORDERDATA_GET,
+        data
+    }
 }
 
 //获取管理员订单信息：参数{uid:xxxx}

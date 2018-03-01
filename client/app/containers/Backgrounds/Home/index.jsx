@@ -133,7 +133,6 @@ class BackgroundsHome extends React.Component{
             </Layout>
           </div>
         </Layout>
-        {console.log('%credux state.orderData', 'color:green', orderData)}
       </div>
     );
   }

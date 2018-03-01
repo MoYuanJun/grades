@@ -202,7 +202,6 @@ class OrderListComponent extends React.Component{
                         <span>合计：<span className="total-price total">{`￥${this.state.totalPrice}`}</span></span>
                     </div>
                 </div>
-                {console.log('%c监听订单数据', 'color:red', data)}
             </div>
         );
     }

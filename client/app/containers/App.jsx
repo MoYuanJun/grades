@@ -19,16 +19,17 @@ class App extends React.Component{
       <div>
         {this.props.children}
         <Footer />
+        {console.log('%c当前redux-state', 'background:green', this.props.ReduxState)}
       </div>
     )
   }
 }
 
-export default App;
-/* // 连接到redux
+/* export default App; */
+// 连接到redux
 function mapStateToProps(state){// 将state映射到 props
   return {
-    userInfo:state.userInfo
+    ReduxState:state
   }
 }
 function mapDispatchToProps(dispatch){// 将action函数集合dispatch进行连接并映射到props
@@ -40,4 +41,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
- */
