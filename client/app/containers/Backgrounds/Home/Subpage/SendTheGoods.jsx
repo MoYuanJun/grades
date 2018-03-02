@@ -4,18 +4,27 @@ import './style.less';
 
 import OrderListComponent from '../../../../components/OrderList';
 
+import { connect } from 'react-redux';
+
 //获取封装的fetch方法：添加（插入）商品数据、获取订单数据
 import { updateSalesRecordState, getSalesRecord } from '../../../../fetch';
 
 class SendTheGoods extends React.Component{
     render(){
+        const { orderData } = this.props;
+        console.log(orderData);
+        const data = orderData.filter((item, index, arr)=>{
+            if (item.state === '2' ){ return item }
+        }); 
         return (
             <div id="OrderListComponent">
                 <h2>待发货</h2>
-                <OrderListComponent 
-                data={this.props.orderData}
-                operationLabel="已发货"
-                operationFunc={this.operationFun} />
+                {data && data.length > 0 ? 
+                    <OrderListComponent 
+                        data = {data}
+                        operationLabel = "已发货"
+                        operationFunc = {this.operationFun} /> :
+                 ''}
             </div>
         );
     }
@@ -46,6 +55,20 @@ class SendTheGoods extends React.Component{
     }
 }
 
-export default SendTheGoods;
+/* 连接redux */
+function mapStateToProps(state){
+    return {
+        orderData: state.orderData,
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {
+        
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SendTheGoods);
 
 

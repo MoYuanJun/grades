@@ -100,3 +100,9 @@ export function uploadFile( obj = {} ){
 export function insertCommodity(obj){
   return post( URL + 'commodity/insertCommodity.php', obj );
 }
+
+/* 后台获取所有商品数据 */
+export function getAllCommodityData(){
+  return get( URL + 'commodity/getAllCommodityData.php' );
+}
+

@@ -25,8 +25,8 @@ class App extends React.Component{
   }
 }
 
-/* export default App; */
-// 连接到redux
+export default App;
+/* // 连接到redux  不能在这里连接redux会造成页面路由跳转，但页面确没有任何变化
 function mapStateToProps(state){// 将state映射到 props
   return {
     ReduxState:state
@@ -41,3 +41,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+ */

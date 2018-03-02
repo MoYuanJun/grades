@@ -8,7 +8,7 @@ import Upload from '../Upload';
 class AddCommodityForm extends React.Component{
     state = {
         img:'',
-    }
+    };
 
     //表单提交事件处理器
     handleSubmit = (e) => {
@@ -18,7 +18,7 @@ class AddCommodityForm extends React.Component{
           if (!err) {
             values.com_img = this.state.img;
             insertCommodity(values).then(res=>res.json()).then(json=>{
-                json.error === '200' ? history.go(0) :  ''
+                json.error === '200' ? history.go(0) :  '';
             });
           }
         });
@@ -151,23 +151,6 @@ class AddCommodityForm extends React.Component{
 
                     </FormItem>
                 </Form>
-                <div>
-                     *商品标题 1
-                     *商品图片 =
-                     *商品原价 1
-                     *商品现价 1
-                     *商品库存 1
-                     *商品颜色 1 
-                     *商品尺寸 1 
-                     *商品发货地 1
-
-                     商品唯一ID
-                     商品评价数
-                     商品收藏量
-                     商品月销售
-                     商品修改时间
-                    
-                </div>
             </div>
         );
       }
