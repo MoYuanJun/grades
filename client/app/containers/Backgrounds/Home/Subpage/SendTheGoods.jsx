@@ -12,19 +12,13 @@ import { updateSalesRecordState, getSalesRecord } from '../../../../fetch';
 class SendTheGoods extends React.Component{
     render(){
         const { orderData } = this.props;
-        console.log(orderData);
-        const data = orderData.filter((item, index, arr)=>{
-            if (item.state === '2' ){ return item }
-        }); 
         return (
             <div id="OrderListComponent">
                 <h2>待发货</h2>
-                {data && data.length > 0 ? 
                     <OrderListComponent 
-                        data = {data}
+                        data = {orderData}
                         operationLabel = "已发货"
-                        operationFunc = {this.operationFun} /> :
-                 ''}
+                        operationFunc = {this.operationFun} />
             </div>
         );
     }
@@ -55,20 +49,6 @@ class SendTheGoods extends React.Component{
     }
 }
 
-/* 连接redux */
-function mapStateToProps(state){
-    return {
-        orderData: state.orderData,
-    }
-}
-function mapDispatchToProps(dispatch){
-    return {
-        
-    }
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SendTheGoods);
+export default SendTheGoods;
 
 

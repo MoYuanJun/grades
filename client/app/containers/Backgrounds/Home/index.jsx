@@ -26,8 +26,7 @@ class BackgroundsHome extends React.Component{
     current:'2'
   }
   render(){
-    const { history, orderData, commodityData } = this.props;
-    console.log('11 ', orderData, commodityData );
+    const { history, commodityData, orderData } = this.props;
     return (
       <div id='backgrounds-home'> 
         <Layout>
@@ -97,17 +96,20 @@ class BackgroundsHome extends React.Component{
                       5
                     </div>
                     <div style = {{display:this.state.current === '6' ? 'block' : 'none'}}>
-                        <SendTheGoods getAdminOrderDataAction={this.props.getAdminOrderDataAction} />                                   
+                        <SendTheGoods 
+                            orderData = {orderData.filter((item, index, arr)=>{
+                              if (item.state === '2' ){ return item }
+                            })}
+                          getAdminOrderDataAction={this.props.getAdminOrderDataAction}
+                        />
                     </div>
                     <div style = {{display:this.state.current === '7' ? 'block' : 'none'}}>
-                      {orderData && orderData.length ?
-                        <WaitForGoodsReceiptComponent orderData={orderData.filter((item, index, arr)=>{
+                      <WaitForGoodsReceiptComponent
+                        orderData = {orderData.filter((item, index, arr)=>{
                           if (item.state === '3' ){ return item }
                         })}
                         getAdminOrderDataAction={this.props.getAdminOrderDataAction}
-                        />
-                      :''
-                      }
+                      />
                     </div>
                     <div style = {{display:this.state.current === '8' ? 'block' : 'none'}}>
                       8
