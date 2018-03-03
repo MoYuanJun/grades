@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 class UpdataCommodity extends React.Component{
     render(){
+        const { props } = this.props;
         return (
             <div>
                 1111111111

@@ -8,9 +8,8 @@ import { getAdminOrderDataAction } from '../../../actions/orderDataAction';
 import { getCommodityData } from '../../../actions/commodityDataAction';
 import { updataUser } from '../../../actions/userInfoAction';
 
-import AddCommodityComponent from '../../../components/AddCommodity';  //添加商品
-import AddCommodity from './Subpage/AddCommodity';
-import UpdataCommodity from './Subpage/UpdataCommodity';
+import AddCommodity from './Subpage/AddCommodity';  //添加商品
+import UpdataCommodity from './Subpage/UpdataCommodity'; //商品修改
 import SendTheGoods from './Subpage/SendTheGoods';  //待发货
 import WaitForGoodsReceiptComponent from './Subpage/WaitForGoodsReceipt'; //待收货
 
@@ -84,7 +83,7 @@ class BackgroundsHome extends React.Component{
                       <AddCommodity history={history} />
                     </div>
                     <div style = {{display:this.state.current === '2' ? 'block' : 'none'}}>
-                      2
+                      <UpdataCommodity data={commodityData} />
                     </div>
                     <div style = {{display:this.state.current === '3' ? 'block' : 'none'}}>
                       3
