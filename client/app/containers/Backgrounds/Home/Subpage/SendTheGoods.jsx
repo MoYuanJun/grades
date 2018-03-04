@@ -15,10 +15,10 @@ class SendTheGoods extends React.Component{
         return (
             <div id="OrderListComponent">
                 <h2>待发货</h2>
-                    <OrderListComponent 
-                        data = {orderData}
-                        operationLabel = "已发货"
-                        operationFunc = {this.operationFun} />
+                <OrderListComponent 
+                    data = {orderData}
+                    operationLabel = "已发货"
+                    operationFunc = {this.operationFun} />
             </div>
         );
     }
