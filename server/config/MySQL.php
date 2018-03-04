@@ -4,6 +4,7 @@
 $users = 'users';  //用户表
 $commodity = 'commodity'; //商品列表
 $salesrecord = 'salesrecord';  //销售记录
+$advertisingcommodity = 'advertisingcommodity'; //广告商品
 
 /* 封装方法  ==> 连接数据库 并执行可执行SQL语句*/
 function db_implement ($sql){

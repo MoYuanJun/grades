@@ -3,11 +3,15 @@ import React from 'react';
 
 import './style.less';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getAdvComDataAction } from '../../actions/advComAction';
 import { Link } from 'react-router-dom';
 import AdvCom from '../AdvCom';
+import { getAdvComData } from '../../fetch';
 
 class UserShowComponent extends React.Component{
   render(){
+    const { advCommData } = this.props;
     return (
       <div id='brnach-right'>
         <div className='userShow'>
@@ -36,20 +40,36 @@ class UserShowComponent extends React.Component{
           </div>
         </div>
         <div id="advertisingcommodity">
-          <AdvCom />
+          <AdvCom 
+            data={advCommData}
+            listLent = {1}
+            forTime = {10000}
+           />
         </div>
       </div>
     );
   }
+
+  componentWillMount(){
+    const { getAdvComDataAction } = this.props;
+    
+    getAdvComData().then(res=>res.json()).then(json=>{
+      json.error === '200' ? getAdvComDataAction(json.content) : [];
+    });
+  }
+
 }
 //连接redux
 function mapStateToProps(state){
   return {
-    userInfo:state.userInfo
+    userInfo:state.userInfo,
+    advCommData: state.advCommData
   }
 }
-function mapDispatchToProps(){
-  return {}
+function mapDispatchToProps(dispatch){
+  return {
+    getAdvComDataAction: bindActionCreators(getAdvComDataAction, dispatch)
+  }
 }
 
 

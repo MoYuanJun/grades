@@ -19,7 +19,6 @@ class App extends React.Component{
       <div>
         {this.props.children}
         <Footer />
-        {console.log('%c当前redux-state', 'background:green', this.props.ReduxState)}
       </div>
     )
   }
