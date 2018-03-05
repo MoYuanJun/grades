@@ -44,21 +44,18 @@ class ShowInfo extends React.Component{
       </div>
     );
   }
-  /**
-   * 设置更新state函数
-   * @param {string} key    键
-   * @param {任意数据} value 值 
-   */
-  setNewState(key,value){
-    let state = this.state;
-    state[key] = value;
-    this.setState(state);
-  }
 
   //组件加载后自动执行  ==> 获取数据
   componentDidMount(){
     getCommodityInfo(this.props.comId).then(res=>res.json()).then(json=>{
-      this.setNewState('data', json);
+      this.setState({data:json});
+    });
+  }
+
+  //将要更新 Props时触发
+  componentWillReceiveProps(nextProps){
+    getCommodityInfo(nextProps.comId).then(res=>res.json()).then(json=>{
+      this.setState({data:json});
     });
   }
   

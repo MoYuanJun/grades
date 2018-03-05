@@ -20,23 +20,23 @@ class AdvCom extends React.Component{
                 {title ? <h2>{title}</h2> : '' }
                 {
                     data && data.length >= listLent ? this.getRandomDataArr().map((item, index, arr) => {
-                        return <Link to={`/prospects/commodity/${item.com_id}`} key={`${keyTime}-index`}>
-                                    <div className='container'>
+                        return <Link to={`/prospects/commodity/${item.com_id}`} key={`${keyTime}-${index}`}>
+                                    <div className={`container ${index < this.getRandomDataArr().length -1 ? 'margin' : ' '}`}>
                                         <div className='img'>
                                             <img src={item.commodity.com_img} alt=""/>
                                         </div>
                                         <div className='content'>
-                                            <h2 ref='title' className='title'>{item.commodity.com_title}</h2>
-                                            <p>
-                                                <span>{item.commodity.com_evaluate}</span>
-                                                <span>{item.commodity.com_collect}</span>
+                                            <h2 ref={`title-${index}`} className='title'>{item.commodity.com_title}</h2>
+                                            <p className='evaluate'>
+                                                <span>评价&nbsp;{item.commodity.com_evaluate}&nbsp;</span>
+                                                <span>收藏&nbsp;{item.commodity.com_collect}&nbsp;</span>
                                             </p>
-                                            <div className='clearfix'>
+                                            <div className='clearfix priceAmdAalesVolume'>
                                                 <p className='float-left'>
-                                                    <span>{item.commodity.com_newPrice}</span>
-                                                    <span>{item.commodity.com_oldPrice}</span>
+                                                    <span className='price new'>￥<span>{item.commodity.com_newPrice}</span></span>
+                                                    <span className='price old'>￥{item.commodity.com_oldPrice}</span>
                                                 </p>
-                                                <p className='float-right'>{item.commodity.com_salesVolume}</p>
+                                                <p className='float-right salesVolume'>销售{item.commodity.com_salesVolume}笔</p>
                                             </div>
                                         </div>
                                     </div>
@@ -55,13 +55,17 @@ class AdvCom extends React.Component{
             this.setState({keyTime: new Date().getTime()})
         }, forTime);
         //限制标题字符长度
-        this.refs.title ? wordlimit(this.refs.title,23) : '';
+        for(let key in this.refs){
+            wordlimit(this.refs[key], 18)
+        }
     }
 
     //组件更新后  触发==>执行函数 对标题字数进行限制
     componentDidUpdate(){
-        //先进行判断 dom是否成功渲染
-        this.refs.title ? wordlimit(this.refs.title,23) : '';
+        //先进行判断 dom是否成功渲染 
+        for(let key in this.refs){
+            wordlimit(this.refs[key], 18)
+        }
     }
 
     getRandomDataArr = () => {
