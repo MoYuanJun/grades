@@ -10,4 +10,11 @@ export function updataUser (data){
   }
 }
 
+//清除用户信息
+export function clearUserInfo(){
+  return {
+    type: actionType.USERINFO_CLEAR,
+    data:{}
+  }
+}
 

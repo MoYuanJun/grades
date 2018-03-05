@@ -6,6 +6,7 @@ export default function userInfo(state={},action){
   switch (action.type) { 
     case actionType.USERINFO_GET : return action.data;
     case actionType.USERINFO_SET : return action.data;
+    case actionType.USERINFO_CLEAR : return action.data;
     default : return state
   }
 }
