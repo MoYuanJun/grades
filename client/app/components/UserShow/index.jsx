@@ -3,47 +3,73 @@ import React from 'react';
 
 import './style.less';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getAdvComDataAction } from '../../actions/advComAction';
 import { Link } from 'react-router-dom';
+import AdvCom from '../AdvCom';
+import { getAdvComData } from '../../fetch';
 
 class UserShowComponent extends React.Component{
   render(){
+    const { advCommData } = this.props;
     return (
-      <div id='userShow'>
-        <div className='top'>
-          <div className='headPortrait'> {/* 头像 */}
-            <img src={require('../../static/img/loginbg.png')} alt=""/>
+      <div id='brnach-right'>
+        <div className='userShow'>
+          <div className='top'>
+            <div className='headPortrait'> {/* 头像 */}
+              <img src={require('../../static/img/loginbg.png')} alt=""/>
+            </div>
+            <div className='welcome'>
+              Hi~{this.props.userInfo.u_id ? <span>{this.props.userInfo.username}</span> : 
+              <span>欢迎来到精品时装！</span>}
+            </div>
           </div>
-          <div className='welcome'>
-            Hi~{this.props.userInfo.u_id ? <span>{this.props.userInfo.username}</span> : 
-            <span>欢迎来到精品时装！</span>}
+          <div className='bottom'>
+            <div className='loginAndRegister clearfix'>
+              {this.props.userInfo.u_id ? 
+              <div>
+                <div className='login float-left'><Link to='/login/login'>退出登录</Link></div>
+                <div className='register float-right'><Link to={`/prospects/userHome/${this.props.userInfo.u_id}`}>个人中心</Link></div>
+              </div> :
+              <div>
+                <div className='login float-left'><Link to='/login/login'>登录入口</Link></div>
+                <div className='register float-right'><Link to='/login/register'>注册入口</Link></div>
+              </div>}
+            </div>
+            <div></div>
           </div>
         </div>
-        <div className='bottom'>
-          <div className='loginAndRegister clearfix'>
-            {this.props.userInfo.u_id ? 
-            <div>
-              <div className='login float-left'><Link to='/login/login'>退出登录</Link></div>
-              <div className='register float-right'><Link to={`/prospects/userHome/${this.props.userInfo.u_id}`}>个人中心</Link></div>
-            </div> :
-            <div>
-              <div className='login float-left'><Link to='/login/login'>登录入口</Link></div>
-              <div className='register float-right'><Link to='/login/register'>注册入口</Link></div>
-            </div>}
-          </div>
-          <div></div>
+        <div id="advertisingcommodity">
+          <AdvCom 
+            data={advCommData}
+            listLent = {1}
+            forTime = {10000}
+           />
         </div>
       </div>
     );
   }
+
+  componentWillMount(){
+    const { getAdvComDataAction } = this.props;
+    
+    getAdvComData().then(res=>res.json()).then(json=>{
+      json.error === '200' ? getAdvComDataAction(json.content) : [];
+    });
+  }
+
 }
 //连接redux
 function mapStateToProps(state){
   return {
-    userInfo:state.userInfo
+    userInfo:state.userInfo,
+    advCommData: state.advCommData
   }
 }
-function mapDispatchToProps(){
-  return {}
+function mapDispatchToProps(dispatch){
+  return {
+    getAdvComDataAction: bindActionCreators(getAdvComDataAction, dispatch)
+  }
 }
 
 

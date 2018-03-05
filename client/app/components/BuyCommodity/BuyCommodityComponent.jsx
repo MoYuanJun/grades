@@ -5,6 +5,7 @@ import './style.less';
 import { changeState } from '../../static/js/common';
 import { getStrToArray } from  '../../static/js/common';
 import ConfirmationOfOrder from '../ConfirmationOfOrder';
+import AdvCom from '../../components/AdvCom';
 import { Link } from 'react-router-dom';
 import { Radio, InputNumber, Cascader  } from 'antd';
 const RadioButton = Radio.Button;
@@ -112,7 +113,7 @@ class BuyCommodityComponent extends React.Component{
   }
   
   render(){
-    const data = this.props.data;
+    const {advCommData, data} = this.props;
     return (
       <div id='showComInfo'>
         { data ?
@@ -219,7 +220,12 @@ class BuyCommodityComponent extends React.Component{
 
             {/* 右侧 */}
             <div className='float-right con-right'>
-              木偶组件 商品展示
+              <AdvCom 
+                data={advCommData}
+                listLent = {2}
+                forTime = {10000}
+                title="店家推荐"
+              />
             </div>
           </div> : ''
         }
@@ -241,7 +247,8 @@ class BuyCommodityComponent extends React.Component{
 //连接到redux
 const mapStateToProps = (state)=>{
   return {
-    userInfo:state.userInfo
+    userInfo:state.userInfo,
+    advCommData: state.advCommData
   };
 };
 const mapDispatchToProps = () => {

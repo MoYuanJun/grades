@@ -21,12 +21,3 @@ class SwiperAndUser extends React.Component{
 }
 export default SwiperAndUser;
 
-
-
-
-
-
-
-
-
-

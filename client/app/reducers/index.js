@@ -5,11 +5,13 @@ import {combineReducers} from 'redux';
 import userInfo from './userInfo';
 import orderData from './orderData';
 import commodityData from './commodityData';
+import advCommData from './advCommData';
 /* 合并多个reducer  state中的对象状态主要还是看这个的 */
 const Reducers = combineReducers({
   userInfo,
   orderData,
-  commodityData
+  commodityData,
+  advCommData
 });
 
 export default Reducers;

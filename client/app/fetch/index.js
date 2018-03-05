@@ -106,3 +106,7 @@ export function getAllCommodityData(){
   return get( URL + 'commodity/getAllCommodityData.php' );
 }
 
+/* 获取广告商品数据 */
+export function getAdvComData(){
+  return get( URL + 'advertising/getAdvComData.php' );
+}
