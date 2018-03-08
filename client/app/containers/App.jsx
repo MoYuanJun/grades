@@ -12,14 +12,19 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userInfoAction from '../actions/userInfoAction.js';
 
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import 'moment/locale/zh-cn';
 
 class App extends React.Component{
   render(){
     return(
-      <div>
-        {this.props.children}
-        <Footer />
-      </div>
+      <LocaleProvider locale={zh_CN}>
+        <div>
+          {this.props.children}
+          <Footer />
+        </div>
+      </LocaleProvider>
     )
   }
 }

@@ -3,12 +3,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import SearchComponent from '../../../../components/SearchComponent';
 class UpdataCommodity extends React.Component{
     render(){
         const { props } = this.props;
         return (
             <div>
-                1111111111
+                <SearchComponent />
+                {console.log('%c查看redux-state', 'background:green', this.props.state)}
             </div>
         );
     }
@@ -17,7 +19,7 @@ class UpdataCommodity extends React.Component{
 //连接redux
 function mapStateToProps(state){
     return {
-
+        state: state
     }
 }
 function mapDispatchToProps(state){
