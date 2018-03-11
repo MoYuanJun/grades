@@ -27,7 +27,7 @@ export const wordlimit = (cname,wordLength) =>{
  }
 
  /**时间戳格式化成日期的方法  => 2018-02-25
-  * @param {string} timestamp   字符串   //时间搓
+  * @param {string} timestamp   字符串   //时间搓获取时间格式
   */
 export function TimestampToFormat(timestamp){
   const date = new Date(timestamp);

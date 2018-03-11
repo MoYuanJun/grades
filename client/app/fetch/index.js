@@ -110,3 +110,13 @@ export function getAllCommodityData(){
 export function getAdvComData(){
   return get( URL + 'advertising/getAdvComData.php' );
 }
+
+//删除商品数据 {com_id: 'xxxxx'}
+export function delteCommodityData(obj){
+  return post(URL + 'commodity/deleteCommodity.php', obj);
+}
+
+//更新商品数据D:\phpStudy\WWW\grades\server\
+export function updataCommodity(obj){
+  return post( URL + 'commodity/updataCommodity.php', obj);
+}

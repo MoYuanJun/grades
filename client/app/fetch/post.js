@@ -11,7 +11,7 @@ if( !window.Promise ){
   window.Promise = Promise;
 }
 
-/* 封装方法 ： 将obj转为字符串  格式：&key=value&key=value */
+/* 封装方法 ： 将obj转为字符串  格式：&key=value&key=value  fetch可以直接传入一个对象 无需如此 */
 function objToParams ( obj ){
   var result = '';
   var item;

@@ -1,0 +1,114 @@
+#CommodityShowList{
+    #CommodityShowListItem{
+        background: #F8F8F8;
+        border-radius: 5px;
+        border: 1px solid #eee;
+        margin: 0 0 10px 0;
+        .header{
+            padding: 10px;
+            height: 60px;
+            background: #F2F2F2;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            .float-left{
+                height: 100%;
+                width: 700px;
+                h2{
+                    color: #666;
+                    font-size: 15px;
+                    margin: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .time-id{
+                    font-size: 12px;
+                    color: #999;
+                    .content{
+                        line-height: 1.5;
+                    }
+                    .label{
+                        padding: 0 10px;
+                    }
+                }
+                
+            }
+            .float-right{
+                width: 200px;
+                background: rgba(0, 255,0,0.1);
+    
+                .btn-delete{
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    background: #fff;
+                    color: #999;
+                    width: 20px;
+                    font-size: 17px;
+                    line-height: 20px;
+                    text-align: center;
+                    height: 20px;
+                    border-radius: 1px 5px 1px 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+    
+        .commodity-box{
+            padding: 10px;
+            .img{
+                width: 100px;
+                height: 100px;
+                background: #fff;
+                padding: 10px;
+                border: 1px solid #eee;
+                img{
+                    width: 100%;
+                }
+            }
+    
+            .info{
+                width: 800px;
+                height: 100px;
+                border: 1px solid #eee;
+                background: #fff;
+                text-align: center;
+                table{
+                    width: 100%;
+                    word-break: break-all;
+                    word-wrap: break-word;
+                }
+                tr{
+                    height: 50px;
+                    line-height: 50px;
+                }
+                td{
+                    width: 80px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                thead tr{
+                    
+                    padding: 0 10px;
+                    background: #fff;
+                }
+                tbody tr{
+                    background: #fcfcfc;
+                }
+    
+                
+            }
+        }
+    }
+
+    .pagination{
+        margin: 0 auto;
+        text-align: right;
+        padding: 10px 50px 0 0;
+        .box{
+            display: inline-block;
+        }
+    }
+}
+

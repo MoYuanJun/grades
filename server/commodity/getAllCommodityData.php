@@ -8,7 +8,7 @@ header('Access-Control-Allow-Origin:*');
 require_once '../config/MySQL.php';
 
 //查询语句
-$sql = "select * from {$commodity} ;";
+$sql = "select * from {$commodity} where com_isremove = '0';";
 //调用封装的方法：执行可执行SQL语句
 $get = db_implement($sql);
 
