@@ -116,7 +116,13 @@ export function delteCommodityData(obj){
   return post(URL + 'commodity/deleteCommodity.php', obj);
 }
 
-//更新商品数据D:\phpStudy\WWW\grades\server\
+/**更新商品数据
+ * @param {object} obj
+ * {
+ *  where: json对象,          ====>  { com_id: xxxx }进行编译来的，存储着查询条件
+ *  setKeyValue: json对象,    ====>  { key: value, key: value}进行编译来的，存储着要修改的字段及修改值
+ * } 
+ */
 export function updataCommodity(obj){
   return post( URL + 'commodity/updataCommodity.php', obj);
 }

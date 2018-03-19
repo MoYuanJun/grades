@@ -3,8 +3,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 /* 导入组件 */
 import BackgroundsHome from '../containers/Backgrounds/Home';
-
-
 //设置后台 嵌套路由 根路由为backgrounds
 const BackgroundsRouter = ( { match } ) => (
   <div>

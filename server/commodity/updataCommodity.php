@@ -1,5 +1,11 @@
 <?php
 //删除商品数据
+/*接口参数：
+模式：post
+参数：
+    - where : json对象 ==> 暂时只存储着商品ID,前端对象格式{ com_id: xxxx }，然后进行JSON编码
+    - setKeyValue ：json对象 ==> 要修改字段的键值对，支持修改多个，前端JS对象格式{ key: value, key : value ..... }
+*/
 header('Content-type:text/html;charset=utf-8');
 header('Access-Control-Allow-Origin:*');
 

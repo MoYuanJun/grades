@@ -7,6 +7,7 @@ import { getAllCommodityData, updataCommodity } from '../../../../fetch';
 
 import SearchComponent from '../../../../components/SearchComponent';
 import CommodityShow from '../../../../components/CommodityShow';
+import UpdataCommodityModal from '../../../../components/UpdataCommodityModal';
 
 const modelData = [
     {
@@ -62,12 +63,10 @@ const modelData = [
     },
 ];
 class UpdataCommodity extends React.Component{
-
     //
     state = {
         filterData: [],  //过滤出的数据
     } 
-
     //props改变时触发
     componentWillReceiveProps(nextProps){
         //初始化 => commodity列表
@@ -278,6 +277,9 @@ class UpdataCommodity extends React.Component{
                 <div className='commity-list'>
                     <CommodityShow commodityData={filterData} deleteFun={this.deleteFun} />
                 </div>
+                <div>
+                    <UpdataCommodityModal />
+                </div>
                 {console.log('%c查看redux-state', 'background:green', this.props.state)}
             </div>
         );
@@ -300,3 +302,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(UpdataCommodity);
+
