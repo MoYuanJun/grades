@@ -22,13 +22,13 @@ class AddCommodityForm extends React.Component{
             });
           }
         });
-      }
-      //获取上传文件组件返回的路径 ==> 不直接传递this.setState是考虑上传多个图片
-      getImgPath = (imgUrl) => {
-          this.setState({img: imgUrl});
-      };
+    }
+    //获取上传文件组件返回的路径 ==> 不直接传递this.setState是考虑上传多个图片
+    getImgPath = (imgUrl) => {
+        this.setState({img: imgUrl});
+    };
 
-      render() {
+    render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <div id="AddCommodityForm">
@@ -153,7 +153,7 @@ class AddCommodityForm extends React.Component{
                 </Form>
             </div>
         );
-      }
+    }
 }
 
 const AddCommodityComponent = Form.create()(AddCommodityForm);

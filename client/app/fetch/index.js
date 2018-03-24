@@ -5,6 +5,42 @@ import { upload } from './upload';
 /* 设置通用URL */
 import { URL } from '../config';
 
+//将对象的二级对象转为json
+const objToJson = (obj) => {
+  const newObj = {};
+  for(let key in obj){
+    typeof obj[key] === 'object' ? newObj[key] = JSON.stringify(obj[key]) : 
+    newObj[key] = obj[key];
+  }
+  return newObj;
+}
+
+/**通用更新数据的函数
+ * 
+ * @param {object} obj  //参数
+ * const request = {
+ *   request: {
+ *       tableName: '表名',
+ *       params: {
+ *           name: 'qianyin',
+ *           age: 20,
+ *           time: '2018-12-02'
+ *       },
+ *       where:{
+ *           column: 'com_id',
+ *           value: '3126'
+ *       }
+ *   }
+ * }
+ * updateData(request).then(res=>res.json()).then(json=>{
+ *    //操作
+ * });
+ */
+export function updateData (obj){
+  return post(URL + 'currency/updateData.php', objToJson(obj));
+}
+
+/************************************************************** */
 
 /* 登录 ==> 信息获取 => 参数 是通过post方式获取数据时的参数 一般是用户名和密码 */
 export function LoginData (obj){

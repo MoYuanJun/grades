@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import './style.less';
-import { Pagination  } from 'antd';
+import { Pagination , Button } from 'antd';
 import { TimestampToFormat } from '../../static/js/common';
 class CommodityShow extends React.Component{
     state = {
@@ -58,15 +58,22 @@ class CommodityShow extends React.Component{
         this.setState({currentData, pagination});
     }
 
+    
     render(){
         const { pagination, currentData } = this.state;
-        const { commodityData, deleteFun } = this.props;
+        const { commodityData, deleteFun, updataVisible, updataModalData } = this.props;
         return (
            <div id="CommodityShowList">
                 {   
                     currentData.length > 0 ?
                         currentData.map((item, index, arr)=>{
-                            return <CommodityShowListItem commodityData={item} key={index} deleteFun={deleteFun} />
+                            return <CommodityShowListItem 
+                                commodityData={item} 
+                                key={index} 
+                                deleteFun={deleteFun} 
+                                updataVisible={updataVisible}
+                                updataModalData={updataModalData}
+                            />
                         })
                     : <div>
                         暂无数据
@@ -98,7 +105,7 @@ export default CommodityShow;
 
 class CommodityShowListItem extends React.Component{
     render(){
-        const { commodityData, deleteFun } = this.props;
+        const { commodityData, deleteFun, updataVisible, updataModalData } = this.props;
         return (
             <div id="CommodityShowListItem">
                 <div className="header clearfix">
@@ -111,12 +118,19 @@ class CommodityShowListItem extends React.Component{
                         </div>
                     </div>
                     <div className="float-right">
-                        <div className="btn-delete" onClick={()=>{
-                            deleteFun(commodityData.com_id);
-                        }}>
+                        <div className="btn-delete" 
+                            onClick={()=>{
+                                deleteFun(commodityData.com_id);
+                            }}>
                             <svg className="icon" aria-hidden="true">
                                 <use xlinkHref="#icon-iconset0127"></use>
                             </svg>
+                        </div>
+                        <div className="float-left">
+                            <span onClick={() => {
+                                updataVisible();
+                                updataModalData(commodityData);
+                            }}>修改</span>
                         </div>
                     </div>
                 </div>

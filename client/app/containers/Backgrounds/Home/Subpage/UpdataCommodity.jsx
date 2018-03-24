@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCommodityData } from '../../../../actions/commodityDataAction';
-import { getAllCommodityData, updataCommodity } from '../../../../fetch';
+import { getAllCommodityData, updataCommodity, updateData } from '../../../../fetch';
 
 import SearchComponent from '../../../../components/SearchComponent';
 import CommodityShow from '../../../../components/CommodityShow';
@@ -66,6 +66,8 @@ class UpdataCommodity extends React.Component{
     //
     state = {
         filterData: [],  //过滤出的数据
+        visible: false,  //控制弹窗的显示
+        modalData: null,  //要修改的数据 => 传给对话框
     } 
     //props改变时触发
     componentWillReceiveProps(nextProps){
@@ -266,8 +268,17 @@ class UpdataCommodity extends React.Component{
         }); */
     }
 
+    //更新visible状态
+    updataVisible = () => {
+        this.setState({visible: !this.state.visible});
+    }
+
+    //更新modal数据
+    updataModalData = (obj) => {
+        this.setState({modalData: obj});
+    }
     render(){
-        const { filterData } = this.state;
+        const { filterData, visible, modalData } = this.state;
         const { commodityData } = this.props;
         return (
             <div id="UpdataCommodity">
@@ -275,10 +286,18 @@ class UpdataCommodity extends React.Component{
                     <SearchComponent filterFunc={this.filterFunc} modelData={modelData} />
                 </div>
                 <div className='commity-list'>
-                    <CommodityShow commodityData={filterData} deleteFun={this.deleteFun} />
+                    <CommodityShow 
+                        commodityData={filterData} 
+                        deleteFun={this.deleteFun}
+                        updataModalData={this.updataModalData}
+                        updataVisible={this.updataVisible} />
                 </div>
                 <div>
-                    <UpdataCommodityModal />
+                    <UpdataCommodityModal 
+                        visible = {visible}
+                        modalData={modalData}
+                        updataVisible={this.updataVisible}
+                    />
                 </div>
                 {console.log('%c查看redux-state', 'background:green', this.props.state)}
             </div>
@@ -303,3 +322,22 @@ export default connect(
     mapDispatchToProps
 )(UpdataCommodity);
 
+
+//
+const request = {
+    request: {
+        tableName: '表名',
+        params: {
+            name: 'qianyin',
+            age: 20,
+            time: '2018-12-02'
+        },
+        where:{
+            column: 'com_id',
+            value: '3126'
+        }
+    }
+}
+updateData(request).then(res=>res.text()).then(text=>{
+    console.log('====================', text);
+});

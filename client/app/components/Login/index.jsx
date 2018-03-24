@@ -18,7 +18,9 @@ class ComLogin extends React.Component{
     const icon_re = <svg className='icon' aria-hidden='true'><use xlinkHref='#icon-zhuce'></use></svg>
     return (
       <div id='login'>
-
+        <div className="bgimg">
+          <img src="http://localhost/grades/server/img/indexbg/1384731.jpg" alt=""/>
+        </div>
         <div className='content'>
           {/* 使用antd组件 */}
           {/* 外层组件 defaultActiveKey默认当前key 接收从智能组件传来的路由参数 */}

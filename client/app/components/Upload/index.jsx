@@ -1,5 +1,7 @@
 /**文件上传木偶组件
- * 接口参数：
+ * props接口参数：
+ * uploadCatalog: 上传文件目录
+ * previewImg: 预览图片
  * styleProps{
  *  svgSize: 上传图标字体大小, 例：'10px'
  *  pSize: 上传文字字体大小,  例：'10px'
@@ -8,7 +10,9 @@
  *  height: 最外层容器高, 例：'10px'
  * }
  * 
- * getImgPath:父组件传来的方法 ==> 目的是为了获取上传文件路径  ==> 调用方法 getImgPath(imgUrl)
+ * getImgPath:父组件传来的方法 
+ *    ==> 目的是为了获取上传文件路径  
+ *    ==> 木偶组件调用方法 getImgPath(imgUrl)
  */
 import React from 'react';
 import './style.less';
@@ -23,14 +27,34 @@ class Demo extends React.Component {
     isUploadSucceed: false, //监听是否上传成功文件
     img:''  //存储上传图片路径
   }
-;
 
-  uploadChangeHandler = (e) => { 
+  //当传入预览图片时 起效
+  componentDidMount(){
+    this.props.previewImg ? this.setState({
+      isUploadSucceed: true,
+      isShowUpRes: true,
+      isShowUpIcon: false,
+      upResData: this.props.previewImg
+    }) : '';
+  }
+  //当传入预览图片时 起效
+  componentWillReceiveProps(nextProps){
+    nextProps.previewImg ? this.setState({
+      isUploadSucceed: true,
+      isShowUpRes: true,
+      isShowUpIcon: false,
+      upResData: nextProps.previewImg
+    }) : '';
+  }
+  //
+  uploadChangeHandler = (e) => {
     if(e.target.files && e.target.files[0]){  
         this.setState({isShowUpIcon: false , isShowUpRes: true });
         this.setState({upResData: window.URL.createObjectURL(e.target.files[0]) });
         const data = new FormData();
         data.append('file', e.target.files[0]);
+        let uploadCatalog = this.props.uploadCatalog || 'commodity';
+        data.append('uploadCatalog', uploadCatalog);
         uploadFile(data).then(res=>res.json()).then(json=>{
           if(json.error === '1'){
             this.props.getImgPath(json.img);

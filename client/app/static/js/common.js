@@ -1,4 +1,3 @@
-
 /**
  * 对元素的字数进行限制  多余的省略并在末尾添加省略号
  * @param {HTMLELEMENT} cname 要操作的DOM元素

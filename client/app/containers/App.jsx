@@ -9,21 +9,22 @@ import '../static/css/common.less';   //通用样式  包括阿里字体图标�
 import '../static/font_icon/iconfont'; //引入阿里字体图标 之JS文件
 /* 连接redux相关依赖 */
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import * as userInfoAction from '../actions/userInfoAction.js';
 
 import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
-
+import CustomSpin from '../components/Spin';
 class App extends React.Component{
   render(){
     return(
+      
       <LocaleProvider locale={zh_CN}>
-        <div>
-          {this.props.children}
-          <Footer />
-        </div>
+          <div>
+            {this.props.children}
+            <Footer />
+            <CustomSpin />
+          </div>
       </LocaleProvider>
     )
   }
