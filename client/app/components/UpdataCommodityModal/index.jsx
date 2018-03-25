@@ -9,7 +9,7 @@ import './style.less';
 
 class UpdataCommodityModal extends React.Component{
     state = {
-        requestParam: null
+        requestParam: null  //表单数据对象  初始值为当前商品数据
     }
     componentWillReceiveProps(nextProps){
         let requestParam = null;
@@ -31,7 +31,7 @@ class UpdataCommodityModal extends React.Component{
     }
     render(){
         const { requestParam } = this.state;
-        const { visible, updataVisible } = this.props;
+        const { visible, updataVisible, modalClickHandler } = this.props;
         return (
             <div>
                 {requestParam ? 
@@ -39,7 +39,9 @@ class UpdataCommodityModal extends React.Component{
                         width="1200px"
                         visible={visible}
                         onOk={()=>{
+                            modalClickHandler(this.state.requestParam);
                             updataVisible();
+                            
                         }}
                         confirmLoading={false}
                         onCancel={()=>{

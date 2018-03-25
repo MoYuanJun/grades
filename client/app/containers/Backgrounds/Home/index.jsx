@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { getAdminOrderDataAction } from '../../../actions/orderDataAction';
 import { getCommodityData } from '../../../actions/commodityDataAction';
 import { updataUser } from '../../../actions/userInfoAction';
+import { switchSpinState } from '../../../actions/commonGlobal';
 
 import AddCommodity from './Subpage/AddCommodity';  //添加商品
 import UpdataCommodity from './Subpage/UpdataCommodity'; //商品修改
@@ -140,19 +141,28 @@ class BackgroundsHome extends React.Component{
    * 2、将获取到的订单数据更新到redux中state.orderData
    */
   componentWillMount(){
-    const { getAdminOrderDataAction, getCommodityData } = this.props;
-
+    const { getAdminOrderDataAction, getCommodityData, switchSpinState } = this.props;
+    //监听：当数据全部加载完，切换redux中spin状态值   ，没加载完一个随便push一个值 监听数组长度即可起到监听作用
+    let count = [];
+    switchSpinState();
     //获取 商品订单数据 ==> 并存储到redux - store
     getSalesRecord().then(res=>res.json()).then(json=>{
-      json.error === '200' ? getAdminOrderDataAction(json.content) : '';
+      count.push(1);
+      count.length === 2 ? switchSpinState() : '';
+      if(json.error === '200'){
+        getAdminOrderDataAction(json.content);
+      }
     });
     //获取商品数据 ==> 并存储到redux - store
     getAllCommodityData().then(res=>res.json()).then(json=>{
-      json.error === '200' ? getCommodityData(json.content) : '';
+      count.push(1);
+      count.length === 2 ? switchSpinState() : '';
+      if(json.error === '200'){
+        getCommodityData(json.content);
+      }
     });
   }
 }
-
 //连接redux
 function mapStateToProps(state){
   return {
@@ -163,6 +173,7 @@ function mapStateToProps(state){
 }
 function mapDispatchToProps(dispatch){
   return {
+    switchSpinState: bindActionCreators(switchSpinState, dispatch),
     getAdminOrderDataAction:bindActionCreators(getAdminOrderDataAction, dispatch),
     updataUser:bindActionCreators(updataUser, dispatch),
     getCommodityData: bindActionCreators(getCommodityData, dispatch),

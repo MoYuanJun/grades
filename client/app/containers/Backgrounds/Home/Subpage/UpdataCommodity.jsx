@@ -2,7 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getCommodityData } from '../../../../actions/commodityDataAction';
+import { getCommodityData, reduxUpdataCommodity } from '../../../../actions/commodityDataAction';
+import { switchSpinState } from '../../../../actions/commonGlobal';
 import { getAllCommodityData, updataCommodity, updateData } from '../../../../fetch';
 
 import SearchComponent from '../../../../components/SearchComponent';
@@ -268,7 +269,7 @@ class UpdataCommodity extends React.Component{
         }); */
     }
 
-    //更新visible状态
+    //更新切换visible状态
     updataVisible = () => {
         this.setState({visible: !this.state.visible});
     }
@@ -277,6 +278,38 @@ class UpdataCommodity extends React.Component{
     updataModalData = (obj) => {
         this.setState({modalData: obj});
     }
+
+    //弹窗确定按钮点击事件
+    modalClickHandler = (obj) => {
+        const { modalData } = this.state;
+        const { reduxUpdataCommodity, switchSpinState } = this.props;
+        if(obj.com_newPrice !== modalData.com_newPrice){
+            obj.com_oldPrice = modalData.com_newPrice;
+        }
+        let params = {
+            request: {
+                tableName: 'commodity',
+                params: obj,
+               where:{  //条件：字段 以及字段值
+                    column: 'com_id',
+                    value: obj.com_id
+                }
+            }
+        };
+        switchSpinState();
+        updateData(params).then(res=>res.json()).then(json=>{
+            if(json.error === '1'){
+                //传入个回调函数
+                reduxUpdataCommodity(json.updatedData);
+                switchSpinState();
+            }else {
+                switchSpinState();
+            }
+        });
+        console.log('-------------', modalData, obj);
+        
+    }
+    
     render(){
         const { filterData, visible, modalData } = this.state;
         const { commodityData } = this.props;
@@ -296,6 +329,7 @@ class UpdataCommodity extends React.Component{
                     <UpdataCommodityModal 
                         visible = {visible}
                         modalData={modalData}
+                        modalClickHandler={this.modalClickHandler}
                         updataVisible={this.updataVisible}
                     />
                 </div>
@@ -315,29 +349,11 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return {
         getCommodityData: bindActionCreators(getCommodityData, dispatch),
+        reduxUpdataCommodity: bindActionCreators(reduxUpdataCommodity, dispatch),
+        switchSpinState: bindActionCreators(switchSpinState, dispatch)
     }
 }
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(UpdataCommodity);
-
-
-//
-const request = {
-    request: {
-        tableName: '表名',
-        params: {
-            name: 'qianyin',
-            age: 20,
-            time: '2018-12-02'
-        },
-        where:{
-            column: 'com_id',
-            value: '3126'
-        }
-    }
-}
-updateData(request).then(res=>res.text()).then(text=>{
-    console.log('====================', text);
-});

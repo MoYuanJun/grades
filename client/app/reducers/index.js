@@ -6,12 +6,14 @@ import userInfo from './userInfo';
 import orderData from './orderData';
 import commodityData from './commodityData';
 import advCommData from './advCommData';
+import commonGlobal from './commonGlobal';
 /* 合并多个reducer  state中的对象状态主要还是看这个的 */
 const Reducers = combineReducers({
   userInfo,
   orderData,
   commodityData,
-  advCommData
+  advCommData,
+  commonGlobal
 });
 
 export default Reducers;

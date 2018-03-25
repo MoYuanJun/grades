@@ -17,16 +17,17 @@ const objToJson = (obj) => {
 
 /**通用更新数据的函数
  * 
- * @param {object} obj  //参数
+ * @param {object} obj  //参数:格式如下演示代码：对象request
+ * 演示：
  * const request = {
  *   request: {
  *       tableName: '表名',
- *       params: {
+ *       params: {   //要设置字段的 键值对
  *           name: 'qianyin',
  *           age: 20,
  *           time: '2018-12-02'
  *       },
- *       where:{
+ *       where:{  //条件：字段 以及字段值
  *           column: 'com_id',
  *           value: '3126'
  *       }
@@ -35,6 +36,11 @@ const objToJson = (obj) => {
  * updateData(request).then(res=>res.json()).then(json=>{
  *    //操作
  * });
+ * 返回格式：json对象
+ * {
+ *    error : '0' || '1'  //1表示更新成功， 0表示失败
+ *    updatedData : {更新后的商品数据对象}
+ * }
  */
 export function updateData (obj){
   return post(URL + 'currency/updateData.php', objToJson(obj));

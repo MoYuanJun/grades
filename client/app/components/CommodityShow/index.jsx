@@ -113,7 +113,7 @@ class CommodityShowListItem extends React.Component{
                         <h2>{commodityData.com_title}</h2>
                         <div className="time-id">
                             <span className="content">{TimestampToFormat(commodityData.com_time)}</span>
-                            <span className="label">订单号 : </span>
+                            <span className="label">商品编号 : </span>
                             <span className="content">{commodityData.com_id}</span>
                         </div>
                     </div>
