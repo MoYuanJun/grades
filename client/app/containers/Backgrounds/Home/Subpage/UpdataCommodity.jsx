@@ -290,9 +290,9 @@ class UpdataCommodity extends React.Component{
             request: {
                 tableName: 'commodity',
                 params: obj,
-               where:{  //条件：字段 以及字段值
-                    column: 'com_id',
-                    value: obj.com_id
+                where:{  //条件：字段 以及字段值
+                        column: 'com_id',
+                        value: obj.com_id
                 }
             }
         };
@@ -312,7 +312,8 @@ class UpdataCommodity extends React.Component{
     
     render(){
         const { filterData, visible, modalData } = this.state;
-        const { commodityData } = this.props;
+        const { commodityData, commodityCategoryData } = this.props;
+        console.log('============', commodityCategoryData);
         return (
             <div id="UpdataCommodity">
                 <div className="search-block clearfix">
@@ -327,6 +328,7 @@ class UpdataCommodity extends React.Component{
                 </div>
                 <div>
                     <UpdataCommodityModal 
+                        commodityCategoryData={commodityCategoryData}
                         visible = {visible}
                         modalData={modalData}
                         modalClickHandler={this.modalClickHandler}
@@ -343,7 +345,8 @@ class UpdataCommodity extends React.Component{
 function mapStateToProps(state){
     return {
         state: state,
-        commodityData: state.commodityData
+        commodityData: state.commodityData,
+        commodityCategoryData: state.commodityCategoryData
     }
 }
 function mapDispatchToProps(dispatch){

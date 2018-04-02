@@ -9,7 +9,7 @@ require_once '../config/MySQL.php';
 //参数处理
 if(isset($_GET['searchText'])){ //获取搜索词条
   $searchText = $_GET['searchText'];
-  $where = " where com_title like '%".$searchText."%' ";
+  $where = " where com_title like '%{$searchText}%' or com_category like '%{$searchText}%' ";
 }
 if(isset($_GET['startIndex']) && isset($_GET['dataNumber'])){  //获取搜索索引 以及条数
   $limit = " limit ".$_GET['startIndex'].",".$_GET['dataNumber'];

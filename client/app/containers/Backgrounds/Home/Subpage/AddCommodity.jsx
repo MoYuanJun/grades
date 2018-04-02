@@ -9,10 +9,13 @@ import AddCommodityComponent from '../../../../components/AddCommodity';  //添�
 import { insertCommodity } from '../../../../fetch';
 class AddCommodity extends React.Component{
     render(){
-        const { history } = this.props;
+        const { history, commodityCategoryData } = this.props;
         return (
             <div>
-                <AddCommodityComponent insertCommodity={insertCommodity} history={history} />
+                <AddCommodityComponent 
+                    insertCommodity={insertCommodity} 
+                    commodityCategoryData={commodityCategoryData}
+                    history={history} />
             </div>
         );
     }
@@ -20,6 +23,7 @@ class AddCommodity extends React.Component{
 /* 连接redux */
 function mapStateToProps(state){
     return {
+        commodityCategoryData: state.commodityCategoryData
     }
 }
 function mapDispatchToProps(dipatch){

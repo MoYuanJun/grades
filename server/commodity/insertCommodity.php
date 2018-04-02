@@ -18,7 +18,7 @@ $com_size = $_POST['com_size'];
 $com_newPrice = $_POST['com_newPrice'];
 $com_oldPrice = $_POST['com_oldPrice'];
 $com_birthplace = $_POST['com_birthplace'];
-
+$com_category = $_POST['com_category'];
 $key = " (`com_id`,
         `com_title`,
         `com_img`,
@@ -27,6 +27,7 @@ $key = " (`com_id`,
         `com_size`,
         `com_newPrice`,
         `com_oldPrice`,
+        `com_category`,
         `com_birthplace`) ";
 $value = "('".$id."',
         '".$com_title."',
@@ -36,6 +37,7 @@ $value = "('".$id."',
         '".$com_size."',
         '".$com_newPrice."',
         '".$com_oldPrice."',
+        '".$com_category."',
         '".$com_birthplace."');";
 
 

@@ -17,7 +17,7 @@ class ComponentHeader extends React.Component{
 
   /* 搜索事件处理器 searchText */
   render(){
-    const { userInfo } = this.props;
+    const { userInfo, searchHandler } = this.props;
     return (
       <div id='header'>
         {/* 顶部 橘黄色 */}
@@ -30,16 +30,24 @@ class ComponentHeader extends React.Component{
             {/* 菜单 */}
             <div className='menu float-left'>
               <ul>
-                <li className='float-left'><a href="javascript:;">女装</a></li>
-                <li className='float-left'><a href="javascript:;">男士</a></li>
-                <li className='float-left'><a href="javascript:;">居家</a></li>
-                <li className='float-left'><a href="javascript:;">运动</a></li>
+                <li className='float-left'>
+                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}} href="javascript:;">女装</a>
+                </li>
+                <li className='float-left'>
+                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}}  href="javascript:;">男士</a>
+                </li>
+                <li className='float-left'>
+                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}}  href="javascript:;">居家</a>
+                </li>
+                <li className='float-left'>
+                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}}  href="javascript:;">运动</a>
+                </li>
               </ul>
             </div>
             {/* 搜索框 */}
             <div className='search float-right'>
               <Input.Search className='inputSearch' 
-                            onSearch={ this.props.searchHandler } 
+                            onSearch={ searchHandler } 
                             placeholder={this.props.placeholder ? this.props.placeholder : '输入搜索词条'} 
                             enterButton="搜索"/>
             </div>

@@ -2,20 +2,40 @@
 import React from 'react';
 import './style.less';
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+const Option = Select.Option;
 const FormItem = Form.Item;
 import Upload from '../Upload';
+
+const children = [];
+for (let i = 10; i < 36; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+}
 
 class AddCommodityForm extends React.Component{
     state = {
         img:'',
+        categoryArr: []
     };
-
+    componentWillReceiveProps(nextProps){
+        if(nextProps.commodityCategoryData.length > 0){
+            this.setState({
+                categoryArr: nextProps.commodityCategoryData.map((item, index, arr)=>{
+                    return item.cat_name;
+                })
+            });
+        } 
+    }
     //表单提交事件处理器
     handleSubmit = (e) => {
         const { insertCommodity, history } = this.props;
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
+            console.log('==========', values.com_category);
           if (!err) {
+            let com_category = values.com_category.reduce((pre='', next)=>{
+                return `${pre};${next}`;
+            });
+            values.com_category = com_category+';';
             values.com_img = this.state.img;
             insertCommodity(values).then(res=>res.json()).then(json=>{
                 json.error === '200' ? history.go(0) :  '';
@@ -128,6 +148,27 @@ class AddCommodityForm extends React.Component{
                         })(
                             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
                             placeholder="请输入商品尺寸，多种尺寸用分号分隔" />
+                        )}
+                    </FormItem>
+                    {/* 类别 */}
+                    <FormItem
+                        label='类别'
+                        labelCol={{span: 2}}
+                        wrapperCol={{span: 10}}
+                        >
+                        {getFieldDecorator('com_category', {
+                            rules: [{ required: true, message: 'Please input your Password!' }],
+                        })(
+                            <Select
+                                mode="tags"
+                                style={{ width: '100%' }}
+                                placeholder="请选择商品类别"
+                                onChange={()=>{}}
+                            >
+                                {this.state.categoryArr.map(( item, index, arr ) =>{
+                                    return <Option key={index} value={item}>{item}</Option>;
+                                })}
+                            </Select>
                         )}
                     </FormItem>
                     {/* 发货地 */}

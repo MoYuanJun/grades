@@ -39,11 +39,56 @@ const objToJson = (obj) => {
  * 返回格式：json对象
  * {
  *    error : '0' || '1'  //1表示更新成功， 0表示失败
- *    updatedData : {更新后的商品数据对象}
+ *    updatedData : {更新后的数据对象}
  * }
  */
 export function updateData (obj){
   return post(URL + 'currency/updateData.php', objToJson(obj));
+}
+
+/**通用查询数据的方法
+ * 参数：request
+ * {
+ *    request：{
+ *          tableName: string  //表名  必选
+ *          columns: []      //要查询的字段名数组，默认（不传）则表示返回所有字段
+ *          where: {}           //查询条件，默认（不传）则表示返回所有数据
+ *          orderBy: {column：'xxxx' , type: 'DESC'  || 'ASC'}//ASC:升序 默认值 ， 不传则不进行操作,支持多个
+ *    }
+ * }
+ * 返回值：
+ * {
+ *    error: '0' || '1'
+ *    content: [{}],
+ *    sql: ''
+ * }
+ */
+export function selectData(obj){
+  return post(URL + 'currency/selectData.php', objToJson(obj));
+}
+
+/**通用删除数据的方法
+ * 参数：request
+ * {
+ *    request: {
+ *      tableName: string  //表名  必选
+ *      where: {}           //查询条件，默认（不传）则表示返回所有数据
+ *    }
+ * }
+ * 返回：object
+ * {
+ *  error: 0 || 1 , // 0 ：失败，1 : 成功
+ *  deleteData: [{}] , //被删除的数据
+ *  sql: string // 后端执行的SQL语句
+ * }
+ */
+export function deleteData(obj){
+  return post(URL + 'currency/deleteData.php', objToJson(obj));
+}
+
+//通用插入数据的方法
+export function insertIntoData(obj){
+  return post(URL + 'currency/insertIntoData.php', objToJson(obj));
 }
 
 /************************************************************** */

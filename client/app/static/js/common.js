@@ -33,7 +33,7 @@ export function TimestampToFormat(timestamp){
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const date_ = date.getDate();
-  return `${year}-${month > 9 ? '' : '0'}${month}-${date_}`;
+  return `${year}-${month > 9 ? '' : '0'}${month}-${date_ > 9 ? '' : '0'}${date_}`;
 }
 
 

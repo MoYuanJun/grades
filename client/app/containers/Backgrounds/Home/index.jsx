@@ -8,18 +8,20 @@ import { getAdminOrderDataAction } from '../../../actions/orderDataAction';
 import { getCommodityData } from '../../../actions/commodityDataAction';
 import { updataUser } from '../../../actions/userInfoAction';
 import { switchSpinState } from '../../../actions/commonGlobal';
+import { categoryDataGet } from '../../../actions/commodityCategoryData';
 
 import AddCommodity from './Subpage/AddCommodity';  //添加商品
 import UpdataCommodity from './Subpage/UpdataCommodity'; //商品修改
 import SendTheGoods from './Subpage/SendTheGoods';  //待发货
 import WaitForGoodsReceiptComponent from './Subpage/WaitForGoodsReceipt'; //待收货
+import CommodityCategory from './Subpage/CommodityCategory';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 //获取封装的fetch方法：获取订单数据 、 获取所有商品数据
-import { getSalesRecord, getAllCommodityData } from '../../../fetch';
+import { getSalesRecord, getAllCommodityData, selectData } from '../../../fetch';
 
 class BackgroundsHome extends React.Component{
   state = {
@@ -70,7 +72,7 @@ class BackgroundsHome extends React.Component{
                     <Menu.Item key="8">option8</Menu.Item>
                   </SubMenu>
                   <SubMenu key="sub3" title={<span><Icon type="notification" />商品类别管理</span>}>
-                    <Menu.Item key="9">option9</Menu.Item>
+                    <Menu.Item key="9">分类管理</Menu.Item>
                     <Menu.Item key="10">option10</Menu.Item>
                     <Menu.Item key="11">option11</Menu.Item>
                     <Menu.Item key="12">option12</Menu.Item>
@@ -115,7 +117,7 @@ class BackgroundsHome extends React.Component{
                       8
                     </div>
                     <div style = {{display:this.state.current === '9' ? 'block' : 'none'}}>
-                      9
+                      <CommodityCategory />
                     </div>
                     <div style = {{display:this.state.current === '10' ? 'block' : 'none'}}>
                       10
@@ -141,7 +143,9 @@ class BackgroundsHome extends React.Component{
    * 2、将获取到的订单数据更新到redux中state.orderData
    */
   componentWillMount(){
-    const { getAdminOrderDataAction, getCommodityData, switchSpinState } = this.props;
+    const { getAdminOrderDataAction, getCommodityData, switchSpinState,categoryDataGet
+    
+    } = this.props;
     //监听：当数据全部加载完，切换redux中spin状态值   ，没加载完一个随便push一个值 监听数组长度即可起到监听作用
     let count = [];
     switchSpinState();
@@ -153,6 +157,7 @@ class BackgroundsHome extends React.Component{
         getAdminOrderDataAction(json.content);
       }
     });
+
     //获取商品数据 ==> 并存储到redux - store
     getAllCommodityData().then(res=>res.json()).then(json=>{
       count.push(1);
@@ -161,6 +166,19 @@ class BackgroundsHome extends React.Component{
         getCommodityData(json.content);
       }
     });
+
+    //加载获取商品分类
+    let request = {   //查询 条件
+      request:{
+        tableName: 'commoditycategory',
+        orderBy: {column: 'cat_time', type: 'DESC' }
+      }
+    };
+    //查询获取分类数据 => 存入redux
+    selectData(request).then(res=>res.json()).then(json=>{
+        json.error === '1' ? categoryDataGet(json.content ) : '';
+    });
+    
   }
 }
 //连接redux
@@ -177,6 +195,7 @@ function mapDispatchToProps(dispatch){
     getAdminOrderDataAction:bindActionCreators(getAdminOrderDataAction, dispatch),
     updataUser:bindActionCreators(updataUser, dispatch),
     getCommodityData: bindActionCreators(getCommodityData, dispatch),
+    categoryDataGet: bindActionCreators(categoryDataGet, dispatch)
   }
 }
 export default connect(

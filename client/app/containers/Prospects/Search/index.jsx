@@ -34,7 +34,20 @@ class Search extends React.Component{
       this.setState(state);
     }
   }
-
+  //sds
+  componentWillReceiveProps(nextProps){
+    if(this.props.match.params.searchText !== nextProps.match.params.searchText){
+      this.stateChange('placeholder', nextProps.match.params.searchText); //更新 this.state记录当前搜索词条
+      this.stateChange('searchText', nextProps.match.params.searchText); //更新 this.state记录当前搜索词条
+    }
+  }
+  //组件更新后首次执行  ==> 首页过来
+  componentDidMount(){
+    console.log('+++++++++++++++++++++');
+    this.stateChange('placeholder', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
+    this.stateChange('searchText', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
+    this.resetData(); //更新||其实是首次获取数据
+  }
   //更新重置数据
   resetData(){
     //调用封装的 fetch调用方法
@@ -58,14 +71,6 @@ class Search extends React.Component{
       </div>
     );
   }
-
-  //组件更新后首次执行  ==> 首页过来
-  componentDidMount(){
-    this.stateChange('placeholder', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
-    this.stateChange('searchText', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
-    this.resetData(); //更新||其实是首次获取数据
-  }
-
 }
 
 export default Search;
