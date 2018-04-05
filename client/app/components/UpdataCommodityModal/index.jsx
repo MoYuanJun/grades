@@ -40,7 +40,6 @@ class UpdataCommodityModal extends React.Component{
         const { visible, updataVisible, modalClickHandler, commodityCategoryData } = this.props;
         return (
             <div>
-                {console.log('%c查看修改商品弹窗状态', 'background:red', this.state)}
                 {requestParam ? 
                     <Modal title="商品修改"
                         width="1200px"

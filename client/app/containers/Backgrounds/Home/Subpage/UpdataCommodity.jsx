@@ -313,7 +313,6 @@ class UpdataCommodity extends React.Component{
     render(){
         const { filterData, visible, modalData } = this.state;
         const { commodityData, commodityCategoryData } = this.props;
-        console.log('============', commodityCategoryData);
         return (
             <div id="UpdataCommodity">
                 <div className="search-block clearfix">

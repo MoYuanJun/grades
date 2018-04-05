@@ -198,7 +198,7 @@ class CommodityCategory extends React.Component{
             let request = {
                 tableName: 'commoditycategory',
                 columns: ['cat_id', 'cat_name'],
-                values: ['id', arr[i]],
+                values: ['catid', arr[i]],
                 key: {column: 'cat_name', value: arr[i]}
             }
             insertIntoData({request}).then(res=>res.json()).then(json=>{
@@ -240,7 +240,6 @@ class CommodityCategory extends React.Component{
         const { visible } = this.state;
         return (
             <div id="CommodityCategory">
-                {console.log('%c查看当前this.state', 'background:Red', this.state)}
                 {
                     <Table 
                         bordered 

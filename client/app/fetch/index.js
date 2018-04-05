@@ -86,7 +86,21 @@ export function deleteData(obj){
   return post(URL + 'currency/deleteData.php', objToJson(obj));
 }
 
-//通用插入数据的方法
+//
+/*  通用插入数据的方法
+* 参数：request
+* {
+ *      tableName: string,                    //表名称
+ *      columns：['cal_id', 'age', 'name']    //要更新的字段：值
+ *      values: ['前缀id', '12', 'name']     //插入字段每个对应的值, 第一个值值是id前缀
+ *      key: {column：'xxxx' , value: ''}     //键值，表示将要判断不可重复字段值； 可选；表示多条数据间字段xxx不可重复，value是本次要插入数据xxx字段的值
+ * }
+ * 返回格式：
+ * {
+ *      error: '0' || '1'    //1成功   0失败
+ *      num:   number , 
+ *      sql: ''
+ * } */
 export function insertIntoData(obj){
   return post(URL + 'currency/insertIntoData.php', objToJson(obj));
 }

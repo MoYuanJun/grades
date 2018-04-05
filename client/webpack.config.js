@@ -23,6 +23,10 @@ module.exports = {
         }]
       },
       {
+        test:/\.css$/,
+        use:ExtractTextPlugin.extract([{loader:'css-loader'},{loader:'postcss-loader'}])
+      },
+      {
         test:/\.less$/,
         use:ExtractTextPlugin.extract([{loader:'css-loader'},{loader:'postcss-loader'},{loader:'less-loader'}])
       },

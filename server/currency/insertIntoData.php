@@ -4,10 +4,10 @@
  * 参数：$_POST[request]: json
  * JSON字符串对应JS对象格式：
  * {
- *      tableName: string,                          //表名称
+ *      tableName: string,                    //表名称
  *      columns：['cal_id', 'age', 'name']    //要更新的字段：值
- *      values: ['id', '12', 'name']          //查询条件,通过值id判断 可选
- *      key: {column：'xxxx' , value: ''}      //键值，不可重复； 可选；表示多条数据间字段xxx不可重复，value是本次要插入数据xxx字段的值
+ *      values: ['前缀id', '12', 'name']      //要插入字段值, 第一个值 ID前缀
+ *      key: {column：'xxxx' , value: ''}     //键值，键值，表示将要判断不可重复字段值； 可选；表示多条数据间字段xxx不可重复，value是本次要插入数据xxx字段的值
  * }
  * 返回格式：
  * {
@@ -73,12 +73,12 @@ function getColumnStr($arr){
     $str .= ')';
     return $str;
 }
-//字符串格式化将[a, b, c,]  => ('a', 'b', 'c')
+//字符串格式化将[a, b, c,]  => ('a', 'b', 'c') 
 function getValueStr($arr){
     $str = '(';
-    foreach($arr as $value){
-        if($value === 'id'){
-            $id = getIDFunc('catid');
+    foreach($arr as $key => $value){
+        if($key === 0 ){
+            $id = getIDFunc($value);
             $value = $id;
         }
         $str .= "'{$value}',";

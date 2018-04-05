@@ -14,7 +14,8 @@ import AddCommodity from './Subpage/AddCommodity';  //添加商品
 import UpdataCommodity from './Subpage/UpdataCommodity'; //商品修改
 import SendTheGoods from './Subpage/SendTheGoods';  //待发货
 import WaitForGoodsReceiptComponent from './Subpage/WaitForGoodsReceipt'; //待收货
-import CommodityCategory from './Subpage/CommodityCategory';
+import CommodityCategory from './Subpage/CommodityCategory';  //商品分类
+import BannerSetting from './Subpage/BannerSetting';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { SubMenu } = Menu;
@@ -25,7 +26,7 @@ import { getSalesRecord, getAllCommodityData, selectData } from '../../../fetch'
 
 class BackgroundsHome extends React.Component{
   state = {
-    current:'2'
+    current:'10'
   }
   render(){
     const { history, commodityData, orderData } = this.props;
@@ -52,8 +53,8 @@ class BackgroundsHome extends React.Component{
               <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                   mode="inline"
-                  defaultSelectedKeys={['2']}
-                  defaultOpenKeys={['sub1']}
+                  defaultSelectedKeys={['10']}
+                  defaultOpenKeys={['sub3']}
                   onClick={(e) => {
                     this.setState({current: e.key});
                   }}
@@ -73,7 +74,7 @@ class BackgroundsHome extends React.Component{
                   </SubMenu>
                   <SubMenu key="sub3" title={<span><Icon type="notification" />商品类别管理</span>}>
                     <Menu.Item key="9">分类管理</Menu.Item>
-                    <Menu.Item key="10">option10</Menu.Item>
+                    <Menu.Item key="10">轮播设置</Menu.Item>
                     <Menu.Item key="11">option11</Menu.Item>
                     <Menu.Item key="12">option12</Menu.Item>
                   </SubMenu>
@@ -120,7 +121,7 @@ class BackgroundsHome extends React.Component{
                       <CommodityCategory />
                     </div>
                     <div style = {{display:this.state.current === '10' ? 'block' : 'none'}}>
-                      10
+                      <BannerSetting />
                     </div>
                     <div style = {{display:this.state.current === '11' ? 'block' : 'none'}}>
                       11
