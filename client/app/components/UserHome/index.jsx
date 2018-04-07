@@ -3,13 +3,14 @@ import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 import './style.less';
-import MyShoppingCart from './subpages/MyShoppingCart';
-import MyOrderComponent from './subpages/MyOrder';
+import MyDataModification from './subpages/MyDataModification';  //资料编辑
+import MyShoppingCart from './subpages/MyShoppingCart'; //购物车
+import MyOrderComponent from './subpages/MyOrder';  //订单
 class UserHomeComponent extends React.Component{
     constructor(){
         super();
         this.state = {
-            current: '3'
+            current: '1'
         }
     }
     render(){
@@ -24,7 +25,7 @@ class UserHomeComponent extends React.Component{
                             onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
                             >
                             <div className="logo" />
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['3']} onClick={(e)=>{
+                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} onClick={(e)=>{
                                 this.setState({'current': e.key });
                             }}>
                                 <Menu.Item key="1">
@@ -50,7 +51,7 @@ class UserHomeComponent extends React.Component{
                             <Content>
                                 <div style={{ padding: '0 24px 24px 24px', background: '#fff', minHeight: 360 }}>
                                     <div style={ this.state.current === '1' ? { display: 'block' } : { display: 'none' } }>
-                                    111111
+                                        <MyDataModification history = { this.props.history } />
                                     </div>
                                     <div style={ this.state.current === '2' ? { display: 'block' } : { display: 'none' } }>
                                         {/* 购物车 */}
@@ -68,7 +69,8 @@ class UserHomeComponent extends React.Component{
                                         {/* 我的订单 */}
                                         <MyOrderComponent data = {this.props.orderData ? this.props.orderData : [] }
                                                           updateSalesRecordState={this.props.updateSalesRecordState}
-                                                          history = { this.props.history } />
+                                                          history = { this.props.history } 
+                                        />
                                     </div>
                                     <div style={ this.state.current === '4' ? { display: 'block' } : { display: 'none' } }>
                                     4444

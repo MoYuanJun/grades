@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import 'antd/dist/antd.less';  //antd样式
 import '../static/css/common.less';   //通用样式  包括阿里字体图标的使用
 import '../static/font_icon/iconfont'; //引入阿里字体图标 之JS文件
+import '../static/js/md5';
 /* 连接redux相关依赖 */
 import {connect} from 'react-redux';
 import * as userInfoAction from '../actions/userInfoAction.js';

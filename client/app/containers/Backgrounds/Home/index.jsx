@@ -15,7 +15,8 @@ import UpdataCommodity from './Subpage/UpdataCommodity'; //商品修改
 import SendTheGoods from './Subpage/SendTheGoods';  //待发货
 import WaitForGoodsReceiptComponent from './Subpage/WaitForGoodsReceipt'; //待收货
 import CommodityCategory from './Subpage/CommodityCategory';  //商品分类
-import BannerSetting from './Subpage/BannerSetting';
+import BannerSetting from './Subpage/BannerSetting'; //轮播设置
+import MyDataModification from '../../../components/UserHome/subpages/MyDataModification'; //资料修改
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { SubMenu } = Menu;
@@ -78,6 +79,9 @@ class BackgroundsHome extends React.Component{
                     <Menu.Item key="11">option11</Menu.Item>
                     <Menu.Item key="12">option12</Menu.Item>
                   </SubMenu>
+                  <SubMenu key="sub4" title={<span><Icon type="notification" />资料修改设置</span>}>
+                    <Menu.Item key="13">资料修改</Menu.Item>
+                  </SubMenu>
                 </Menu>
               </Sider>
               <Layout style={{ padding: '0 0 0 24px' }}>
@@ -128,6 +132,9 @@ class BackgroundsHome extends React.Component{
                     </div>
                     <div style = {{display:this.state.current === '12' ? 'block' : 'none'}}>
                       12
+                    </div>
+                    <div style = {{display:this.state.current === '13' ? 'block' : 'none'}}>
+                      <MyDataModification history={history}   />
                     </div>
                   </div>
                 </Content>

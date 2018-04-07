@@ -52,7 +52,10 @@ export function updateData (obj){
  *    request：{
  *          tableName: string  //表名  必选
  *          columns: []      //要查询的字段名数组，默认（不传）则表示返回所有字段
- *          where: {}           //查询条件，默认（不传）则表示返回所有数据
+ *          where: {    //查询条件，默认（不传）则表示返回所有数据
+ *            column: 字段，
+ *            value: 值
+ *          } 
  *          orderBy: {column：'xxxx' , type: 'DESC'  || 'ASC'}//ASC:升序 默认值 ， 不传则不进行操作,支持多个
  *    }
  * }
@@ -226,4 +229,10 @@ export function delteCommodityData(obj){
  */
 export function updataCommodity(obj){
   return post( URL + 'commodity/updataCommodity.php', obj);
+}
+
+
+//修改密码接口
+export function updatePassword(obj){
+  return post( URL + 'login/updatePassword.php', obj);
 }

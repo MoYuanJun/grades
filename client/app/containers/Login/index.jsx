@@ -17,6 +17,7 @@ class Login extends React.Component{
     LoginData(obj).then(res=>res.json()).then((json)=>{
       if (json.error === 200){  //后端返回的数据通过error表示登录的状态 200 登录成功  404登录失败
         /* 登录成功则将用户数据存储到redux */
+        delete json.error;
         this.props.userInfoAction.updataUser(json);
         this.props.history.go(-1); //回退到上一个路由，继续操作
       }else{

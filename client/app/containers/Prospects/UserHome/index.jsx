@@ -29,6 +29,7 @@ class UserHome extends React.Component{
             <div>
                 <Header />
                 <UserHomeComponent orderData = { this.props.orderData }
+                                   userInfo={this.props.userInfo}
                                    updateSalesRecordState = { this.updateSalesRecordState }
                                    history = { this.props.history }
                 />

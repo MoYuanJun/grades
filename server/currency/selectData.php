@@ -5,7 +5,10 @@
  * {
  *      tableName: string  //表名
  *      columns: []      //要查询的字段名数组，默认（不传）则表示返回所有字段
- *      where: {}           //查询条件，默认（不传）则表示返回所有数据
+ *      where: {    //查询条件，默认（不传）则表示返回所有数据
+ *           column: 字段，
+ *           value: 值
+ *      } 
  *      orderBy: {column：'xxxx' , type: 'DESC'  || 'ASC'} //ASC:升序 默认值 ， 不传则不进行操作,支持多个
  * }
  */
@@ -29,11 +32,13 @@ $columnStr = getStr($columnArr);
 
 //获取查询条件 
 $whereStr = '';
-$whereObj = isset($requestObj->where) ? $requestObj->where : (object)null;
-if(!empty($whereObj)){
+$whereObj = isset($requestObj->where) ? $requestObj->where : false;
+if($whereObj){
     //处理查询条件
+    //$whereStr = "where {$whereObj->column} = {$whereObj->value}";
+    $whereStr = "where {$whereObj->column} = '{$whereObj->value}'";
 } else {
-    $whereStr = '';
+    $whereStr = "";
 }
 
 //获取排序参数
