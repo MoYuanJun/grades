@@ -2,10 +2,11 @@
 import React from 'react';
 import { getCommodityInfo } from '../../../../fetch';
 import BuyCommodityComponent from '../../../../components/BuyCommodity/BuyCommodityComponent';
-import { addSalesRecord } from '../../../../fetch';
+import { addSalesRecord, getSalesRecord } from '../../../../fetch';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { getUserOrderDataAction } from '../../../../actions/orderDataAction';
 import { switchSpinState } from '../../../../actions/commonGlobal';
 
 class ShowInfo extends React.Component{
@@ -14,10 +15,11 @@ class ShowInfo extends React.Component{
     this.state={}
   }
 
-  //添加销售记录
+  //用户添加销售记录
   //@param { object } obj 插入数据库订单参数
   //@param { object } state 当然状态  1:直接添加到购物车  || 2：直接下单购买  
-  addSalesRecord(obj, state){
+  userAddSalesRecord(obj, state){
+    const { switchSpinState } = this.props;
     obj.com_id = this.props.comId //添加商品ID
     //通过订单状态处理数据 ==> 状态1，表示只是添加到购物车，状态为2，则表示用户直接下单咯
     obj.state = state;
@@ -27,12 +29,21 @@ class ShowInfo extends React.Component{
       obj.cart_time = timestamp; 
     }else if(state === '2'){
       //用户直接购买商品，则设置buy_time记录用户购买商品时间
-      obj.buy_time = timestamp;    
+      obj.buy_time = timestamp;
     };
-    //将数据插入数据库 ==> 成功则进行业务处理
+    //加载中状态
+    switchSpinState();
+    //将数据插入数据库 ==> 成功则进行业务处理 ==> 重新获取订单数据 ==> 更新redux ==> 进行友好的提示
     addSalesRecord(obj).then(res=>res.text()).then(text=>{
       if(text === '200'){
-        this.props.history.push(`/prospects/userHome/${obj.u_id}`);
+
+        //插入数据成功 重新获取当前用户的订单数据
+        getSalesRecord({u_id: obj.u_id}).then(res=>res.json()).then(json=>{
+          console.log('%c更新当前用户订单数据成功！', 'color: green', json);
+          switchSpinState();
+          this.props.history.push(`/prospects/userHome/${obj.u_id}/2`);
+        });
+        
       }else if (text === '404'){
         //错误处理
       }
@@ -44,8 +55,7 @@ class ShowInfo extends React.Component{
       <div>
         <BuyCommodityComponent data={this.state.data} 
                                history={this.props.history} 
-                               addSalesRecord={this.addSalesRecord.bind(this)}
-                               addSalesRecord = {this.addSalesRecord.bind(this)} />
+                               addSalesRecord = {this.userAddSalesRecord.bind(this)} />
       </div>
     );
   }
@@ -76,7 +86,8 @@ class ShowInfo extends React.Component{
 function mapSatateToProps(state){return {};}
 function mapDispatchToProps(dispatch){
   return {
-    switchSpinState: bindActionCreators(switchSpinState, dispatch)
+    switchSpinState: bindActionCreators(switchSpinState, dispatch),
+
   }
 }
 
@@ -84,3 +95,15 @@ export default connect(
   mapSatateToProps,
   mapDispatchToProps
 )(ShowInfo);
+
+
+//弹窗：订单提交 || 加入购物车成功后弹窗进行提示，用户可选择返回获取跳转到首页！
+class asdsa extends React.Component{
+  render(){
+    return (
+      <div>
+
+      </div>
+    );
+  }
+}
