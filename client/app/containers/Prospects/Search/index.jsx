@@ -6,6 +6,10 @@ import { searchCommodity } from '../../../fetch/index';
 import Header from '../../../components/Header';
 import List from '../../../components/List';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { switchSpinState } from '../../../actions/commonGlobal';
+
 class Search extends React.Component{
   constructor(){
     super();
@@ -34,7 +38,7 @@ class Search extends React.Component{
       this.setState(state);
     }
   }
-  //sds
+  //在搜索页点击导航条触发触发
   componentWillReceiveProps(nextProps){
     if(this.props.match.params.searchText !== nextProps.match.params.searchText){
       this.stateChange('placeholder', nextProps.match.params.searchText); //更新 this.state记录当前搜索词条
@@ -43,13 +47,14 @@ class Search extends React.Component{
   }
   //组件更新后首次执行  ==> 首页过来
   componentDidMount(){
-    console.log('+++++++++++++++++++++');
     this.stateChange('placeholder', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
     this.stateChange('searchText', this.props.match.params.searchText); //更新 this.state记录当前搜索词条
     this.resetData(); //更新||其实是首次获取数据
   }
   //更新重置数据
   resetData(){
+    const { switchSpinState } = this.props;
+    switchSpinState();
     //调用封装的 fetch调用方法
     searchCommodity({
       searchText: this.state.searchText,      //搜索词条
@@ -58,6 +63,7 @@ class Search extends React.Component{
       orderBy: this.state.orderBy,            //按照什么进行排序?
       orderType: this.state.orderType         //降序desc || 升序asc 
     }).then(res=>res.json()).then(json=>{
+      switchSpinState();
       this.stateChange('data', json);
       console.log(this.state);   //控制台输出当前this.state
     });
@@ -67,10 +73,23 @@ class Search extends React.Component{
     return (
       <div>
         <Header searchHandler={this.searchHandler.bind(this)} placeholder={this.state.placeholder} />
+        <div style={{minHeight: '300px'}}>
         <List data={this.state.data} />
+        </div>
+        
       </div>
     );
   }
 }
+//redux
+function mapStateToProps(state){ return {}; }
+function mapDispatchToprops(dispatch){
+  return {
+    switchSpinState: bindActionCreators(switchSpinState, dispatch)
+  }
+}
 
-export default Search;
+export default connect(
+  mapStateToProps,
+  mapDispatchToprops
+)(Search);

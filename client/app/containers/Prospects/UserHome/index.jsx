@@ -27,6 +27,7 @@ class UserHome extends React.Component{
     render (){
         return (
             <div>
+                {console.log('=========', this.props.match.params)}
                 <Header />
                 <UserHomeComponent orderData = { this.props.orderData }
                                    userInfo={this.props.userInfo}
@@ -35,14 +36,6 @@ class UserHome extends React.Component{
                 />
             </div>
         );
-    }
-    componentDidMount(){
-        getSalesRecord({u_id:this.props.userInfo.u_id}).then(res=>res.json()).then(json=>{
-            if(json.error === '200'){
-                console.log(json.content);
-                this.props.getUserOrderDataAction(json.content);
-            }
-        });
     }
 }
 

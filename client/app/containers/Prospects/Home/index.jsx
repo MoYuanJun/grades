@@ -6,6 +6,13 @@ import Header from './subpage/Header';  //导航头 子智能组件
 import SwiperAndUser from './subpage/SwiperAndUser'; //swiper和user信息 子智能组件
 import List from './subpage/List';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { getUserOrderDataAction } from '../../../actions/orderDataAction';
+import { switchSpinState } from '../../../actions/commonGlobal';
+import { getSalesRecord } from '../../../fetch';
+
 class ProspectsHome extends React.Component{
   render(){
     return (
@@ -16,5 +23,27 @@ class ProspectsHome extends React.Component{
       </div>
     )
   }
+
+  
+
+  componentDidMount(){
+    
+  }
 }
-export default ProspectsHome;
+//连接 redux
+function mapStateToProps(state){
+  return {
+    userInfo: state.userInfo,
+    orderData: state.orderData
+  }
+} 
+function mapDispatchToProps(dispatch){
+  return {
+    switchSpinState: bindActionCreators(switchSpinState, dispatch),
+    getUserOrderDataAction: bindActionCreators(getUserOrderDataAction, dispatch)
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProspectsHome);

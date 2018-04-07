@@ -11,29 +11,42 @@ import { getAdvComData } from '../../fetch';
 
 class UserShowComponent extends React.Component{
   render(){
-    const { advCommData } = this.props;
+    const { advCommData, userInfo } = this.props;
     return (
       <div id='brnach-right'>
         <div className='userShow'>
           <div className='top'>
-            <div className='headPortrait'> {/* 头像 */}
-              <img src={require('../../static/img/loginbg.png')} alt=""/>
-            </div>
+            <Link to={`/prospects/userHome/${userInfo.u_id}/0`}>
+              <div className='headPortrait'> {/* 头像 */}
+                  { userInfo.head_img ? 
+                    <img src={userInfo.head_img} alt=""/>: 
+                    <img src={require('../../static/img/loginbg.png')} alt=""/>
+                  }
+              </div>
+            </Link>
             <div className='welcome'>
-              Hi~{this.props.userInfo.u_id ? <span>{this.props.userInfo.username}</span> : 
+              Hi~{userInfo.u_id ? <span>{userInfo.username}</span> : 
               <span>欢迎来到精品时装！</span>}
             </div>
           </div>
           <div className='bottom'>
             <div className='loginAndRegister clearfix'>
-              {this.props.userInfo.u_id ? 
+              {userInfo.u_id ? 
               <div>
-                <div className='login float-left'><Link to='/login/login'>退出登录</Link></div>
-                <div className='register float-right'><Link to={`/prospects/userHome/${this.props.userInfo.u_id}`}>个人中心</Link></div>
+                <Link to='/login/login'>
+                  <div className='login float-left'>退出登录</div>
+                </Link>
+                <Link to={`/prospects/userHome/${userInfo.u_id}/0`}>
+                  <div className='register float-right'>个人中心</div>
+                </Link>
               </div> :
               <div>
-                <div className='login float-left'><Link to='/login/login'>登录入口</Link></div>
-                <div className='register float-right'><Link to='/login/register'>注册入口</Link></div>
+                <Link to='/login/login'>
+                  <div className='login float-left'>登录入口</div>
+                </Link>
+                <Link to='/login/register'>
+                  <div className='register float-right'>注册入口</div>
+                </Link>
               </div>}
             </div>
             <div></div>

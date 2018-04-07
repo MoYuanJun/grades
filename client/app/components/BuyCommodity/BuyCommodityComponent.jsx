@@ -137,7 +137,7 @@ class BuyCommodityComponent extends React.Component{
                   </div>
                   <div className='price-bottom'>
                     <svg className='icon' aria-hidden='true'><use xlinkHref='#icon-zongxiaoliang'></use></svg>
-                    <span>月销量：{data.com_salesVolume}</span>
+                    <span>销量：{data.com_salesVolume}</span>
                     <svg className='icon' aria-hidden='true'><use xlinkHref='#icon-pinglunliang_icon'></use></svg>
                     <span>评论量：{data.com_evaluate}</span>
                   </div>
@@ -214,8 +214,6 @@ class BuyCommodityComponent extends React.Component{
                     加入购物车
                   </div>
                 </div>
-                <br/><br/><br/><br/>
-                <div>{console.log('监听：this.state发生改变',this.state)}</div>
             </div>
 
             {/* 右侧 */}
@@ -233,7 +231,6 @@ class BuyCommodityComponent extends React.Component{
                              pushOrder={this.pushOrder.bind(this)}
                              changeParentState = {this.setState.bind(this)}
          />
-         <div>{this.props.userInfo.u_id}</div>
       </div>
     );
   }

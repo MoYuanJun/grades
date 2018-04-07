@@ -16,7 +16,13 @@ export function getAdminOrderDataAction(data){
         data
     }
 }
-
+/* 清除订单数据 */
+export function clearOrderDataAction(){
+    return {
+        type:actionType.ADMINORDERDATA_GET,
+        data: []
+    }
+}
 /**
  * 更新订单信息
  * @param {object} 格式：

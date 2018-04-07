@@ -17,7 +17,7 @@ class ComponentHeader extends React.Component{
 
   /* 搜索事件处理器 searchText */
   render(){
-    const { userInfo, searchHandler } = this.props;
+    const { userInfo, searchHandler, orderData, placeholder } = this.props;
     return (
       <div id='header'>
         {/* 顶部 橘黄色 */}
@@ -31,16 +31,24 @@ class ComponentHeader extends React.Component{
             <div className='menu float-left'>
               <ul>
                 <li className='float-left'>
-                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}} href="javascript:;">女装</a>
+                  <a className={placeholder === '女装' ? 'action' : ''} 
+                    onClick={(e) => {searchHandler(e.target.innerHTML);}} 
+                    href="javascript:;">女装</a>
                 </li>
                 <li className='float-left'>
-                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}}  href="javascript:;">男士</a>
+                  <a className={placeholder === '男装' ? 'action' : ''}
+                    onClick={(e) => {searchHandler(e.target.innerHTML);}}  
+                    href="javascript:;">男装</a>
                 </li>
                 <li className='float-left'>
-                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}}  href="javascript:;">居家</a>
+                  <a className={placeholder === '休闲装' ? 'action' : ''}
+                    onClick={(e) => {searchHandler(e.target.innerHTML);}}  
+                    href="javascript:;">休闲装</a>
                 </li>
                 <li className='float-left'>
-                  <a onClick={(e) => {searchHandler(e.target.innerHTML);}}  href="javascript:;">运动</a>
+                  <a className={placeholder === '运动装' ? 'action' : ''}
+                    onClick={(e) => {searchHandler(e.target.innerHTML);}}  
+                    href="javascript:;">运动装</a>
                 </li>
               </ul>
             </div>
@@ -48,7 +56,7 @@ class ComponentHeader extends React.Component{
             <div className='search float-right'>
               <Input.Search className='inputSearch' 
                             onSearch={ searchHandler } 
-                            placeholder={this.props.placeholder ? this.props.placeholder : '输入搜索词条'} 
+                            placeholder={placeholder ? placeholder : '输入搜索词条'} 
                             enterButton="搜索"/>
             </div>
           </div>
@@ -60,19 +68,26 @@ class ComponentHeader extends React.Component{
               <li className='float-left'>
                 {
                   userInfo && userInfo.u_id ? 
-                  <Link to={`/prospects/userHome/${userInfo.u_id}`}>Hi~{userInfo.username}</Link> :
+                  <Link to={`/prospects/userHome/${userInfo.u_id}/0`}>Hi~{userInfo.username}</Link> :
                   <Link to='/login/login'>亲，请登录</Link>
                 }
               </li>
               <li className='float-left'>
                 {
                   userInfo && userInfo.u_id ? 
-                  <Link to='/' onClick={ this.clickHandlerClearUserInfo }>退出登录</Link> :
+                  <Link to='/login/login' onClick={ this.clickHandlerClearUserInfo }>退出登录</Link> :
                   <Link to='/login/register'>免费注册</Link>
                 }
               </li>
-              <li className='float-left'>
-                <a href="/">我的购物车</a>
+              <li className='float-left shopping-cart'>
+                <Link to={userInfo.u_id ? `/prospects/userHome/${userInfo.u_id}/1` : '/login/login'}>
+                  <svg className="icon" aria-hidden="true">
+                      <use xlinkHref="#icon-navigoumai"></use>
+                  </svg>
+                  购物车
+                  <span>{ userInfo.u_id ? orderData.filter(item=>item.state === '1').length :''}</span>
+                </Link>
+                
               </li>
             </ul>
           </div>
@@ -85,7 +100,8 @@ class ComponentHeader extends React.Component{
 //连接redux
 function mapStateToProps(state){
   return {
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
+    orderData: state.orderData
   }
 }
 function mapDispatchToProps(dispatch){return {
