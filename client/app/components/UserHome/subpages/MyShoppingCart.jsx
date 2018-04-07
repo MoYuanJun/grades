@@ -3,6 +3,7 @@ import React from 'react';
 import './style.less';
 import ConfirmationOfOrder from '../../ConfirmationOfOrder';
 import OrderListComponent from '../../OrderList';
+import { Divider } from 'antd';
 class MyShoppingCart extends React.Component{
     constructor(){
         super();
@@ -55,7 +56,8 @@ class MyShoppingCart extends React.Component{
     render(){
         return (
             <div id='MyShoppingCart'>
-                <h2>购物车</h2>
+                <br/>
+                <Divider orientation="right">购物车</Divider>
                 <OrderListComponent data={this.props.data} /* 列表木偶组件 */
                                     operationFunc={this.operationFunc}
                                     operationLabel="购买"

@@ -111,6 +111,7 @@ class MyOrderComponent extends React.Component{
         }) : [];
         return ( 
             <div id='MyOrder'>
+                <br/>
                 <Tabs defaultActiveKey='1' key={this.state.time} onChange={console.log('')}>
                     <TabPane tab={<div className='tab'>全部订单<span>{FullOrderData.length}</span></div>} key='1'>{/* 已确认收货的：state=4 */}
                         <OrderListComponent 
