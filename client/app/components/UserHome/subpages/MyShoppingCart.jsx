@@ -57,7 +57,6 @@ class MyShoppingCart extends React.Component{
         return (
             <div id='MyShoppingCart'>
                 <br/>
-                <Divider orientation="right">购物车</Divider>
                 <OrderListComponent data={this.props.data} /* 列表木偶组件 */
                                     operationFunc={this.operationFunc}
                                     operationLabel="购买"

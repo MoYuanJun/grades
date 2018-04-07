@@ -186,22 +186,26 @@ class OrderListComponent extends React.Component{
                         </div>
                     );
                 }) : <div className="no-data">暂无数据</div>}
-                <div className='footer clearfix'>{/* 尾部 */}
-                    <div className='float-left foot-left'>
-                        <Checkbox checked={this.state.isCheckAll} onChange={this.checkAllHandler} />
-                        <span>全选</span>
-                    </div>
-                    <div className='float-right foot-right'>
-                        <div  className="button" onClick={this.FooterClickHandler}>
-                            <svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
-                            {operationLabel}
+                {/* 底部 */
+                data && data.length > 0 ?
+                    <div className='footer clearfix'>{/* 尾部 */}
+                        <div className='float-left foot-left'>
+                            <Checkbox checked={this.state.isCheckAll} onChange={this.checkAllHandler} />
+                            <span>全选</span>
                         </div>
-                    </div>
-                    <div className="float-right foot-center">
-                        <span>已选商品<span className="total-num total">{this.state.totalNum}</span>件</span>
-                        <span>合计：<span className="total-price total">{`￥${this.state.totalPrice}`}</span></span>
-                    </div>
-                </div>
+                        <div className='float-right foot-right'>
+                            <div  className="button" onClick={this.FooterClickHandler}>
+                                <svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
+                                {operationLabel}
+                            </div>
+                        </div>
+                        <div className="float-right foot-center">
+                            <span>已选商品<span className="total-num total">{this.state.totalNum}</span>件</span>
+                            <span>合计：<span className="total-price total">{`￥${this.state.totalPrice}`}</span></span>
+                        </div>
+                    </div> : ''
+                }
+                
             </div>
         );
     }
