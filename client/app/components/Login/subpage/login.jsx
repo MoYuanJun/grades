@@ -17,13 +17,19 @@ function error() {
 }
 
 class SubLogin extends React.Component{
+  state = {
+    loading: false //是否登录中
+  }
+
   /* 提交事件处理函数 */
   handleSubmit = (e) => {
     e.preventDefault();
     /* validateFields校验并获取一组输入域的值与 Error */
     this.props.form.validateFields((err, values) => {
       if (!err) { /* 表单提交在前端通过第一轮验证 */
+        this.setState({loading: true});
         this.props.LoginFun(values,()=>{
+          this.setState({loading: false});
           error();
         });
       }
@@ -44,7 +50,8 @@ class SubLogin extends React.Component{
               /* 表单检验规则 */
               rules: [{ required: true, message: '请输入正确的账号!' }],
             })(
-              <Input size='large' prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="账号" />
+              <Input size='large' prefix={<Icon type="user" 
+              style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="账号" />
             )}
           </FormItem>
 
@@ -53,14 +60,16 @@ class SubLogin extends React.Component{
               /* 表单检验规则 */
               rules: [{ required: true, message: '请输入正确的密码！' }],
             })(
-              <Input size='large' prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
+              <Input size='large' prefix={<Icon type="lock" 
+              style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
             )}
           </FormItem>
 
           <FormItem className='but'>
             {/* 按钮设置type表示按钮的样式  htmlType表示类型   */}
-            <Button size='large' type="primary" htmlType="submit" className="login-form-button">
-              登录
+            <Button style={{opacity: this.state.loading ? '0.5' : '1'}} 
+              size='large' type="primary" htmlType="submit" className="login-form-button">
+              {this.state.loading ? '登录中······' : '登录'}
             </Button>
           </FormItem>
 

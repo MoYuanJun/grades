@@ -21,13 +21,17 @@ class SubRegister extends React.Component{
     this.state = {
       validateStatus:'',      //验证状态值：''表示初始化状态、'success'表示成功状态、'error'表示错误状态
       userHelp:'',            //用户注册账号表单出错时的提示
-      userValue:''            //账号输入框值
+      userValue:'',            //账号输入框值
+      loading: false //是否登录中
     }
   }
 
   /* 提交事件处理函数 */
   handleSubmit = (e) => {
     e.preventDefault();
+    if(this.state.validateStatus !== 'success'){
+      return ;
+    }
     if(this.state.validateStatus === ''){ //如果this.state.validateStatus === ''表示用户没有填写账号
       //当然输入框表单为空 ==> 修改this.state.userValue和this.state.help的值
       this.setState({'validateStatus':'error', 'userHelp':'请输入要注册的账号'});
@@ -36,6 +40,7 @@ class SubRegister extends React.Component{
     this.props.form.validateFields((err, values) => {
       if (!err) { /* 表单提交在前端通过第一轮验证 */
        if(this.state.userValue){ /* 判断输入值是否为空！ */
+          this.setState({loading: true});
           //这里执行注册业务函数 ==> 该函数是智能组件传给主木偶组件 ==> 主木偶组件再传过来的
           //注册成功到底怎么做，木偶组件不管，全部交给智能组件处理 它只负责执行
           this.props.register(values);
@@ -97,14 +102,16 @@ class SubRegister extends React.Component{
               /* 表单检验规则 */
               rules: [{ required: true, message: '请输入密码！' }],
             })(
-              <Input size='large' prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
+              <Input size='large' prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                type="password" placeholder="密码" />
             )}
           </FormItem>
 
           <FormItem className='but'>
             {/* 按钮设置type表示按钮的样式  htmlType表示类型   */}
-            <Button size='large' type="primary" htmlType="submit" className="login-form-button">
-              注册
+            <Button style={{opacity: this.state.loading ? '0.5' : '1'}} 
+            size='large' type="primary" htmlType="submit" className="login-form-button">
+              {this.state.loading ? '注册中······' : '注册'}
             </Button>
           </FormItem>
 
