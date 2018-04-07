@@ -3,6 +3,11 @@ import React from 'react';
 import { getCommodityInfo } from '../../../../fetch';
 import BuyCommodityComponent from '../../../../components/BuyCommodity/BuyCommodityComponent';
 import { addSalesRecord } from '../../../../fetch';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { switchSpinState } from '../../../../actions/commonGlobal';
+
 class ShowInfo extends React.Component{
   constructor(){
     super();
@@ -45,19 +50,37 @@ class ShowInfo extends React.Component{
     );
   }
 
+  //加载数据
+  loadData = (comId) => {
+    const { switchSpinState } = this.props;
+    switchSpinState();
+    getCommodityInfo(comId).then(res=>res.json()).then(json=>{
+      this.setState({data:json});
+      switchSpinState();
+    });
+  }
+
   //组件加载后自动执行  ==> 获取数据
   componentDidMount(){
-    getCommodityInfo(this.props.comId).then(res=>res.json()).then(json=>{
-      this.setState({data:json});
-    });
+    this.loadData(this.props.comId);
   }
 
   //将要更新 Props时触发
   componentWillReceiveProps(nextProps){
-    getCommodityInfo(nextProps.comId).then(res=>res.json()).then(json=>{
-      this.setState({data:json});
-    });
+    this.loadData(nextProps.comId);
   }
   
 }
-export default ShowInfo;
+
+//redux
+function mapSatateToProps(state){return {};}
+function mapDispatchToProps(dispatch){
+  return {
+    switchSpinState: bindActionCreators(switchSpinState, dispatch)
+  }
+}
+
+export default connect(
+  mapSatateToProps,
+  mapDispatchToProps
+)(ShowInfo);

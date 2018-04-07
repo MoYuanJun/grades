@@ -40,6 +40,7 @@ class BuyCommodityComponent extends React.Component{
   constructor(){
     super();
     this.state={
+      imgIsLoad: false,
       isCorrectFillIn:true,                 //判断当前内容是否正确填写(商品信息)
       visible : false,                      //监听模态框的显示和隐藏
       com_size:  undefined,                     //选择的商品尺寸

@@ -1,6 +1,6 @@
 /* 客户端：智能组件List */
 import React from 'react';
-
+import './style.less';
 import ListComponent from '../../../../components/List';
 import { getCommodityList } from '.././../../../fetch/index';
 
@@ -12,7 +12,7 @@ class List extends React.Component{
   }
   render(){
     return (
-      <div>
+      <div id="List">
         <div>
           <ListComponent data = {this.state} />
         </div>
