@@ -68,7 +68,7 @@ class ComponentHeader extends React.Component{
               <li className='float-left'>
                 {
                   userInfo && userInfo.u_id ? 
-                  <Link to={`/prospects/userHome/${userInfo.u_id}/0`}>Hi~{userInfo.username}</Link> :
+                  <Link to={`/prospects/userHome/${userInfo.u_id}/1`}>Hi~{userInfo.username}</Link> :
                   <Link to='/login/login'>亲，请登录</Link>
                 }
               </li>
@@ -80,7 +80,7 @@ class ComponentHeader extends React.Component{
                 }
               </li>
               <li className='float-left shopping-cart'>
-                <Link to={userInfo.u_id ? `/prospects/userHome/${userInfo.u_id}/1` : '/login/login'}>
+                <Link to={userInfo.u_id ? `/prospects/userHome/${userInfo.u_id}/2` : '/login/login'}>
                   <svg className="icon" aria-hidden="true">
                       <use xlinkHref="#icon-navigoumai"></use>
                   </svg>

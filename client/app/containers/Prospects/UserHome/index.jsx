@@ -27,9 +27,10 @@ class UserHome extends React.Component{
     render (){
         return (
             <div>
-                {console.log('=========', this.props.match.params)}
+                {/* console.log('=========', this.props.match.params) */}
                 <Header />
                 <UserHomeComponent orderData = { this.props.orderData }
+                                   params = {this.props.match.params}
                                    userInfo={this.props.userInfo}
                                    updateSalesRecordState = { this.updateSalesRecordState }
                                    history = { this.props.history }

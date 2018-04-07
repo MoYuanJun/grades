@@ -7,13 +7,18 @@ import MyDataModification from './subpages/MyDataModification';  //资料编辑
 import MyShoppingCart from './subpages/MyShoppingCart'; //购物车
 import MyOrderComponent from './subpages/MyOrder';  //订单
 class UserHomeComponent extends React.Component{
+    componentDidMount(){
+        this.setState({current: this.props.params.itemKey});
+    }
     constructor(){
         super();
         this.state = {
             current: '1'
         }
     }
+    /* this.props.params.itemKey */
     render(){
+        const { params } = this.props;
         return (
             <div id='UserHomeComponent'>
                 <div className='content'>
@@ -25,7 +30,8 @@ class UserHomeComponent extends React.Component{
                             onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
                             >
                             <div className="logo" />
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} onClick={(e)=>{
+                            <Menu theme="dark" mode="inline" 
+                                defaultSelectedKeys={[params.itemKey]} onClick={(e)=>{
                                 this.setState({'current': e.key });
                             }}>
                                 <Menu.Item key="1">

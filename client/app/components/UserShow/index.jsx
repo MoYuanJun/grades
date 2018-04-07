@@ -16,14 +16,18 @@ class UserShowComponent extends React.Component{
       <div id='brnach-right'>
         <div className='userShow'>
           <div className='top'>
-            <Link to={`/prospects/userHome/${userInfo.u_id}/0`}>
+            
               <div className='headPortrait'> {/* 头像 */}
                   { userInfo.head_img ? 
-                    <img src={userInfo.head_img} alt=""/>: 
-                    <img src={require('../../static/img/loginbg.png')} alt=""/>
+                    <Link to={`/prospects/userHome/${userInfo.u_id}/1`}>
+                      <img src={userInfo.head_img} alt=""/>
+                    </Link>:
+                    <Link to={`/login/login`}>
+                      <img src={require('../../static/img/loginbg.png')} alt=""/>
+                    </Link>
                   }
               </div>
-            </Link>
+            
             <div className='welcome'>
               Hi~{userInfo.u_id ? <span>{userInfo.username}</span> : 
               <span>欢迎来到精品时装！</span>}
@@ -36,7 +40,7 @@ class UserShowComponent extends React.Component{
                 <Link to='/login/login'>
                   <div className='login float-left'>退出登录</div>
                 </Link>
-                <Link to={`/prospects/userHome/${userInfo.u_id}/0`}>
+                <Link to={`/prospects/userHome/${userInfo.u_id}/1`}>
                   <div className='register float-right'>个人中心</div>
                 </Link>
               </div> :
