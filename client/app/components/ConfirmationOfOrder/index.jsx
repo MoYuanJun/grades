@@ -10,16 +10,27 @@ import { Modal, Button, Input,Radio } from 'antd';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 class ConfirmationOfOrder extends React.Component {
     constructor(){
         super();
         this.state = {
-            isPrompt : false,   //是否显示提示 ：对填写内容进行检测、错误提示状态
-            prompt : '',            //提示语 
+            isPrompt : false,         //是否显示提示 ：对填写内容进行检测、错误提示状态
+            prompt : '',              //提示语 
             u_address : undefined,    //地址
             u_phone : undefined,      //电话
-            paymentMethod : 1       //付款方式   1 货到付款   2  在线支付
+            paymentMethod : 1         //付款方式   1 货到付款   2  在线支付
         }
+    }
+    //
+    componentWillReceiveProps(nextProps){
+        nextProps.userInfo ? 
+        this.setState({
+            u_address: nextProps.userInfo.addr,
+            u_phone:  nextProps.userInfo.phone
+        }) : '';
     }
     /* 确定按钮触发函数 */
     handleOk = (e) => {
@@ -31,9 +42,9 @@ class ConfirmationOfOrder extends React.Component {
                     'u_address': this.state.u_address,
                     'u_phone': this.state.u_phone,
                     'paymentMethod': this.state.paymentMethod
-                })
-                
+                });
             this.props.pushOrder();  //提交订单函数
+            this.props.changeParentState({'visible': false});
         }else{
             return false;
         }
@@ -52,6 +63,7 @@ class ConfirmationOfOrder extends React.Component {
         }
     }
     render() {
+        const { userInfo } = this.props;
         /* 图标管理 */
         const icon_genggaishouhuodizhi = <svg className='icon' aria-hidden='true'>
                                             <use xlinkHref='#icon-genggaishouhuodizhi'></use>
@@ -80,6 +92,7 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='key'>收货地址：</div>
                     <div className='value'>
                     <Input prefix={icon_genggaishouhuodizhi} 
+                          value={this.state.u_address}
                           onChange={(e)=>{
                               this.setState({'u_address': e.target.value});
                           }} />
@@ -89,6 +102,7 @@ class ConfirmationOfOrder extends React.Component {
                     <div className='key'>联系方式：</div>
                     <div className='value'>
                     <Input prefix={ icon_lianxifangshi } 
+                           value= {this.state.u_phone}
                            onChange={(e)=>{
                                this.setState({'u_phone': e.target.value});
                             }} />
@@ -111,4 +125,17 @@ class ConfirmationOfOrder extends React.Component {
       );
     }
 }
-export default ConfirmationOfOrder;
+//连接redux
+function mapStateToProps(state){
+    return {
+        userInfo: state.userInfo
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ConfirmationOfOrder);

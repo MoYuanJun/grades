@@ -49,7 +49,8 @@ class MyShoppingCart extends React.Component{
         console.log(params);
         //该方法有个回调函数
         this.props.updateSalesRecordState(params, () => {
-            this.props.history.push('/');
+            //更新redux
+
         });
     }
 

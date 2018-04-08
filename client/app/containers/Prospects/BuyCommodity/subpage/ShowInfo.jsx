@@ -1,7 +1,12 @@
 /* 购买商品页面 ==> 显示商品智能组件 */
 import React from 'react';
-import { getCommodityInfo } from '../../../../fetch';
+
+import { Link } from 'react-router-dom';
+
+import { Modal } from 'antd';
 import BuyCommodityComponent from '../../../../components/BuyCommodity/BuyCommodityComponent';
+
+import { getCommodityInfo } from '../../../../fetch';
 import { addSalesRecord, getSalesRecord } from '../../../../fetch';
 
 import { bindActionCreators } from 'redux';
@@ -15,11 +20,32 @@ class ShowInfo extends React.Component{
     this.state={}
   }
 
+  //@param { string } state 状态  1:直接添加到购物车  || 2：直接下单购买 
+  userAddSalesRecordSuccess = (state) => {
+    const { userInfo, history } = this.props;
+    let ref = Modal.success({
+      title: `${state === '1' ? '添加购物车' : '购买' }成功！`,
+      content: <p>是否<a onClick={()=>{
+        history.go(-1);
+        ref.destroy();
+      }}>返回</a>，或者跳转至
+      {state === '1' ? 
+      <a onClick={()=>{ 
+        history.push(`/prospects/userHome/${userInfo.u_id}/2`);
+        ref.destroy();
+       }}>购物车</a> : 
+      <a onClick={()=>{ 
+        history.push('/');
+       }}>首页</a>}
+      ！</p>
+    });
+  }
+
   //用户添加销售记录
   //@param { object } obj 插入数据库订单参数
   //@param { object } state 当然状态  1:直接添加到购物车  || 2：直接下单购买  
   userAddSalesRecord(obj, state){
-    const { switchSpinState } = this.props;
+    const { switchSpinState, getUserOrderDataAction } = this.props;
     obj.com_id = this.props.comId //添加商品ID
     //通过订单状态处理数据 ==> 状态1，表示只是添加到购物车，状态为2，则表示用户直接下单咯
     obj.state = state;
@@ -36,14 +62,16 @@ class ShowInfo extends React.Component{
     //将数据插入数据库 ==> 成功则进行业务处理 ==> 重新获取订单数据 ==> 更新redux ==> 进行友好的提示
     addSalesRecord(obj).then(res=>res.text()).then(text=>{
       if(text === '200'){
-
-        //插入数据成功 重新获取当前用户的订单数据
+        //插入数据成功 重新从数据库获取当前用户的订单数据
         getSalesRecord({u_id: obj.u_id}).then(res=>res.json()).then(json=>{
-          console.log('%c更新当前用户订单数据成功！', 'color: green', json);
-          switchSpinState();
-          this.props.history.push(`/prospects/userHome/${obj.u_id}/2`);
+          if( json.error === '200' ){
+            //获取数据成功 ==> 更新redux
+            getUserOrderDataAction(json.content);
+            console.log('%c更新当前用户订单数据成功！', 'color: green', json);
+          }
+          switchSpinState();  //切换加载中状态
+          this.userAddSalesRecordSuccess(state);  //弹出会话框
         });
-        
       }else if (text === '404'){
         //错误处理
       }
@@ -83,11 +111,13 @@ class ShowInfo extends React.Component{
 }
 
 //redux
-function mapSatateToProps(state){return {};}
+function mapSatateToProps(state){return {
+  userInfo: state.userInfo
+};}
 function mapDispatchToProps(dispatch){
   return {
     switchSpinState: bindActionCreators(switchSpinState, dispatch),
-
+    getUserOrderDataAction: bindActionCreators(getUserOrderDataAction, dispatch)
   }
 }
 
@@ -97,13 +127,3 @@ export default connect(
 )(ShowInfo);
 
 
-//弹窗：订单提交 || 加入购物车成功后弹窗进行提示，用户可选择返回获取跳转到首页！
-class asdsa extends React.Component{
-  render(){
-    return (
-      <div>
-
-      </div>
-    );
-  }
-}

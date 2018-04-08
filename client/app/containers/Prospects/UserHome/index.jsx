@@ -5,6 +5,7 @@ import UserHomeComponent   from '../../../components/UserHome';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getUserOrderDataAction } from '../../../actions/orderDataAction';
+import { switchSpinState } from '../../../actions/commonGlobal';
 import { getSalesRecord, updateSalesRecordState } from '../../../fetch';
 class UserHome extends React.Component{
     constructor(){
@@ -16,9 +17,21 @@ class UserHome extends React.Component{
      * @param {*} obj 
      * @param {*} func 
      */
-    updateSalesRecordState(obj,func = () => {console.log('未给定回调函数')}){
+    updateSalesRecordState = (obj,func = () => {console.log('未给定回调函数')}) => {
+        const { userInfo, getUserOrderDataAction, switchSpinState } = this.props;
+        //切换加载中状态
+        switchSpinState();
+        //更新订单
         updateSalesRecordState(obj).then(res => res.text()).then(text => {
             if(text !== '0'){
+                //从数据库获取指定用户的订单数据
+                getSalesRecord({u_id: userInfo.u_id}).then(res=>res.json()).then(json=>{
+                    //切换加载中状态
+                    switchSpinState();
+                    if(json.error === '200' ){
+                        getUserOrderDataAction(json.content);
+                    }
+                });
                 func();
             }
         });
@@ -27,7 +40,6 @@ class UserHome extends React.Component{
     render (){
         return (
             <div>
-                {/* console.log('=========', this.props.match.params) */}
                 <Header />
                 <UserHomeComponent orderData = { this.props.orderData }
                                    params = {this.props.match.params}
@@ -50,7 +62,8 @@ function mapStateToProps(state){
 }
 function mapDispatchToProps(dispatch){
     return {
-        getUserOrderDataAction : bindActionCreators(getUserOrderDataAction, dispatch)
+        getUserOrderDataAction : bindActionCreators(getUserOrderDataAction, dispatch),
+        switchSpinState: bindActionCreators(switchSpinState, dispatch)
     }
 }
 export default connect(
