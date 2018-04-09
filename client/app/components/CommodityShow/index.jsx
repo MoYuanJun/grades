@@ -132,7 +132,7 @@ class CommodityShowListItem extends React.Component{
                                 updataVisible();
                                 updataModalData(commodityData);
                             }}>
-                            <svg style={{fontSize: '15px', marginRight: '5px'}} class="icon" aria-hidden="true">
+                            <svg style={{fontSize: '15px', marginRight: '5px'}} className="icon" aria-hidden="true">
                                 <use xlinkHref="#icon-15"></use>
                             </svg>
                             修改

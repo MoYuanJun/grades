@@ -10,6 +10,7 @@ import { updataUser } from '../../../actions/userInfoAction';
 import { switchSpinState } from '../../../actions/commonGlobal';
 import { categoryDataGet } from '../../../actions/commodityCategoryData';
 
+import BackgroundsHeader from './Subpage/BackgroundsHeader';
 import AddCommodity from './Subpage/AddCommodity';  //添加商品
 import UpdataCommodity from './Subpage/UpdataCommodity'; //商品修改
 import SendTheGoods from './Subpage/SendTheGoods';  //待发货
@@ -36,17 +37,7 @@ class BackgroundsHome extends React.Component{
         <Layout>
           <Header className="header">
             <div className='header-content'>
-              <div className="logo" />
-              <Menu
-                theme="dark"
-                mode="horizontal"
-                defaultSelectedKeys={['2']}
-                style={{ lineHeight: '64px' }}
-                >
-                <Menu.Item key="1">nav 1</Menu.Item>
-                <Menu.Item key="2">nav 2</Menu.Item>
-                <Menu.Item key="3">nav 3</Menu.Item>
-              </Menu>
+              <BackgroundsHeader />
             </div>
           </Header>
           <div className='content'>
@@ -63,7 +54,7 @@ class BackgroundsHome extends React.Component{
                   >
                   <SubMenu key="sub1" title={
                   <span>
-                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-shangpin"></use>
                     </svg>
                     商品信息管理
@@ -75,7 +66,7 @@ class BackgroundsHome extends React.Component{
                   </SubMenu>
                   <SubMenu key="sub2" title={
                   <span>
-                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-iconddfh"></use>
                     </svg>
                     订单信息管理
@@ -87,7 +78,7 @@ class BackgroundsHome extends React.Component{
                   </SubMenu>
                   <SubMenu key="sub3" title={
                   <span>
-                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-fenlei"></use>
                     </svg>
                     商品类别管理
@@ -99,7 +90,7 @@ class BackgroundsHome extends React.Component{
                   </SubMenu>
                   <SubMenu key="sub4" title={
                   <span>
-                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-ziliaoguanli"></use>
                     </svg>
                     资料修改设置
