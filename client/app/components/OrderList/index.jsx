@@ -7,10 +7,11 @@ operationFunc :
             第二参数：==> state :0 表示用户点击列表中的多选框  1 表示用户单击列表项的按钮 2 表示用户单击底部按钮
             第三参数：函数
 operationLabel: 操作按钮label
-operationIcon：操作按钮icon
+operationIcon：操作按钮  iconfont中带#的icon名称；如：#icon-user
 */
 import React from 'react';
 import { Checkbox } from 'antd';
+import NullData from '../../components/NullData';
 import './style.less';
 class OrderListComponent extends React.Component{
     constructor(){
@@ -185,7 +186,7 @@ class OrderListComponent extends React.Component{
                             </div>
                         </div>
                     );
-                }) : <div className="no-data">暂无数据</div>}
+                }) : <div className="no-data"><NullData /></div>}
                 {/* 底部 */
                 data && data.length > 0 ?
                     <div className='footer clearfix'>{/* 尾部 */}

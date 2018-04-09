@@ -2,6 +2,7 @@
 import React from 'react';
 import './style.less'
 import ItemComponent from '../../Item';
+import NullData from '../../NullData';
 class ListComponentSubpage extends React.Component{
   constructor(){
     super();
@@ -32,8 +33,8 @@ class ListComponentSubpage extends React.Component{
                           <ItemComponent data = {data.content[key]}  />
                         </div>
                 }) : 
-                <div>
-                  找不到哦
+                <div style={{height: '500px', padding: '50px 0'}}>
+                  <NullData />
                 </div>
             }
           </div> : ''

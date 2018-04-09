@@ -51,6 +51,9 @@ class CommodityCategory extends React.Component{
                                 onClick={() => {
                                     this.switchAddNewDataModal();
                                 }}>
+                                    <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-tianjia"></use>
+                                    </svg>
                                     添加
                             </div>
                         </div>,
@@ -63,16 +66,36 @@ class CommodityCategory extends React.Component{
                         {
                             editable ?
                             <span>
-                                <a onClick={() => this.save(record.key)}>保存</a>
+                                <a onClick={() => this.save(record.key)}>
+                                    <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-msnui-save"></use>
+                                    </svg>
+                                    保存
+                                </a>
                                 <Popconfirm title="是否确定取消编辑?" onConfirm={() => this.cancel(record.key)}>
-                                <a>取消</a>
+                                <a>
+                                    <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-cancel"></use>
+                                    </svg>
+                                    取消
+                                </a>
                                 </Popconfirm>
-                            </span>
-                            : <a onClick={() => this.edit(record.key)}>编辑</a>
+                            </span> : 
+                            <a onClick={() => this.edit(record.key)}>
+                                <svg style={{marginRight: '3px'}} className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-zhuce"></use>
+                               </svg>
+                            编辑
+                            </a>
                         }
                         {
                             <Popconfirm title="是否确定删除该条分类?" onConfirm={() => this.delete(record.key)}>
-                                <a>删除</a>
+                                <a>
+                                    <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-shanchu"></use>
+                                    </svg>
+                                    删除
+                                </a>
                             </Popconfirm>
                         }
                         </div>

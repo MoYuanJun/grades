@@ -178,14 +178,26 @@ class BannerItem extends React.Component{
                         <span>
                             <a onClick={()=>{
                                 operation.saveUpdateData(data.ban_id);
-                            }}>保</a>
+                            }}>{/* 保存 */}
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-msnui-save"></use>
+                                </svg>
+                            </a>
                             <a onClick={()=>{
                                 operation.cancelUapdeData(data.ban_id);
-                            }}>取</a>
+                            }}>{/* 取消 */}
+                                <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-cancel"></use>
+                                </svg>
+                            </a>
                         </span> :
                         <a className="float-right" onClick={()=>{
                             operation.switchEditState(data.ban_id);
-                        }}>修</a> }
+                        }}>{/* 修改 */}
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref="#icon-zhuce"></use>
+                            </svg>
+                        </a> }
                     </div>
                 </div>
                 <div className="banner-img">

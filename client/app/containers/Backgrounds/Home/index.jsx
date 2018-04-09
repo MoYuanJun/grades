@@ -61,25 +61,49 @@ class BackgroundsHome extends React.Component{
                   }}
                   style={{ height: '100%', borderRight: 0 }}
                   >
-                  <SubMenu key="sub1" title={<span><Icon type="user" />商品信息管理</span>}>
+                  <SubMenu key="sub1" title={
+                  <span>
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-shangpin"></use>
+                    </svg>
+                    商品信息管理
+                  </span>}>
                     <Menu.Item key="1">商品添加</Menu.Item>
                     <Menu.Item key="2">商品修改</Menu.Item>
                     <Menu.Item key="3">option3</Menu.Item>
                     <Menu.Item key="4">option4</Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub2" title={<span><Icon type="laptop" />订单信息管理</span>}>
+                  <SubMenu key="sub2" title={
+                  <span>
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-iconddfh"></use>
+                    </svg>
+                    订单信息管理
+                  </span>}>
                     <Menu.Item key="5">option5</Menu.Item>
                     <Menu.Item key="6">待发货</Menu.Item>
                     <Menu.Item key="7">待收货</Menu.Item>
                     <Menu.Item key="8">option8</Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub3" title={<span><Icon type="notification" />商品类别管理</span>}>
+                  <SubMenu key="sub3" title={
+                  <span>
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-fenlei"></use>
+                    </svg>
+                    商品类别管理
+                  </span>}>
                     <Menu.Item key="9">分类管理</Menu.Item>
                     <Menu.Item key="10">轮播设置</Menu.Item>
                     <Menu.Item key="11">option11</Menu.Item>
                     <Menu.Item key="12">option12</Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub4" title={<span><Icon type="notification" />资料修改设置</span>}>
+                  <SubMenu key="sub4" title={
+                  <span>
+                    <svg style={{fontSize: '15px', marginRight: '8px'}} class="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-ziliaoguanli"></use>
+                    </svg>
+                    资料修改设置
+                  </span>}>
                     <Menu.Item key="13">资料修改</Menu.Item>
                   </SubMenu>
                 </Menu>

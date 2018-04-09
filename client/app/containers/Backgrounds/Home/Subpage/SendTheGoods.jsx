@@ -16,6 +16,7 @@ class SendTheGoods extends React.Component{
             <div id="OrderListComponent">
                 <h2>待发货</h2>
                 <OrderListComponent 
+                    operationIcon='#icon-iconddfh'
                     data = {orderData}
                     operationLabel = "已发货"
                     operationFunc = {this.operationFun} />

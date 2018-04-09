@@ -10,6 +10,7 @@ import React from 'react';
 import './style.less';
 import { Pagination , Button } from 'antd';
 import { TimestampToFormat } from '../../static/js/common';
+import NullData from '../../components/NullData';
 class CommodityShow extends React.Component{
     state = {
         pagination: {              //分页数据
@@ -76,7 +77,7 @@ class CommodityShow extends React.Component{
                             />
                         })
                     : <div>
-                        暂无数据
+                        <NullData />
                     </div>
                 }
                 {
@@ -130,7 +131,12 @@ class CommodityShowListItem extends React.Component{
                             <span onClick={() => {
                                 updataVisible();
                                 updataModalData(commodityData);
-                            }}>修改</span>
+                            }}>
+                            <svg style={{fontSize: '15px', marginRight: '5px'}} class="icon" aria-hidden="true">
+                                <use xlinkHref="#icon-15"></use>
+                            </svg>
+                            修改
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -35,15 +35,21 @@ class UserHomeComponent extends React.Component{
                                 this.setState({'current': e.key });
                             }}>
                                 <Menu.Item key="1">
-                                    <Icon type="user" />
+                                    <svg style={{fontSize: '16px', margin:'0 8px 0 0'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-ziliaoguanli"></use>
+                                    </svg>
                                     <span className="nav-text">编辑资料</span>
                                 </Menu.Item>
                                 <Menu.Item key="2">
-                                    <Icon type="video-camera" />
+                                    <svg style={{fontSize: '16px', margin:'0 8px 0 0'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-navigoumai"></use>
+                                    </svg>
                                     <span className="nav-text">我的购物车</span>
                                 </Menu.Item>
                                 <Menu.Item key="3">
-                                    <Icon type="upload" />
+                                    <svg style={{fontSize: '16px', margin: '0 8px 0 0'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-iconddfh"></use>
+                                    </svg>
                                     <span className="nav-text">我的订单</span>
                                 </Menu.Item>
                                 <Menu.Item key="4">

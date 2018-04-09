@@ -19,6 +19,7 @@ class SendTheGoods extends React.Component{
                     data={orderData}
                     operationLabel="已收货"
                     operationFunc={this.operationFun} 
+                    operationIcon="#icon-shouhuo"
                 /> 
             </div>
         );
