@@ -31,6 +31,15 @@ while($rows = mysql_fetch_assoc($get)){
     while($row = mysql_fetch_assoc($getCom )){
         $rows['commodity'] = $row;
     }
+
+    /* 获取用户ID  编写并编写获取用户信息 添加到结果集中 */
+    $getUserSql = "select * from {$users} where u_id='{$rows['u_id']}'";
+    $getUser = db_implement($getUserSql);
+
+    while($row = mysql_fetch_assoc($getUser )){
+        $rows['user'] = $row;
+    }
+
     $result['content'][] = $rows;
 }
 
