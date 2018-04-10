@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAdminOrderDataAction } from '../../../actions/orderDataAction';
 import { getCommodityData } from '../../../actions/commodityDataAction';
-import { updataUser } from '../../../actions/userInfoAction';
+import { updataUser, clearUserInfo } from '../../../actions/userInfoAction';
 import { switchSpinState } from '../../../actions/commonGlobal';
 import { categoryDataGet } from '../../../actions/commodityCategoryData';
 
@@ -165,17 +165,18 @@ class BackgroundsHome extends React.Component{
    * 1、获取所有订单数据 
    * 2、将获取到的订单数据更新到redux中state.orderData
    */
-  componentWillMount(){
+  loadingData = () => {
     const { getAdminOrderDataAction, getCommodityData, switchSpinState,categoryDataGet
-    
     } = this.props;
-    //监听：当数据全部加载完，切换redux中spin状态值   ，没加载完一个随便push一个值 监听数组长度即可起到监听作用
-    let count = [];
+
+    //监听：当数据全部加载完，切换redux中spin状态值 
+    let count = 0;
     switchSpinState();
+
     //获取 商品订单数据 ==> 并存储到redux - store
     getSalesRecord().then(res=>res.json()).then(json=>{
-      count.push(1);
-      count.length === 2 ? switchSpinState() : '';
+      count++;
+      count === 2 ? switchSpinState() : '';
       if(json.error === '200'){
         getAdminOrderDataAction(json.content);
       }
@@ -183,8 +184,8 @@ class BackgroundsHome extends React.Component{
 
     //获取商品数据 ==> 并存储到redux - store
     getAllCommodityData().then(res=>res.json()).then(json=>{
-      count.push(1);
-      count.length === 2 ? switchSpinState() : '';
+      count++;
+      count === 2 ? switchSpinState() : '';
       if(json.error === '200'){
         getCommodityData(json.content);
       }
@@ -201,8 +202,30 @@ class BackgroundsHome extends React.Component{
     selectData(request).then(res=>res.json()).then(json=>{
         json.error === '1' ? categoryDataGet(json.content ) : '';
     });
-    
+
   }
+
+  /* 当前用户身份验证  处理  ==> 不是管理员就滚回登录页面*/
+  userIdentityVerification = () =>{
+    const { userInfo, history } = this.props;
+    if(userInfo.username !== 'root'){
+      history.push('/login/login');
+    }
+  }
+
+  componentWillMount(){
+    //加载数据 => 更新redux
+    this.loadingData();
+    //验证身份
+    this.userIdentityVerification();
+  }
+
+  componentWillUnmount(){
+    const { clearUserInfo } = this.props;
+    //组件卸载清除用户数据
+    clearUserInfo();
+  }
+
 }
 //连接redux
 function mapStateToProps(state){
@@ -218,7 +241,8 @@ function mapDispatchToProps(dispatch){
     getAdminOrderDataAction:bindActionCreators(getAdminOrderDataAction, dispatch),
     updataUser:bindActionCreators(updataUser, dispatch),
     getCommodityData: bindActionCreators(getCommodityData, dispatch),
-    categoryDataGet: bindActionCreators(categoryDataGet, dispatch)
+    categoryDataGet: bindActionCreators(categoryDataGet, dispatch),
+    clearUserInfo: bindActionCreators(clearUserInfo, dispatch)
   }
 }
 export default connect(

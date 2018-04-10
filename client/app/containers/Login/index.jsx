@@ -47,9 +47,15 @@ class Login extends React.Component{
     /* 调用封装的函数，从数据库通过给定用户名和密码判断对比，并返回结果 */
     LoginData(obj).then(res=>res.json()).then((json)=>{
       if (json.error === 200){  //后端返回的数据通过error表示登录的状态 200 登录成功  404登录失败
-        /* 登录成功则将用户数据存储到redux */
+        /* 登录成功则将用户数据存储到redux 并加载所需要的数据*/
         this.loadDataToRedux(json);
-        this.props.history.go(-1); //回退到上一个路由，继续操作
+
+        //判断用户进行跳转
+        if (json.username === 'root'){
+          this.props.history.push('/backgrounds')
+        } else {
+          this.props.history.go(-1); //回退到上一个路由，继续操作
+        }
       }else{
         //登录失败 调用木偶组件的回调函数 弹出登录失败对话框
         calback(); 
@@ -69,8 +75,15 @@ class Login extends React.Component{
     register(obj).then(res=>res.json()).then(json=>{
       //更新 redux
       if( json.error === 200 ){  //注册成功 ==> 否则都是失败的
+
+        //更新redux中userInfo状态并加载其余数据
         this.loadDataToRedux(json);
-        this.props.history.go(-1);
+
+        if (json.username === 'root'){
+          this.props.history.push('/backgrounds');
+        } else {
+          this.props.history.go(-1);
+        }
       } else {
         this.props.history.push('/login/login');
       }
