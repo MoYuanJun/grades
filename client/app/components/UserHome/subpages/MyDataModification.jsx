@@ -1,5 +1,9 @@
 /* 木偶组件资料修改 */
-/* props接口： history = { this.props.history }  */
+/* props接口： 
+    history = { this.props.history } 
+    basicInfoShow: true || fasle  //是否显示基本信息修改
+    passwordRemoveShow：true || false  //是否显示密码修改
+*/
 
 import React from 'react';
 import { hex_md5 } from '../../../static/js/md5';
@@ -110,6 +114,7 @@ class MyDataModification extends React.Component{
     }
     render(){
         const { emailAutoArr, userInfo, oldPasswordError, newPasswordError, password } = this.state;
+        const { basicInfoShow, passwordRemoveShow } = this.props;
         //email 配置
         const children = emailAutoArr.map((email) => {
             return <Option key={email}>{email}</Option>;
@@ -129,9 +134,8 @@ class MyDataModification extends React.Component{
         }
         return (
             <div id="MyDataModification">
-                {console.log('++++', '====', this.state)}
-                <Divider orientation="left" dashed>基本信息编辑</Divider>
-                <div className="basic-info">
+                <div className="basic-info" style={{display: basicInfoShow ? 'block' : 'none'}}>
+                    <Divider orientation="left" dashed>基本信息编辑</Divider>
                     <div className="clearfix">
                         <div className="float-left info-head-img">
                             <Upload 
@@ -285,9 +289,9 @@ class MyDataModification extends React.Component{
                         >提交修改</Button>
                     </div>
                 </div>
-                <Divider orientation="left" dashed>账号密码修改</Divider>
-                <div className="password-remove">
-                    <div className="content" style={{padding: '20px'}}>
+                <div className="password-remove" style={{display: passwordRemoveShow ? 'block' : 'none'}}>
+                    <Divider orientation="left" dashed>账号密码修改</Divider>
+                    <div className="content" style={{padding: '0 20px 20px 20px'}}>
                         <Row>
                             <Col span={4}><span className="label">原密码：</span></Col>
                             <Col span={20}>

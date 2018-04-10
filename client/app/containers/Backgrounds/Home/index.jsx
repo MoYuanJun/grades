@@ -61,8 +61,8 @@ class BackgroundsHome extends React.Component{
                   </span>}>
                     <Menu.Item key="1">商品添加</Menu.Item>
                     <Menu.Item key="2">商品修改</Menu.Item>
-                    <Menu.Item key="3">option3</Menu.Item>
-                    <Menu.Item key="4">option4</Menu.Item>
+                    {/* <Menu.Item key="3">option3</Menu.Item>
+                    <Menu.Item key="4">option4</Menu.Item> */}
                   </SubMenu>
                   <SubMenu key="sub2" title={
                   <span>
@@ -71,10 +71,10 @@ class BackgroundsHome extends React.Component{
                     </svg>
                     订单信息管理
                   </span>}>
-                    <Menu.Item key="5">option5</Menu.Item>
+                    {/* <Menu.Item key="5">option5</Menu.Item> */}
                     <Menu.Item key="6">待发货</Menu.Item>
                     <Menu.Item key="7">待收货</Menu.Item>
-                    <Menu.Item key="8">option8</Menu.Item>
+                    {/* <Menu.Item key="8">option8</Menu.Item> */}
                   </SubMenu>
                   <SubMenu key="sub3" title={
                   <span>
@@ -85,8 +85,8 @@ class BackgroundsHome extends React.Component{
                   </span>}>
                     <Menu.Item key="9">分类管理</Menu.Item>
                     <Menu.Item key="10">轮播设置</Menu.Item>
-                    <Menu.Item key="11">option11</Menu.Item>
-                    <Menu.Item key="12">option12</Menu.Item>
+                    {/* <Menu.Item key="11">option11</Menu.Item>
+                    <Menu.Item key="12">option12</Menu.Item> */}
                   </SubMenu>
                   <SubMenu key="sub4" title={
                   <span>
@@ -96,6 +96,7 @@ class BackgroundsHome extends React.Component{
                     资料修改设置
                   </span>}>
                     <Menu.Item key="13">资料修改</Menu.Item>
+                    <Menu.Item key="14">密码修改</Menu.Item>
                   </SubMenu>
                 </Menu>
               </Sider>
@@ -149,7 +150,10 @@ class BackgroundsHome extends React.Component{
                       12
                     </div>
                     <div style = {{display:this.state.current === '13' ? 'block' : 'none'}}>
-                      <MyDataModification history={history}   />
+                      <MyDataModification history={history} basicInfoShow={true}  />
+                    </div>
+                    <div style = {{display:this.state.current === '14' ? 'block' : 'none'}}>
+                      <MyDataModification history={history} passwordRemoveShow={true}  />
                     </div>
                   </div>
                 </Content>

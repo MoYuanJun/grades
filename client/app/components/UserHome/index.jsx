@@ -19,6 +19,7 @@ class UserHomeComponent extends React.Component{
     /* this.props.params.itemKey */
     render(){
         const { params } = this.props;
+        const { current } = this.state;
         return (
             <div id='UserHomeComponent'>
                 <div className='content'>
@@ -53,8 +54,10 @@ class UserHomeComponent extends React.Component{
                                     <span className="nav-text">我的订单</span>
                                 </Menu.Item>
                                 <Menu.Item key="4">
-                                    <Icon type="user" />
-                                    <span className="nav-text">我的收藏</span>
+                                    <svg style={{fontSize: '16px', margin: '0 8px 0 0'}} className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-mima1"></use>
+                                    </svg>
+                                    <span className="nav-text">密码修改</span>
                                 </Menu.Item>
                             </Menu>
                         </Sider>
@@ -62,10 +65,10 @@ class UserHomeComponent extends React.Component{
                             {/* <Header style={{ background: '#fff', padding: 0 }} /> */}
                             <Content>
                                 <div style={{ padding: '0 24px 24px 24px', background: '#fff', minHeight: 360 }}>
-                                    <div style={ this.state.current === '1' ? { display: 'block' } : { display: 'none' } }>
-                                        <MyDataModification history = { this.props.history } />
+                                    <div style={ { display: current === '1' ? 'block' : 'none', paddingTop: '20px' } }>
+                                        <MyDataModification history = { this.props.history } basicInfoShow={true} />
                                     </div>
-                                    <div style={ this.state.current === '2' ? { display: 'block' } : { display: 'none' } }>
+                                    <div style={ { display: current === '2' ? 'block' : 'none' } }>
                                         {/* 购物车 */}
                                         <MyShoppingCart data = {this.props.orderData ?
                                                         this.props.orderData.filter((item, index, arr) => {
@@ -77,15 +80,15 @@ class UserHomeComponent extends React.Component{
                                                         updateSalesRecordState={this.props.updateSalesRecordState} 
                                                         history = { this.props.history }/>
                                     </div>
-                                    <div style={ this.state.current === '3' ? { display: 'block' } : { display: 'none' } }>
+                                    <div style={ { display: current === '3' ? 'block' : 'none' } }>
                                         {/* 我的订单 */}
                                         <MyOrderComponent data = {this.props.orderData ? this.props.orderData : [] }
                                                           updateSalesRecordState={this.props.updateSalesRecordState}
                                                           history = { this.props.history } 
                                         />
                                     </div>
-                                    <div style={ this.state.current === '4' ? { display: 'block' } : { display: 'none' } }>
-                                    4444
+                                    <div style={ { display: current === '4' ? 'block' : 'none', paddingTop: '20px' } }>
+                                        <MyDataModification history = { this.props.history } passwordRemoveShow={true} />
                                     </div>
                                 </div>
                             </Content>
