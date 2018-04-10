@@ -14,7 +14,15 @@ class SendTheGoods extends React.Component{
         const { orderData } = this.props;
         return (
             <div id="OrderListComponent">
-                <h2>待发货</h2>
+                <div className="shuaxin">
+                    <a onClick={() => {
+                        
+                    }}>
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-shuaxin"></use>
+                        </svg>
+                    </a>
+                </div>
                 <OrderListComponent 
                     operationIcon='#icon-iconddfh'
                     data = {orderData}

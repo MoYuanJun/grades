@@ -46,7 +46,7 @@ class BackgroundsHome extends React.Component{
                 <Menu
                   mode="inline"
                   defaultSelectedKeys={['10']}
-                  defaultOpenKeys={['sub3']}
+                  defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4']}
                   onClick={(e) => {
                     this.setState({current: e.key});
                   }}

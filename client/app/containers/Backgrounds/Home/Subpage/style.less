@@ -3,18 +3,40 @@
     .logo{
         padding: 0;
         margin: 0;
+        width: 350px;
+        opacity: 0.9;
         img{
             margin: -5px 0 0 0;
             padding: 0;
-            width: 120px;
+            width: 100%;
+        }
+    }
+    .user{
+        color: #ccc;
+        .img{
+            width: 25px;
+            img{
+                border-radius: 50%;
+                overflow: hidden;
+                border: 1px solid #ccc;
+                width: 100%;
+            }
+        }
+        span{
+            padding: 0 5px 0 0;
         }
     }
 }
 
 #OrderListComponent{    
-    h2{
-        border-bottom: 2px solid #ccc;
-        line-height: 3;
+    position: relative;
+    .shuaxin{
+        position: absolute;
+        z-index: 99999;
+        top: 20px;
+        left: 50px;
+        color: red;
+        font-size: 20px;
     }
 }
 #WaitForGoodsReceipt{

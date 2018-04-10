@@ -14,7 +14,6 @@ class SendTheGoods extends React.Component{
         const { orderData } = this.props;
         return (
             <div id="OrderListComponent">
-                <h2>待收货</h2>
                 <OrderListComponent 
                     data={orderData}
                     operationLabel="已收货"
