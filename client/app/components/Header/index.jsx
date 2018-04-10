@@ -68,7 +68,7 @@ class ComponentHeader extends React.Component{
               <li className='float-left'>
                 {
                   userInfo && userInfo.u_id ? 
-                  <Link to={`/prospects/userHome/${userInfo.u_id}/1`}>Hi~{userInfo.username}</Link> :
+                  <Link to={`/prospects/userHome/${userInfo.u_id}/1`}>Hi~{ userInfo.nickname || userInfo.username}</Link> :
                   <Link to='/login/login'>亲，请登录</Link>
                 }
               </li>

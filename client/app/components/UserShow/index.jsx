@@ -29,7 +29,7 @@ class UserShowComponent extends React.Component{
               </div>
             
             <div className='welcome'>
-              Hi~{userInfo.u_id ? <span>{userInfo.username}</span> : 
+              Hi~{userInfo.u_id ? <span>{ userInfo.nickname || userInfo.username}</span> : 
               <span>欢迎来到精品时装！</span>}
             </div>
           </div>
