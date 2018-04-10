@@ -123,7 +123,6 @@ class BackgroundsHome extends React.Component{
                             orderData = {orderData.filter((item, index, arr)=>{
                               if (item.state === '2' ){ return item }
                             })}
-                          getAdminOrderDataAction={this.props.getAdminOrderDataAction}
                         />
                     </div>
                     <div style = {{display:this.state.current === '7' ? 'block' : 'none'}}>
