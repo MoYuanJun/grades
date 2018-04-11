@@ -10,7 +10,9 @@ operationLabel: 操作按钮label
 operationIcon：操作按钮  iconfont中带#的icon名称；如：#icon-user
 */
 import React from 'react';
-import { Checkbox } from 'antd';
+
+import { Checkbox, Modal, Divider } from 'antd';
+
 import NullData from '../../components/NullData';
 import './style.less';
 class OrderListComponent extends React.Component{
@@ -20,7 +22,11 @@ class OrderListComponent extends React.Component{
             checkList: {},
             isCheckAll: false,
             totalNum: 0,
-            totalPrice: 0.00
+            totalPrice: 0.00,
+            expressState: { //物流弹窗信息状态
+                visible: false, //控制弹窗
+                data: {}    //记录data
+            }
         }
     }
     /** 通过状态值 返回状态
@@ -134,9 +140,24 @@ class OrderListComponent extends React.Component{
         });
         this.setState({totalPrice: totalPrice - 0 });
     }
+    
+    //expressState 切换弹窗状态
+    switchVisible = () => {
+        const { expressState } = this.state;
+        expressState.visible = !expressState.visible;
+        this.setState({expressState});
+    }
+    //expressState更新数据
+    updateExpressOrderData = (data) => {
+        const { expressState } = this.state;
+        expressState.data = data;
+        this.setState({expressState});
+    }
+
     render(){
         //接口，从父组件 获取的所有接口
         const {data, childrenNodeDom, operationLabel, operationIcon, changeParentState } = this.props;
+        const { expressState } = this.state;
         return (
             <div id="OrderListComponent">
                 <div className='header'>{/* 头部 */}
@@ -162,7 +183,7 @@ class OrderListComponent extends React.Component{
                             <div className='img float-left'>
                                 <img src={item.commodity.com_img} alt=""/>
                             </div>
-                            <div className='title float-left'>
+                            <div className='title float-left' style={{textAlign: 'left'}}>
                                 {item.commodity.com_title}
                             </div>
                             <div className='price float-left iteam'>
@@ -175,8 +196,15 @@ class OrderListComponent extends React.Component{
                             <div className='total float-left iteam'>
                                 ￥{item.totalPrice}
                             </div>
-                            <div className='state float-left iteam iteam-margin'>
+                            <div className='state float-left iteam iteam-margin' >
                                {this.stateNumberToText(item.state)}
+                               {    
+                                    item.express_name && item.express_no ?
+                                   <p><a onClick={()=>{
+                                        this.switchVisible();
+                                        this.updateExpressOrderData(item);
+                                   }}>查看物流</a></p>: ''
+                               }
                             </div>
                             <div className='operation float-left iteam'>
                                 <div className="button" onClick={this.ListClickHandler.bind(this, item.sal_id)}>
@@ -206,9 +234,76 @@ class OrderListComponent extends React.Component{
                         </div>
                     </div> : ''
                 }
-                
+                <ModelBlock 
+                    visible={expressState.visible} 
+                    data={expressState.data} 
+                    switchVisible={this.switchVisible}
+                />
             </div>
         );
     }
 }
 export default OrderListComponent;
+
+class ModelBlock extends React.Component{
+    state={
+        expressName: '',  //快递名称
+        expressNo:'',   //快递单号
+        stateList: [],  //物流状态信息
+    }
+    //初始化state
+    initState = () => {
+        this.setState({
+            expressName: '',
+            expressNo:'',
+            stateList: [],
+        });
+    }
+    //确认事件
+    onOKHandler = () => {
+        const { switchVisible } = this.props;
+        switchVisible();
+    }
+    //取消事件
+    onCancelHandler = () => {
+        const { switchVisible } = this.props;
+        switchVisible();
+    }
+    //
+    componentDidMount(){
+        const { data } = this.props;
+        console.log('__弹窗数据__', data);
+    }
+    //
+    componentWillReceiveProps(nextProps){
+        const {data, visible} = nextProps;
+        if(data && visible){
+            console.log('__弹窗数据在将要更新props时__', data);
+            
+        }
+        
+    }
+    render(){
+        const {visible, data, switchVisible} = this.props;
+        return (
+            <div>
+                {console.log('___查看弹窗组件的this.state___', this.state)}
+                <Modal
+                    title="查看物流信息"
+                    visible={visible}
+                    onOk={this.onOKHandler}
+                    onCancel={this.onCancelHandler}
+                >
+                    <Divider dashed>邮政快递包裹：992939394939129994</Divider>
+                    <ul>
+                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
+                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
+                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
+                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
+                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
+                    </ul>
+                </Modal>
+            </div>
+        );
+    }
+}
