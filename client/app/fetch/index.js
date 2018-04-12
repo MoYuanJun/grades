@@ -108,6 +108,18 @@ export function insertIntoData(obj){
   return post(URL + 'currency/insertIntoData.php', objToJson(obj));
 }
 
+
+/**获取物流信息
+ *参数：
+ *    com : 快递对应编号
+ *    no  : 订单号
+ */
+export function getExpressInfo(com, no){
+  const key = '8496a210439928f0672b7be6a0f2da24';
+  return get( `http://v.juhe.cn/exp/index?key=${key}&com=${com}&no=${no}` );
+}
+
+
 /************************************************************** */
 
 /* 登录 ==> 信息获取 => 参数 是通过post方式获取数据时的参数 一般是用户名和密码 */

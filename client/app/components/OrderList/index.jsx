@@ -16,6 +16,8 @@ const Step = Steps.Step;
 
 import NullData from '../../components/NullData';
 import './style.less';
+
+import { getExpressInfo } from '../../fetch';
 class OrderListComponent extends React.Component{
     constructor(){
         super();
@@ -276,6 +278,9 @@ class ModelBlock extends React.Component{
         console.log('__弹窗数据__', data);
     }
     //加载物流数据：根据 expressName 和 expressNo（快递名称编号 + 订单号）
+    loadingExpressInfo = () => {
+        getExpressInfo
+    }
     //
     componentWillReceiveProps(nextProps){
         const {data, visible} = nextProps;
@@ -301,7 +306,10 @@ class ModelBlock extends React.Component{
                 >
                 <div id="order-list-modal">
                     <Steps direction="vertical" size="small" current={0}>
-                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
+                        <Step 
+                            title={<p className="info">到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区</p>} 
+                            description="2018-04-11 07:15:24" 
+                        />
                         <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
                         <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
                         <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
