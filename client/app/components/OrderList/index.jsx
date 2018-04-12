@@ -11,7 +11,8 @@ operationIcon：操作按钮  iconfont中带#的icon名称；如：#icon-user
 */
 import React from 'react';
 
-import { Checkbox, Modal, Divider } from 'antd';
+import { Checkbox, Modal, Divider, Steps } from 'antd';
+const Step = Steps.Step;
 
 import NullData from '../../components/NullData';
 import './style.less';
@@ -274,11 +275,15 @@ class ModelBlock extends React.Component{
         const { data } = this.props;
         console.log('__弹窗数据__', data);
     }
+    //加载物流数据：根据 expressName 和 expressNo（快递名称编号 + 订单号）
     //
     componentWillReceiveProps(nextProps){
         const {data, visible} = nextProps;
         if(data && visible){
-            console.log('__弹窗数据在将要更新props时__', data);
+            this.setState({
+                expressName: data.express_name,  //更新this.state中快递名称
+                expressNo: data.express_no,   //更新this.state中快递单号
+            });
             
         }
         
@@ -289,19 +294,19 @@ class ModelBlock extends React.Component{
             <div>
                 {console.log('___查看弹窗组件的this.state___', this.state)}
                 <Modal
-                    title="查看物流信息"
+                    title="邮政快递包裹：992939394939129994"
                     visible={visible}
                     onOk={this.onOKHandler}
                     onCancel={this.onCancelHandler}
                 >
-                    <Divider dashed>邮政快递包裹：992939394939129994</Divider>
-                    <ul>
-                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
-                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
-                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
-                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
-                        <li>到达中国邮政局福州市区<span>2018-04-11 07:15:24</span></li>
-                    </ul>
+                <div id="order-list-modal">
+                    <Steps direction="vertical" size="small" current={0}>
+                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
+                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
+                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
+                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
+                    </Steps>
+                </div>
                 </Modal>
             </div>
         );
