@@ -250,9 +250,9 @@ export default OrderListComponent;
 
 class ModelBlock extends React.Component{
     state={
-        expressName: '',  //快递名称
-        expressNo:'',   //快递单号
-        stateList: [],  //物流状态信息
+        expressName: '',  //查询回来的快递名称（中文）
+        expressNo:'',   //查询回来的快递单号
+        stateList: [],  //查询回来的物流状态信息
     }
     //初始化state
     initState = () => {
@@ -272,48 +272,54 @@ class ModelBlock extends React.Component{
         const { switchVisible } = this.props;
         switchVisible();
     }
-    //
-    componentDidMount(){
-        const { data } = this.props;
-        console.log('__弹窗数据__', data);
-    }
+
     //加载物流数据：根据 expressName 和 expressNo（快递名称编号 + 订单号）
-    loadingExpressInfo = () => {
-        getExpressInfo
+    loadingExpressInfo = (com, no) => {
+        const { stateList } = this.state;
+        getExpressInfo(com, no).then(res=>res.json()).then(json=>{
+            if(json.error_code === 0){ //查询正常
+                this.setState({
+                    expressName: json.result.company,
+                    expressNo: json.result.no,
+                    stateList: json.result.list.reverse()
+                });
+            }
+        });
     }
+
     //
     componentWillReceiveProps(nextProps){
         const {data, visible} = nextProps;
         if(data && visible){
-            this.setState({
-                expressName: data.express_name,  //更新this.state中快递名称
-                expressNo: data.express_no,   //更新this.state中快递单号
-            });
-            
+            this.loadingExpressInfo(data.express_name, data.express_no);
         }
-        
     }
     render(){
         const {visible, data, switchVisible} = this.props;
+        const {expressName, expressNo, stateList } = this.state;
         return (
             <div>
-                {console.log('___查看弹窗组件的this.state___', this.state)}
                 <Modal
-                    title="邮政快递包裹：992939394939129994"
+                    title={ expressName&&expressNo ? `${expressName}包裹: ${expressNo}` : '暂无信息'}
                     visible={visible}
                     onOk={this.onOKHandler}
                     onCancel={this.onCancelHandler}
                 >
                 <div id="order-list-modal">
-                    <Steps direction="vertical" size="small" current={0}>
-                        <Step 
-                            title={<p className="info">到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区</p>} 
-                            description="2018-04-11 07:15:24" 
-                        />
-                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
-                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
-                        <Step title="到到达中国邮政局福州市区到达中国邮政局福州市区达中国邮政局福州市区" description="2018-04-11 07:15:24" />
-                    </Steps>
+                    <div style={{height: '200px', overflow: 'scroll', overflowX: 'hidden'}}>
+                        <Steps direction="vertical" size="small" current={0}>
+                            {
+                                stateList.length > 0 ?
+                                stateList.map((item, index, arr) => {
+                                    return <Step 
+                                        key={index}
+                                        title={<p className="info">{item.remark}</p>} 
+                                        description={item.datetime}
+                                    />
+                                }) : ''
+                            }
+                        </Steps>
+                    </div>
                 </div>
                 </Modal>
             </div>

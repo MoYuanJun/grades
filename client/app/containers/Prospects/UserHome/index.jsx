@@ -50,6 +50,14 @@ class UserHome extends React.Component{
             </div>
         );
     }
+
+    componentDidMount(){
+        const { history, userInfo } = this.props;
+        if(!userInfo.u_id){
+            history.push('/login/login');
+        }
+
+    }
 }
 
 /* 连接到redux */

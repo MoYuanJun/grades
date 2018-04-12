@@ -116,7 +116,7 @@ export function insertIntoData(obj){
  */
 export function getExpressInfo(com, no){
   const key = '8496a210439928f0672b7be6a0f2da24';
-  return get( `http://v.juhe.cn/exp/index?key=${key}&com=${com}&no=${no}` );
+  return get( `${URL}salesrecord\\getExpressInfo.php?key=${key}&com=${com}&no=${no}` );
 }
 
 
