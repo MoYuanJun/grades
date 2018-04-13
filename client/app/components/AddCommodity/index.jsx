@@ -66,71 +66,99 @@ class AddCommodityForm extends React.Component{
         return (
             <div id="AddCommodityForm">
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                    {/* 标题 */}
-                    <FormItem
-                        label='标题'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_title', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                            <Input prefix={
-                            <svg className='icon' style={{fontSize:'14px', color: '#ccc'}} aria-hidden='true'>
-                            <use xlinkHref='#icon-biaoti'></use>
-                            </svg>} 
-                            placeholder="请输入标题" />
+                    <div className="clearfix">
+                        <div className="float-left form-left">
+                            {/* 图片 */}
+                            <FormItem
+                                label='主图'
+                                labelCol={{span: 2}}
+                                wrapperCol={{span: 10}}
+                                >
+                                {getFieldDecorator('com_img', {
+                                    rules: [{ required: true, message: 'Please input your username!' }],
+                                })(
+                                    <div>
+                                    <Upload getImgPath= {this.getImgPath } 
+                                            previewImg= {this.state.img}
+                                            tyleProps = {{
+                                                svgSize : '50px',
+                                                
+                                                pSize: '16px',
+                                                padding: '60px',
+                                                width: '200px',
+                                                height: '200px',
+                                            }}
+                                    />
+                                    </div>
+                                )}
+                            </FormItem>
+                        </div>
+                        <div className="float-right form-right">
+                            <div className="clearfix" style={{padding: '0 0 0 20px'}}>
+                                {/* 标题 */}
+                                <FormItem
+                                    label='标题'
+                                    labelCol={{span: 2}}
+                                    wrapperCol={{span: 22}}
+                                    >
+                                    {getFieldDecorator('com_title', {
+                                        rules: [{ required: true, message: 'Please input your username!' }],
+                                    })(
+                                        <Input prefix={
+                                        <svg className='icon' style={{fontSize:'14px', color: '#ccc'}} aria-hidden='true'>
+                                        <use xlinkHref='#icon-biaoti'></use>
+                                        </svg>} 
+                                        placeholder="请输入标题" />
 
-                        )}
-                    </FormItem>
-                    {/* 图片 */}
-                    <FormItem
-                        label='主图'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_img', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                            <div>
-                            <Upload getImgPath= {this.getImgPath } 
-                                    previewImg= {this.state.img}
-                                    tyleProps = {{
-                                        svgSize : '50px',
-                                        
-                                        pSize: '16px',
-                                        padding: '60px',
-                                        width: '200px',
-                                        height: '200px',
-                                    }}
-                            />
+                                    )}
+                                </FormItem>
                             </div>
-                        )}
-                    </FormItem>
-                    {/* 原价 */}
-                    <FormItem
-                        label='原价'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_oldPrice', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                                <Input addonBefore="￥"  placeholder="请输入商品原价" />
-                        )}
-                    </FormItem>
-                    {/* 现价 */}
-                    <FormItem
-                        label='现价'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_newPrice', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                                <Input addonBefore="￥" placeholder="请输入商品现价" />
-                        )}
-                    </FormItem>
+                            <div className="clearfix" style={{padding: '0 0 0 20px'}}>
+                                
+                            </div>
+                            <div className="clearfix" style={{padding: '0 0 0 20px'}}>
+                                
+                            </div>
+                            <div className="clearfix" style={{padding: '0 0 0 20px'}}>
+                                
+                            </div>
+                            <div className="clearfix">
+                                <div className="float-left form-con-left">
+                                    {/* 原价 */}
+                                    <FormItem
+                                        label='原价'
+                                        labelCol={{span: 5}}
+                                        wrapperCol={{span: 19}}
+                                        >
+                                        {getFieldDecorator('com_oldPrice', {
+                                            rules: [{ required: true, message: 'Please input your username!' }],
+                                        })(
+                                                <Input addonBefore="￥"  placeholder="请输入商品原价" />
+                                        )}
+                                    </FormItem>
+                                </div>
+                                <div className="float-right form-con-right">
+                                    {/* 现价 */}
+                                    <FormItem
+                                        label='现价'
+                                        labelCol={{span: 5}}
+                                        wrapperCol={{span: 19}}
+                                        >
+                                        {getFieldDecorator('com_newPrice', {
+                                            rules: [{ required: true, message: 'Please input your username!' }],
+                                        })(
+                                                <Input addonBefore="￥" placeholder="请输入商品现价" />
+                                        )}
+                                    </FormItem>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
                     {/* 库存 */}
                     <FormItem
                         label='库存'
