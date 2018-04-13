@@ -27,18 +27,31 @@ class AddCommodityForm extends React.Component{
     }
     //表单提交事件处理器
     handleSubmit = (e) => {
-        const { insertCommodity, history } = this.props;
+        const { insertCommodity, history, form, switchSpinState } = this.props;
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            console.log('==========', values.com_category);
           if (!err) {
             let com_category = values.com_category.reduce((pre='', next)=>{
                 return `${pre};${next}`;
             });
             values.com_category = com_category+';';
             values.com_img = this.state.img;
+            //切换加载中状态
+            switchSpinState();
             insertCommodity(values).then(res=>res.json()).then(json=>{
-                json.error === '200' ? history.go(0) :  '';
+                //切换加载中状态
+                switchSpinState();
+                if(json.error === '200'){
+                    //清除表单数据，antd封装后的form中的方法
+                    form.resetFields();
+                    //同时初始化化this.state 因为图片上传组件是自定义的无法清除
+                    this.setState({
+                        img:'',
+                        categoryArr: []
+                    }, ()=>{
+                        console.log('==============');
+                    });
+                }
             });
           }
         });
@@ -62,7 +75,10 @@ class AddCommodityForm extends React.Component{
                         {getFieldDecorator('com_title', {
                             rules: [{ required: true, message: 'Please input your username!' }],
                         })(
-                            <Input prefix={<svg className='icon' style={{fontSize:'14px', color: '#ccc'}} aria-hidden='true'><use xlinkHref='#icon-biaoti'></use></svg>} 
+                            <Input prefix={
+                            <svg className='icon' style={{fontSize:'14px', color: '#ccc'}} aria-hidden='true'>
+                            <use xlinkHref='#icon-biaoti'></use>
+                            </svg>} 
                             placeholder="请输入标题" />
 
                         )}
@@ -77,12 +93,16 @@ class AddCommodityForm extends React.Component{
                             rules: [{ required: true, message: 'Please input your username!' }],
                         })(
                             <div>
-                            <Upload getImgPath= {this.getImgPath } styleProps = {{
-                                    svgSize : '50px',
-                                    pSize: '16px',
-                                    padding: '60px',
-                                    width: '200px',
-                                    height: '200px',}}
+                            <Upload getImgPath= {this.getImgPath } 
+                                    previewImg= {this.state.img}
+                                    tyleProps = {{
+                                        svgSize : '50px',
+                                        
+                                        pSize: '16px',
+                                        padding: '60px',
+                                        width: '200px',
+                                        height: '200px',
+                                    }}
                             />
                             </div>
                         )}

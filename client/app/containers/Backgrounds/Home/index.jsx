@@ -28,7 +28,7 @@ import { getSalesRecord, getAllCommodityData, selectData } from '../../../fetch'
 
 class BackgroundsHome extends React.Component{
   state = {
-    current:'10'
+    current:'1'
   }
   render(){
     const { history, commodityData, orderData } = this.props;
@@ -45,7 +45,7 @@ class BackgroundsHome extends React.Component{
               <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                   mode="inline"
-                  defaultSelectedKeys={['10']}
+                  defaultSelectedKeys={['1']}
                   defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4']}
                   onClick={(e) => {
                     this.setState({current: e.key});

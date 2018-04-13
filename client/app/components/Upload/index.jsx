@@ -44,7 +44,12 @@ class Demo extends React.Component {
       isShowUpRes: true,
       isShowUpIcon: false,
       upResData: nextProps.previewImg
-    }) : '';
+    }) : this.setState({
+      isUploadSucceed: false,
+      isShowUpRes: false,
+      isShowUpIcon: true,
+      upResData: null
+    });
   }
   //
   uploadChangeHandler = (e) => {
