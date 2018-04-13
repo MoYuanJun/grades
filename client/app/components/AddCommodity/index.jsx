@@ -70,9 +70,7 @@ class AddCommodityForm extends React.Component{
                         <div className="float-left form-left">
                             {/* 图片 */}
                             <FormItem
-                                label='主图'
-                                labelCol={{span: 2}}
-                                wrapperCol={{span: 10}}
+                                wrapperCol={{span: 19}}
                                 >
                                 {getFieldDecorator('com_img', {
                                     rules: [{ required: true, message: 'Please input your username!' }],
@@ -114,13 +112,57 @@ class AddCommodityForm extends React.Component{
                                 </FormItem>
                             </div>
                             <div className="clearfix" style={{padding: '0 0 0 20px'}}>
-                                
+                                {/* 颜色 */}
+                                <FormItem
+                                    label='颜色'
+                                    labelCol={{span: 2}}
+                                    wrapperCol={{span: 22}}
+                                    >
+                                    {getFieldDecorator('com_color', {
+                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                    })(
+                                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
+                                        placeholder="请输入商品颜色，多种颜色用分号分隔" />
+                                    )}
+                                </FormItem>
                             </div>
                             <div className="clearfix" style={{padding: '0 0 0 20px'}}>
-                                
+                                {/* 尺寸 */}
+                                <FormItem
+                                    label='尺寸'
+                                    labelCol={{span: 2}}
+                                    wrapperCol={{span: 22}}
+                                    >
+                                    {getFieldDecorator('com_size', {
+                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                    })(
+                                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
+                                        placeholder="请输入商品尺寸，多种尺寸用分号分隔" />
+                                    )}
+                                </FormItem>
                             </div>
                             <div className="clearfix" style={{padding: '0 0 0 20px'}}>
-                                
+                                {/* 类别 */}
+                                <FormItem
+                                    label='类别'
+                                    labelCol={{span: 2}}
+                                    wrapperCol={{span: 22}}
+                                    >
+                                    {getFieldDecorator('com_category', {
+                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                    })(
+                                        <Select
+                                            mode="tags"
+                                            style={{ width: '100%' }}
+                                            placeholder="请选择商品类别"
+                                            onChange={()=>{}}
+                                        >
+                                            {this.state.categoryArr.map(( item, index, arr ) =>{
+                                                return <Option key={index} value={item}>{item}</Option>;
+                                            })}
+                                        </Select>
+                                    )}
+                                </FormItem>
                             </div>
                             <div className="clearfix">
                                 <div className="float-left form-con-left">
@@ -152,93 +194,47 @@ class AddCommodityForm extends React.Component{
                                     </FormItem>
                                 </div>
                             </div>
+                            <div className="clearfix">
+                                <div className="float-left form-con-left">
+                                    {/* 库存 */}
+                                    <FormItem
+                                        label='库存'
+                                        labelCol={{span: 5}}
+                                        wrapperCol={{span: 19}}
+                                        >
+                                        {getFieldDecorator('com_number', {
+                                            rules: [{ required: true, message: 'Please input your Password!' }],
+                                        })(
+                                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
+                                            placeholder="请输入库存" />
+                                        )}
+                                    </FormItem>
+                                </div>
+                                <div className="float-right form-con-right">
+                                    {/* 发货地 */}
+                                    <FormItem
+                                        label='发货地'
+                                        labelCol={{span: 5}}
+                                        wrapperCol={{span: 19}}
+                                        >
+                                        {getFieldDecorator('com_birthplace', {
+                                            rules: [{ required: true, message: 'Please input your Password!' }],
+                                        })(
+                                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
+                                            placeholder="请输入商品发货地" />
+                                        )}
+                                    </FormItem>
+                                </div>
+                            </div>
+                            <div className="form-btn">
+                                <FormItem>
+                                    <Button type="primary" style={{width: '100%'}} htmlType="submit" className="login-form-button">
+                                        提交
+                                    </Button>
+                                </FormItem>
+                            </div>
                         </div>
                     </div>
-                    
-                    
-                    
-                    
-                    
-                    {/* 库存 */}
-                    <FormItem
-                        label='库存'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_number', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
-                            placeholder="请输入库存" />
-                        )}
-                    </FormItem>
-                    {/* 颜色 */}
-                    <FormItem
-                        label='颜色'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_color', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
-                            placeholder="请输入商品颜色，多种颜色用分号分隔" />
-                        )}
-                    </FormItem>
-                    {/* 尺寸 */}
-                    <FormItem
-                        label='尺寸'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_size', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
-                            placeholder="请输入商品尺寸，多种尺寸用分号分隔" />
-                        )}
-                    </FormItem>
-                    {/* 类别 */}
-                    <FormItem
-                        label='类别'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_category', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Select
-                                mode="tags"
-                                style={{ width: '100%' }}
-                                placeholder="请选择商品类别"
-                                onChange={()=>{}}
-                            >
-                                {this.state.categoryArr.map(( item, index, arr ) =>{
-                                    return <Option key={index} value={item}>{item}</Option>;
-                                })}
-                            </Select>
-                        )}
-                    </FormItem>
-                    {/* 发货地 */}
-                    <FormItem
-                        label='发货地'
-                        labelCol={{span: 2}}
-                        wrapperCol={{span: 10}}
-                        >
-                        {getFieldDecorator('com_birthplace', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
-                            placeholder="请输入商品发货地" />
-                        )}
-                    </FormItem>
-                    <FormItem>
-
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        提交
-                    </Button>
-
-                    </FormItem>
                 </Form>
             </div>
         );
