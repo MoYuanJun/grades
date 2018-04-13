@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { getUserOrderDataAction } from '../../../actions/orderDataAction';
 import { switchSpinState } from '../../../actions/commonGlobal';
 import { getSalesRecord, updateSalesRecordState } from '../../../fetch';
+import { message } from 'antd';
 class UserHome extends React.Component{
     constructor(){
         super();
@@ -29,7 +30,11 @@ class UserHome extends React.Component{
                     //切换加载中状态
                     switchSpinState();
                     if(json.error === '200' ){
+                        message.success('订单操作成功！');
+                        console.log('============', '-----------');
                         getUserOrderDataAction(json.content);
+                    }else{
+                        message.error('订单操作失败！');
                     }
                 });
                 func();

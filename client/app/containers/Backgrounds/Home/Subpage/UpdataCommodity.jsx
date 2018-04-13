@@ -10,6 +10,7 @@ import SearchComponent from '../../../../components/SearchComponent';
 import CommodityShow from '../../../../components/CommodityShow';
 import UpdataCommodityModal from '../../../../components/UpdataCommodityModal';
 
+import { message } from 'antd';
 const modelData = [
     {
         type: 'TextInput', //TextInput 
@@ -237,7 +238,7 @@ class UpdataCommodity extends React.Component{
 
     //删除商品数据 处理函数
     deleteFun = (com_id) => {
-        const { getCommodityData } = this.props;
+        const { getCommodityData, switchSpinState } = this.props;
         
 
         //设置fetch-post参数
@@ -247,11 +248,20 @@ class UpdataCommodity extends React.Component{
         const where = JSON.stringify({
             com_id
         });
+        switchSpinState();
         updataCommodity({where, setKeyValue}).then(res => res.text()).then(text => {
             if(text == '200'){
                 getAllCommodityData().then(res=>res.json()).then(json=>{
-                    json.error === '200' ? getCommodityData(json.content) : '';
+                    switchSpinState();
+                    if(json.error === '200'){
+                        getCommodityData(json.content);
+                        message.success('删除商品成功！');
+                    }
+
                 });
+            } else {
+                switchSpinState();
+                message.error('删除商品失败！');
             }
         });
 
@@ -302,12 +312,12 @@ class UpdataCommodity extends React.Component{
                 //传入个回调函数
                 reduxUpdataCommodity(json.updatedData);
                 switchSpinState();
+                message.success('商品修改成功！');
             }else {
                 switchSpinState();
+                message.error('商品修改失败！');
             }
         });
-        console.log('-------------', modalData, obj);
-        
     }
     
     render(){

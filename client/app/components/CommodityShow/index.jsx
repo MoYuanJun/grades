@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import './style.less';
-import { Pagination , Button } from 'antd';
+import { Pagination , Button, Popconfirm } from 'antd';
 import { TimestampToFormat } from '../../static/js/common';
 import NullData from '../../components/NullData';
 class CommodityShow extends React.Component{
@@ -119,14 +119,16 @@ class CommodityShowListItem extends React.Component{
                         </div>
                     </div>
                     <div className="float-right">
-                        <div className="btn-delete" 
-                            onClick={()=>{
-                                deleteFun(commodityData.com_id);
+                        <Popconfirm title="是否确定删除该商品?" 
+                            onConfirm={()=>{
+                                    deleteFun(commodityData.com_id);
                             }}>
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref="#icon-iconset0127"></use>
-                            </svg>
-                        </div>
+                            <div className="btn-delete" >
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-iconset0127"></use>
+                                </svg>
+                            </div>
+                        </Popconfirm>
                         <div className="float-left">
                             <span onClick={() => {
                                 updataVisible();

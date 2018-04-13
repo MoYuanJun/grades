@@ -1,7 +1,8 @@
 /* 添加商品 - 木偶组件 */
 import React from 'react';
 import './style.less';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, 
+    Checkbox, Button, AutoComplete, message } from 'antd';
 const Option = Select.Option;
 const FormItem = Form.Item;
 import Upload from '../Upload';
@@ -42,15 +43,16 @@ class AddCommodityForm extends React.Component{
                 //切换加载中状态
                 switchSpinState();
                 if(json.error === '200'){
+                    message.success('商品添加成功！');
                     //清除表单数据，antd封装后的form中的方法
                     form.resetFields();
                     //同时初始化化this.state 因为图片上传组件是自定义的无法清除
                     this.setState({
                         img:'',
                         categoryArr: []
-                    }, ()=>{
-                        console.log('==============');
                     });
+                } else {
+                    message.error('商品添加失败！');
                 }
             });
           }

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { hex_md5 } from '../../../static/js/md5';
-import { Divider, Row, Col, Input, Button, AutoComplete, Radio } from 'antd';
+import { Divider, Row, Col, Input, Button, AutoComplete, Radio, message } from 'antd';
 const RadioGroup = Radio.Group;
 const Option = AutoComplete.Option;
 import Upload from '../../Upload';
@@ -59,6 +59,7 @@ class MyDataModification extends React.Component{
             }
             //切换加载状态
             switchSpinState();
+            message.success('资料编辑成功！');
         });
     }
     //用户基本信息修改提交
@@ -84,6 +85,7 @@ class MyDataModification extends React.Component{
             } else {
                 //切换加载中状态
                 switchSpinState();
+                message.error('资料编辑失败！');
             }
         });
     }
@@ -99,9 +101,12 @@ class MyDataModification extends React.Component{
         updatePassword(request).then(res=>res.json()).then(json=>{
             switchSpinState();
             if(json.error === '1'){
+                message.success('密码修改成功！');
                 console.log('%c密码修改成功', 'color:green', json);
                 clearUserInfo();
                 history.push('/login/login');
+            }else{
+                message.error('密码修改失败！');
             }
         });
     }
