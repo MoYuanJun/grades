@@ -178,41 +178,53 @@ class OrderListComponent extends React.Component{
                     return (
                         <div className='box clearfix' key = { index } 
                             style={{background:this.state.checkList[item.sal_id] ? '#FFF8E1' : ''}} >
-                            <div className='checkbox float-left'>
-                                <Checkbox value={item.sal_id} checked={this.state.checkList[item.sal_id]} 
-                                        onChange = {(e) => {this.checkChangeHandler(e.target.value);}}
-                                 />
+
+                            <div className="box-header">
+                                {console.log('------------', item)}
+                                <span className="time">{item.sal_time}</span>
+                                <span className="order-no">订单号:&nbsp;{item.sal_id}</span>
+                                <span className="user-info">用户:&nbsp;{item.user.username}</span>
+                            
                             </div>
-                            <div className='img float-left'>
-                                <img src={item.commodity.com_img} alt=""/>
-                            </div>
-                            <div className='title float-left' style={{textAlign: 'left'}}>
-                                {item.commodity.com_title}
-                            </div>
-                            <div className='price float-left iteam'>
-                                <p className='old-price'>￥{item.commodity.com_oldPrice}</p>
-                                <p className='new-price'>￥{item.commodity.com_newPrice}</p>
-                            </div>
-                            <div className='number float-left iteam iteam-margin'>
-                                {item.com_number}
-                            </div>
-                            <div className='total float-left iteam'>
-                                ￥{item.totalPrice}
-                            </div>
-                            <div className='state float-left iteam iteam-margin' >
-                               {this.stateNumberToText(item.state)}
-                               {    
-                                    item.express_name && item.express_no ?
-                                   <p><a onClick={()=>{
-                                        this.switchVisible();
-                                        this.updateExpressOrderData(item);
-                                   }}>查看物流</a></p>: ''
-                               }
-                            </div>
-                            <div className='operation float-left iteam'>
-                                <div className="button" onClick={this.ListClickHandler.bind(this, item.sal_id)}>
-                                    <svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
-                                    {operationLabel}
+                            <div className="box-contetn clearfix">
+                                <div className='checkbox float-left'>
+                                    <Checkbox value={item.sal_id} checked={this.state.checkList[item.sal_id]} 
+                                            onChange = {(e) => {this.checkChangeHandler(e.target.value);}}
+                                    />
+                                </div>
+                                <div className='img float-left'>
+                                    <img src={item.commodity.com_img} alt=""/>
+                                </div>
+                                <div className='title float-left' style={{textAlign: 'left'}}>
+                                    {item.commodity.com_title}
+                                    <p><span>尺寸&nbsp;:</span>{item.com_size}</p>
+                                    <p><span>颜色&nbsp;:</span>{item.com_color}</p>
+                                </div>
+                                <div className='price float-left iteam'>
+                                    <p className='old-price'>￥{item.commodity.com_oldPrice}</p>
+                                    <p className='new-price'>￥{item.commodity.com_newPrice}</p>
+                                </div>
+                                <div className='number float-left iteam iteam-margin'>
+                                    {item.com_number}
+                                </div>
+                                <div className='total float-left iteam'>
+                                    ￥{item.totalPrice}
+                                </div>
+                                <div className='state float-left iteam iteam-margin' >
+                                {this.stateNumberToText(item.state)}
+                                {    
+                                        item.express_name && item.express_no ?
+                                    <p><a onClick={()=>{
+                                            this.switchVisible();
+                                            this.updateExpressOrderData(item);
+                                    }}>查看物流</a></p>: ''
+                                }
+                                </div>
+                                <div className='operation float-left iteam'>
+                                    <div className="button" onClick={this.ListClickHandler.bind(this, item.sal_id)}>
+                                        <svg className='icon' aria-hidden='true'> <use xlinkHref={operationIcon}></use></svg>&nbsp;
+                                        {operationLabel}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -28,10 +28,10 @@ import { getSalesRecord, getAllCommodityData, selectData } from '../../../fetch'
 
 class BackgroundsHome extends React.Component{
   state = {
-    current:'1'
+    current:'7'
   }
   render(){
-    const { history, commodityData, orderData } = this.props;
+    const { history, commodityData, orderData, switchSpinState } = this.props;
     return (
       <div id='backgrounds-home'> 
         <Layout>
@@ -45,7 +45,7 @@ class BackgroundsHome extends React.Component{
               <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                   mode="inline"
-                  defaultSelectedKeys={['1']}
+                  defaultSelectedKeys={['7']}
                   defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4']}
                   onClick={(e) => {
                     this.setState({current: e.key});
@@ -127,6 +127,7 @@ class BackgroundsHome extends React.Component{
                     </div>
                     <div style = {{display:this.state.current === '7' ? 'block' : 'none'}}>
                       <WaitForGoodsReceiptComponent
+                        switchSpinState={switchSpinState}
                         orderData = {orderData.filter((item, index, arr)=>{
                           if (item.state === '3' ){ return item }
                         })}

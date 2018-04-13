@@ -25,7 +25,7 @@ class SendTheGoods extends React.Component{
     }
     //操作按钮处理函数，参数：选中状态、状态值、回调函数
     operationFun=(checkList, state, callback=()=>{'未设置回调函数'})=>{
-        const { getAdminOrderDataAction, orderData } = this.props;
+        const { getAdminOrderDataAction, orderData, switchSpinState } = this.props;
         //过滤出当前选中的订单
         const filteCheckList = [];
         for(let key in checkList) {
@@ -47,7 +47,9 @@ class SendTheGoods extends React.Component{
             };
             if(state !== '0'){
                 if(isGoodsReceipt){
+                    switchSpinState();
                     updateSalesRecordState(params).then(res=>res.text()).then(text=>{
+                        switchSpinState();
                         if(text !== '0'){ //影响行数不为0，则表示修改成功
                             //重新获取后端订单数据，更新redux，执行回调函数  
                             getSalesRecord().then(res=>res.json()).then(json=>{

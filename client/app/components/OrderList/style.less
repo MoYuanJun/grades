@@ -25,47 +25,82 @@
         margin: 0 0 20px 0;
         background: #FCFCFC;
         border: 1px solid #ccc;
-        padding: 25px 32px;
-        .checkbox{
-            width: 4%;
-            margin: -4px 0 0 0;
-        }
-        .img{
-            width: 11%;
-            img{
-                width: 100%;
-            }
-        }
-        .title{
-            //height: 100px;
-            width: 31%;
-            margin: 0 2%;
-        }
-        .iteam{
-            width: 8%;
-        }
-        .operation.iteam{
-            width: 10%;
-        }
-        .iteam-margin{
-            margin: 0 2%;
-        }
-        //单独iteam设置
-        .price{
-            .old-price{
-                color: #999;
-                font-size: 14px;
-                margin: 0;
-                text-decoration:line-through;
-            }
-            .new-price{
+        
+        .box-header{
+            text-align: left;
+            padding: 10px 32px;
+            background: #F1F1F1;
+            border-bottom: red;
+            .time{
+                font-size: 13px;
                 color: #666;
-                font-size: 15px;
+            }
+            .order-no{
+                color: #ccc;
+                font-size: 13px;
+                padding: 0 50px 0 10px;
+            }
+            .user-info{
+                font-size: 13px;
+                color: #ccc;
             }
         }
-        .total{
-            color: #FF4400;
+        .box-contetn{
+            padding: 20px;
+            .checkbox{
+                width: 4%;
+                margin: -4px 0 0 0;
+            }
+            .img{
+                width: 11%;
+                img{
+                    width: 100%;
+                }
+            }
+            .title{
+                //height: 100px;
+                width: 31%;
+                margin: 0 2%;
+
+                p{
+                    line-height: 2;
+                    padding: 0;
+                    color: #999;
+                    margin: 0;
+                    font-size: 13px;
+                    span{
+                        padding: 0 10px 0 0;
+                    }
+                }
+            }
+            .iteam{
+                height: 100%;
+                width: 8%;
+            }
+            .operation.iteam{
+                width: 10%;
+            }
+            .iteam-margin{
+                margin: 0 2%;
+            }
+            //单独iteam设置
+            .price{
+                .old-price{
+                    color: #999;
+                    font-size: 14px;
+                    margin: 0;
+                    text-decoration:line-through;
+                }
+                .new-price{
+                    color: #666;
+                    font-size: 15px;
+                }
+            }
+            .total{
+                color: #FF4400;
+            }
         }
+        
     }
     
     .no-data{
