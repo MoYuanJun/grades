@@ -13,14 +13,14 @@ const RadioGroup = Radio.Group;
 
 //级联数据
 const options = [{
-  value: 'zhejiang',
-  label: 'Zhejiang',
+  value: '福建',
+  label: '福建',
   children: [{
-    value: 'hangzhou',
-    label: 'Hangzhou',
+    value: '福州',
+    label: '福州',
     children: [{
-      value: 'xihu',
-      label: 'West Lake',
+      value: '长乐',
+      label: '长乐',
     }],
   }],
   }, {
@@ -64,7 +64,6 @@ class BuyCommodityComponent extends React.Component{
         if(state === '1'){
           //用户直接添加到购物车 计算订单总价并更新this.state.totalPrice，并且 ==> 提交信息
           this.setState({totalPrice: this.state.com_number * this.props.data.com_newPrice}, () => {
-            console.log('22222222222222', this.state)
             this.pushOrder(state);
           });
          } else if(state === '2') {
@@ -114,7 +113,7 @@ class BuyCommodityComponent extends React.Component{
   }
   
   render(){
-    const {advCommData, data} = this.props;
+    const {advCommData, data, dataModel} = this.props;
     return (
       <div id='showComInfo'>
         { data ?
@@ -148,7 +147,7 @@ class BuyCommodityComponent extends React.Component{
                   <div className='row distribution clearfix'>
                     <div className='row-key float-left'>配送</div>
                     <div className='row-value float-left'>{data.com_birthplace}&nbsp;至 &nbsp; 
-                    <Cascader options={options} expandTrigger='hover'
+                    <Cascader options={dataModel} expandTrigger='hover'
                               size='small'
                               placeholder="请选择所在城市！"
                               displayRender={this.displayRender}

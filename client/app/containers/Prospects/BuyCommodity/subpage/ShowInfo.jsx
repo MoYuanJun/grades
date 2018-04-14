@@ -14,6 +14,8 @@ import { connect } from 'react-redux';
 import { getUserOrderDataAction } from '../../../../actions/orderDataAction';
 import { switchSpinState } from '../../../../actions/commonGlobal';
 
+import getModelData from "./model";
+
 class ShowInfo extends React.Component{
   constructor(){
     super();
@@ -83,6 +85,7 @@ class ShowInfo extends React.Component{
       <div>
         <BuyCommodityComponent data={this.state.data} 
                                history={this.props.history} 
+                               dataModel = {getModelData()}
                                addSalesRecord = {this.userAddSalesRecord.bind(this)} />
       </div>
     );
