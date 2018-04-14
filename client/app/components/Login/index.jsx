@@ -7,6 +7,8 @@ import { Tabs } from 'antd';
 /* 获取选项组*/
 const TabPane = Tabs.TabPane;
 
+const img = require( '../../static/img/index.jpg' );
+
 /* 导入木偶组件的分页 */
 import SubLogin from  './subpage/login';/* 登录木偶组件 */
 import SubRegister from './subpage/register';/* 注册木偶组件 */
@@ -19,7 +21,7 @@ class ComLogin extends React.Component{
     return (
       <div id='login'>
         <div className="bgimg">
-          <img src="http://localhost/grades/server/img/indexbg/1384731.jpg" alt=""/>
+          <img src={img} alt=""/>
         </div>
         <div className='content'>
           {/* 使用antd组件 */}
