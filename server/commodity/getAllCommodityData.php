@@ -7,8 +7,8 @@ header('Access-Control-Allow-Origin:*');
 //导入数据库连接请求方法+数据库参数
 require_once '../config/MySQL.php';
 
-//查询语句
-$sql = "select * from {$commodity} where com_isremove = '0';";
+//查询语句 order by name desc
+$sql = "select * from {$commodity} where com_isremove = '0' order by com_time DESC ;";
 //调用封装的方法：执行可执行SQL语句
 $get = db_implement($sql);
 

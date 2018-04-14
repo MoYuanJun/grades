@@ -296,6 +296,9 @@ class UpdataCommodity extends React.Component{
         if(obj.com_newPrice !== modalData.com_newPrice){
             obj.com_oldPrice = modalData.com_newPrice;
         }
+        if(obj.com_time){
+            delete obj.com_time;
+        }
         let params = {
             request: {
                 tableName: 'commodity',

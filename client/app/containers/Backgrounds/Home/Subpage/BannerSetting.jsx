@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { switchSpinState } from '../../../../actions/commonGlobal';
 
-import { Input } from 'antd';
+import { Input, Popconfirm, message, Tooltip } from 'antd';
 
 import { selectData } from '../../../../fetch';
 import Upload from '../../../../components/Upload';
@@ -81,7 +81,10 @@ class BannerSetting extends React.Component{
             switchSpinState(); 
 
             if(json.error === '1'){
+                message.success('Bannner编辑成功！');
                 console.log('%c更新数据成功！', 'color: green', json);
+            } else {
+                message.error('Bannner编辑成功！');
             }
 
         });
@@ -176,28 +179,38 @@ class BannerItem extends React.Component{
                     <div className="float-right btn">
                     { data.editState ? 
                         <span>
-                            <a onClick={()=>{
-                                operation.saveUpdateData(data.ban_id);
-                            }}>{/* 保存 */}
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-msnui-save"></use>
-                                </svg>
-                            </a>
-                            <a onClick={()=>{
-                                operation.cancelUapdeData(data.ban_id);
-                            }}>{/* 取消 */}
-                                <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-cancel"></use>
-                                </svg>
-                            </a>
+                            <Tooltip placement="bottom" title={'保存'}>
+                                <a onClick={()=>{
+                                    operation.saveUpdateData(data.ban_id);
+                                }}>{/* 保存 */}
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-msnui-save"></use>
+                                    </svg>
+                                </a>
+                            </Tooltip>
+                            <Popconfirm title="是否确定取消编辑?" 
+                                onConfirm={()=>{
+                                    operation.cancelUapdeData(data.ban_id);
+                                }}>
+                                <Tooltip placement="bottom" title={'撤销'}>
+                                    <a>{/* 取消 */}
+                                        <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-cancel"></use>
+                                        </svg>
+                                    </a>
+                                </Tooltip>
+                            </Popconfirm>
                         </span> :
-                        <a className="float-right" onClick={()=>{
-                            operation.switchEditState(data.ban_id);
-                        }}>{/* 修改 */}
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref="#icon-zhuce"></use>
-                            </svg>
-                        </a> }
+                        <Tooltip placement="bottom" title={'编辑'}>
+                            <a className="float-right" onClick={()=>{
+                                operation.switchEditState(data.ban_id);
+                            }}>{/* 修改 */}
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-zhuce"></use>
+                                </svg>
+                            </a> 
+                        </Tooltip>
+                        }
                     </div>
                 </div>
                 <div className="banner-img">

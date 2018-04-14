@@ -81,7 +81,7 @@ class BackgroundsHome extends React.Component{
                     <svg style={{fontSize: '15px', marginRight: '8px'}} className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-fenlei"></use>
                     </svg>
-                    商品类别管理
+                    商品配置管理
                   </span>}>
                     <Menu.Item key="9">分类管理</Menu.Item>
                     <Menu.Item key="10">轮播设置</Menu.Item>

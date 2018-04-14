@@ -1,7 +1,7 @@
 /* 智能组件 后台-发货 */
 import React from 'react';
 import './style.less';
-import { Modal, Input, Select, Row, Col } from 'antd';
+import { Modal, Input, Select, Row, Col, message } from 'antd';
 const Option = Select.Option;
 
 import OrderListComponent from '../../../../components/OrderList';
@@ -123,6 +123,7 @@ class SendTheGoods extends React.Component{
                             if(text !== '0'){
                                 getSalesRecord().then(res=>res.json()).then(json=>{
                                     switchSpinState();
+                                    message.success('订单操作成功！');
                                     this.initState();
                                     this.props.getAdminOrderDataAction(json.content);
                                     callback();
@@ -130,6 +131,7 @@ class SendTheGoods extends React.Component{
                             } else {
                                 this.setState({ visible: false });
                                 switchSpinState();
+                                message.error('订单操作失败！');
                             }
                         }); 
                     }

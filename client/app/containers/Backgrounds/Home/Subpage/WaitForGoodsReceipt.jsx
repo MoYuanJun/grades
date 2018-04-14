@@ -6,6 +6,8 @@ import OrderListComponent from '../../../../components/OrderList';
 
 import { connect } from 'react-redux';
 
+import {message} from 'antd';
+
 //获取封装的fetch方法：添加（插入）商品数据、获取订单数据
 import { updateSalesRecordState, getSalesRecord } from '../../../../fetch';
 
@@ -49,18 +51,21 @@ class SendTheGoods extends React.Component{
                 if(isGoodsReceipt){
                     switchSpinState();
                     updateSalesRecordState(params).then(res=>res.text()).then(text=>{
-                        switchSpinState();
                         if(text !== '0'){ //影响行数不为0，则表示修改成功
                             //重新获取后端订单数据，更新redux，执行回调函数  
                             getSalesRecord().then(res=>res.json()).then(json=>{
                                 this.props.getAdminOrderDataAction(json.content);
+                                switchSpinState();
+                                message.success('订单操作成功！');
                                 callback();
                             });
+                        } else {
+                            switchSpinState();
                         }
                     });
                 }else{
                     callback();
-                    alert('这里应该有个提示！！未满足强制收货条件');
+                    message.error('订单操作失败，发货十五天后才允许进行强制收货！');
                 }
             }
         });

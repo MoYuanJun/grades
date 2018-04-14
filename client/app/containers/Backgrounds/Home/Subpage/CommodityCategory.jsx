@@ -7,7 +7,7 @@ import './style.less';
 import { categoryDataUpdata, categoryDataGet } from '../../../../actions/commodityCategoryData';
 import { switchSpinState } from '../../../../actions/commonGlobal';
 
-import { Table, Input, Popconfirm, Modal, Button } from 'antd';
+import { Table, Input, Popconfirm, Modal, Button, message } from 'antd';
 import { updateData, deleteData, insertIntoData, selectData } from '../../../../fetch';
 import { TimestampToFormat } from '../../../../static/js/common';
 class CommodityCategory extends React.Component{
@@ -73,12 +73,12 @@ class CommodityCategory extends React.Component{
                                     保存
                                 </a>
                                 <Popconfirm title="是否确定取消编辑?" onConfirm={() => this.cancel(record.key)}>
-                                <a>
-                                    <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
-                                        <use xlinkHref="#icon-cancel"></use>
-                                    </svg>
-                                    取消
-                                </a>
+                                    <a>
+                                        <svg style={{marginRight: '2px'}} className="icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-cancel"></use>
+                                        </svg>
+                                        取消
+                                    </a>
                                 </Popconfirm>
                             </span> : 
                             <a onClick={() => this.edit(record.key)}>
@@ -116,12 +116,10 @@ class CommodityCategory extends React.Component{
     }
 
     handleChange(value, key, column) {
-        console.log('%c查看3个参数', value, key, column);
         const {data , cacheData} = this.state;
         const newData = [...data];
         const target = newData.filter(item => key === item.key)[0];
         if (target) {
-            console.log('%c查看target', target);
             target[column] = value;
             this.setState({ data: newData });
         }
@@ -164,7 +162,9 @@ class CommodityCategory extends React.Component{
                         return item;
                     });
                     categoryDataUpdata(reduxState);
-                    console.log('%c商品分类更新数据库成功！', 'color:green', json);
+                    message.success('商品分类设置保存成功！');
+                } else {
+                    message.error('商品分类设置保存失败！');
                 }
                 switchSpinState(); //切换加载中状态
             });
@@ -202,6 +202,9 @@ class CommodityCategory extends React.Component{
             if( json.error === '1' && json.deleteData ){
                 categoryDataUpdata(deletedData); //更新redux
                 console.log('%c数据删除成功', 'color: green',  json);
+                message.success('商品分类删除成功！');
+            } else {
+                message.error('商品分类删除失败！');
             }
             switchSpinState();//切换加载中状态
         });
@@ -231,8 +234,10 @@ class CommodityCategory extends React.Component{
                 }
                 if(json.error === '1'){
                     console.log('%c插入数据成功!', 'color:green', json);
+                    message.success('商品分类添加成功！');
                 } else if (json.error === '0'){
                     alert('插入数据失败！');
+                    message.error('商品分类添加失败！');
                     console.log('%c插入数据失败!', 'color:red', json);
                 }
             });
