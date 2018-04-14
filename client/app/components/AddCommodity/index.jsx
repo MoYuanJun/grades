@@ -28,7 +28,8 @@ class AddCommodityForm extends React.Component{
     }
     //表单提交事件处理器
     handleSubmit = (e) => {
-        const { insertCommodity, history, form, switchSpinState } = this.props;
+        const { insertCommodity, history, form, switchSpinState, 
+        getAllCommodityData, getCommodityData } = this.props;
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -44,6 +45,12 @@ class AddCommodityForm extends React.Component{
                 switchSpinState();
                 if(json.error === '200'){
                     message.success('商品添加成功！');
+                    //更新redux中商品数据 ==> 并存储到redux - store
+                    getAllCommodityData().then(res=>res.json()).then(json=>{
+                        if(json.error === '200'){
+                            getCommodityData(json.content);
+                        }
+                    });
                     //清除表单数据，antd封装后的form中的方法
                     form.resetFields();
                     //同时初始化化this.state 因为图片上传组件是自定义的无法清除
@@ -75,7 +82,7 @@ class AddCommodityForm extends React.Component{
                                 wrapperCol={{span: 19}}
                                 >
                                 {getFieldDecorator('com_img', {
-                                    rules: [{ required: true, message: 'Please input your username!' }],
+                                    rules: [{ required: true, message: '请上传商品的图片!' }],
                                 })(
                                     <div>
                                     <Upload getImgPath= {this.getImgPath } 
@@ -102,7 +109,7 @@ class AddCommodityForm extends React.Component{
                                     wrapperCol={{span: 22}}
                                     >
                                     {getFieldDecorator('com_title', {
-                                        rules: [{ required: true, message: 'Please input your username!' }],
+                                        rules: [{ required: true, message: '请填写商品的标题!' }],
                                     })(
                                         <Input prefix={
                                         <svg className='icon' style={{fontSize:'14px', color: '#ccc'}} aria-hidden='true'>
@@ -121,7 +128,7 @@ class AddCommodityForm extends React.Component{
                                     wrapperCol={{span: 22}}
                                     >
                                     {getFieldDecorator('com_color', {
-                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                        rules: [{ required: true, message: '请为商品设置颜色款式!' }],
                                     })(
                                         <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
                                         placeholder="请输入商品颜色，多种颜色用分号分隔" />
@@ -136,7 +143,7 @@ class AddCommodityForm extends React.Component{
                                     wrapperCol={{span: 22}}
                                     >
                                     {getFieldDecorator('com_size', {
-                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                        rules: [{ required: true, message: '请为商品设置尺寸!' }],
                                     })(
                                         <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
                                         placeholder="请输入商品尺寸，多种尺寸用分号分隔" />
@@ -151,7 +158,7 @@ class AddCommodityForm extends React.Component{
                                     wrapperCol={{span: 22}}
                                     >
                                     {getFieldDecorator('com_category', {
-                                        rules: [{ required: true, message: 'Please input your Password!' }],
+                                        rules: [{ required: true, message: '请为商品设置所属类别!' }],
                                     })(
                                         <Select
                                             mode="tags"
@@ -175,7 +182,7 @@ class AddCommodityForm extends React.Component{
                                         wrapperCol={{span: 19}}
                                         >
                                         {getFieldDecorator('com_oldPrice', {
-                                            rules: [{ required: true, message: 'Please input your username!' }],
+                                            rules: [{ required: true, message: '请填写商品原价!' }],
                                         })(
                                                 <Input addonBefore="￥"  placeholder="请输入商品原价" />
                                         )}
@@ -189,7 +196,7 @@ class AddCommodityForm extends React.Component{
                                         wrapperCol={{span: 19}}
                                         >
                                         {getFieldDecorator('com_newPrice', {
-                                            rules: [{ required: true, message: 'Please input your username!' }],
+                                            rules: [{ required: true, message: '请填写商品出售价格!' }],
                                         })(
                                                 <Input addonBefore="￥" placeholder="请输入商品现价" />
                                         )}
@@ -205,7 +212,7 @@ class AddCommodityForm extends React.Component{
                                         wrapperCol={{span: 19}}
                                         >
                                         {getFieldDecorator('com_number', {
-                                            rules: [{ required: true, message: 'Please input your Password!' }],
+                                            rules: [{ required: true, message: '请填写商品出售数量!' }],
                                         })(
                                             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
                                             placeholder="请输入库存" />
@@ -220,7 +227,7 @@ class AddCommodityForm extends React.Component{
                                         wrapperCol={{span: 19}}
                                         >
                                         {getFieldDecorator('com_birthplace', {
-                                            rules: [{ required: true, message: 'Please input your Password!' }],
+                                            rules: [{ required: true, message: '请为商品设置发货地址!' }],
                                         })(
                                             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" 
                                             placeholder="请输入商品发货地" />
