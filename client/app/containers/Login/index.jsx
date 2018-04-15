@@ -26,7 +26,7 @@ class Login extends React.Component{
     const {updataUser, getUserOrderDataAction, getAdminOrderDataAction, 
       switchSpinState, clearOrderDataAction
     } = this.props;
-    //先清除数据
+    //先清除订单数据
     clearOrderDataAction();
     //更新用户信息 ==> redux
     delete userInfo.error;
