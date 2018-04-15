@@ -39,10 +39,8 @@ class SendTheGoods extends React.Component{
             let testData = {};
 
             for(let z =0; z<orderData.length; z++){
-                console.log('__', 4, filteCheckList[i], orderData[z]);
                 if(filteCheckList[i] === orderData[z].sal_id){
                     testData = orderData[z];
-                    console.log('___', '3', testData);
                     console.log(new Date().getTime() - testData.shipments_time > 24*60*60*1000*15)
                 }
             }
@@ -61,7 +59,6 @@ class SendTheGoods extends React.Component{
                 sal_id: this.state.sal_id  //需要修改的订单（订单号）
             };
             if(state !== '0'){
-                console.log('__', '2', isGoodsReceipt);
                 if(isGoodsReceipt){
                     switchSpinState();
                     updateSalesRecordState(params).then(res=>res.text()).then(text=>{
