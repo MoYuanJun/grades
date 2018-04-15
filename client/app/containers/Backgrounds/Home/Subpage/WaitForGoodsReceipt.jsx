@@ -35,9 +35,22 @@ class SendTheGoods extends React.Component{
         }
         //判断当前订单是否满足后台强制收货的条件（发货时间超过15天）
         let isGoodsReceipt = false;  //存储记录状态（是否允许收货）
-        for(let i = 0 ; i<filteCheckList.length; i++){
-            for(let key in orderData){
-                new Date().getTime() - orderData[key].shipments_time > 24*60*60*1000*15 ? isGoodsReceipt=true : isGoodsReceipt= false ;
+        for(let i = 0 ; i < filteCheckList.length; i++){
+            let testData = {};
+
+            for(let z =0; z<orderData.length; z++){
+                console.log('__', 4, filteCheckList[i], orderData[z]);
+                if(filteCheckList[i] === orderData[z].sal_id){
+                    testData = orderData[z];
+                    console.log('___', '3', testData);
+                    console.log(new Date().getTime() - testData.shipments_time > 24*60*60*1000*15)
+                }
+            }
+            if( testData && new Date().getTime() - testData.shipments_time > 24*60*60*1000*15){
+                isGoodsReceipt=true;
+            } else {
+                isGoodsReceipt=false;
+                break;
             }
         }
 
@@ -48,6 +61,7 @@ class SendTheGoods extends React.Component{
                 sal_id: this.state.sal_id  //需要修改的订单（订单号）
             };
             if(state !== '0'){
+                console.log('__', '2', isGoodsReceipt);
                 if(isGoodsReceipt){
                     switchSpinState();
                     updateSalesRecordState(params).then(res=>res.text()).then(text=>{
